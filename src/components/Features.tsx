@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card } from './ui/Card';
 import { cn } from '../utils/cn';
 
@@ -22,7 +21,7 @@ const features = [
     ),
     title: 'Save Time',
     description: 'No more ordering multiple sizes or dealing with returns',
-    color: 'from-blue-600 to-cyan-600'
+    color: 'from-purple-600 via-fuchsia-600 to-pink-600'
   },
   {
     icon: (
@@ -33,7 +32,7 @@ const features = [
     ),
     title: 'Shop Confidently',
     description: 'Make informed decisions with accurate size recommendations',
-    color: 'from-green-600 to-emerald-600'
+    color: 'from-pink-600 to-purple-600'
   },
   {
     icon: (
@@ -43,44 +42,62 @@ const features = [
     ),
     title: 'Works Everywhere',
     description: 'Compatible with all major online clothing retailers',
-    color: 'from-orange-600 to-yellow-600'
+    color: 'from-purple-600 via-pink-600 to-purple-600'
   }
 ];
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <section id="features" className="py-24 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 via-white to-pink-50/30"></div>
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-purple-200/20 to-pink-200/20 rounded-full filter blur-3xl"></div>
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full filter blur-3xl"></div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
-          <span className="text-purple-600 font-semibold tracking-wide uppercase">Features</span>
-          <h2 className="mt-2 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 inline-block">
-            Transform Your Shopping Experience
+          <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
+            Features
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Transform Your{' '}
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Shopping Experience
+            </span>
           </h2>
-          <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Discover why thousands of shoppers choose Vesti for a seamless and confident online shopping experience
           </p>
         </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="p-8 group hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 transition-all duration-500"
+              className="relative group"
             >
-              <div className={cn(
-                "w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6",
-                "bg-gradient-to-br",
-                feature.color,
-                "transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg"
-              )}>
-                {feature.icon}
+              {/* Card Background */}
+              <div className="absolute inset-0 bg-white/50 backdrop-blur-xl rounded-3xl shadow-xl group-hover:shadow-2xl transition-all duration-300"></div>
+              
+              {/* Card Content */}
+              <div className="relative p-8">
+                <div className={cn(
+                  "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
+                  "transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300",
+                  "bg-gradient-to-r shadow-lg",
+                  feature.color
+                )}>
+                  <div className="text-white">{feature.icon}</div>
+                </div>
+                <h3 className="text-xl font-semibold mb-4">
+                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    {feature.title}
+                  </span>
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4 group-hover:text-purple-700 transition-colors">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 group-hover:text-gray-700 transition-colors leading-relaxed">
-                {feature.description}
-              </p>
             </Card>
           ))}
         </div>
