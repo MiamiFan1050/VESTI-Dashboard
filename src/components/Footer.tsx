@@ -87,19 +87,25 @@ export function Footer() {
             </h3>
             <div className="flex space-x-4">
               <a 
-                href="#" 
+                href="https://twitter.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 p-3 rounded-xl text-gray-400 hover:text-white transition-colors"
               >
                 <Twitter className="h-6 w-6" />
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/vesti.ai" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 p-3 rounded-xl text-gray-400 hover:text-white transition-colors"
               >
                 <Instagram className="h-6 w-6" />
               </a>
               <a 
-                href="#" 
+                href="https://facebook.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 p-3 rounded-xl text-gray-400 hover:text-white transition-colors"
               >
                 <Facebook className="h-6 w-6" />

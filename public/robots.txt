@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://getvesti.com/sitemap.xml 

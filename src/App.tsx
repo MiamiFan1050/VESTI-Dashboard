@@ -1,29 +1,26 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { Stats } from './components/Stats';
-import { Features } from './components/Features';
-import { Brands } from './components/Brands';
-import { HowItWorks } from './components/HowItWorks';
-import { Testimonials } from './components/Testimonials';
-import { Newsletter } from './components/Newsletter';
 import { Footer } from './components/Footer';
+import { BlogPage } from './pages/BlogPage';
+import { BlogPostPage } from './pages/BlogPostPage';
+import { LandingPage } from './pages/LandingPage';
+import { BackToTop } from './components/ui/BackToTop';
+import { ScrollProgress } from './components/ui/ScrollProgress';
 
-function App() {
+export function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
-        <Hero />
-        <Stats />
-        <Features />
-        <Brands />
-        <HowItWorks />
-        <Testimonials />
-        <Newsletter />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <ScrollProgress />
+        <Header />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+        </Routes>
+        <Footer />
+        <BackToTop />
+      </div>
+    </Router>
   );
 }
-
-export default App;
