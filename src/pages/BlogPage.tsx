@@ -26,6 +26,36 @@ const categories = [
 
 export const blogPosts: BlogPostType[] = [
   {
+    title: "Virtual Try-On Revolution: Say Goodbye to Clothing Returns Forever",
+    description: "Discover how VESTI's AI-powered virtual fitting room technology is transforming online shopping by eliminating size uncertainty and reducing returns by up to 80%. Learn how our advanced body mapping creates the most accurate digital clothing visualization available today.",
+    date: "April 15, 2024",
+    readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "virtual-try-on-revolution-eliminate-returns",
+    category: "Virtual Try-On",
+    author: "Emma Roberts, Fashion Tech Analyst"
+  },
+  {
+    title: "Shop with Confidence: How Virtual Fitting Rooms Transform Online Shopping",
+    description: "Tired of the uncertainty when shopping online? Learn how virtual fitting room technology creates a shopping experience where you can visualize exactly how clothes will look and fit on your body before you buy, giving you complete confidence in every purchase.",
+    date: "April 13, 2024",
+    readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1583744946564-b52d01e7f922?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "shop-with-confidence-virtual-fitting-rooms",
+    category: "E-commerce",
+    author: "Marcus Chen, UX Research Lead"
+  },
+  {
+    title: "The Ultimate Guide to Virtual Try-On Technology in 2024",
+    description: "Everything you need to know about virtual try-on technology and how it's revolutionizing online shopping. From the science behind accurate body mapping to the environmental impact of reduced returns, discover why this technology is essential for modern consumers.",
+    date: "April 12, 2024",
+    readTime: "9 min",
+    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "ultimate-guide-virtual-try-on-technology-2024",
+    category: "AI Technology",
+    author: "Dr. Sophia Williams, AI Research Director"
+  },
+  {
     title: "How AI Is Revolutionizing E-Commerce: Forbes Insights",
     description: "AI is transforming e-commerce by turning intelligence into a utility. With $16 billion projected in political ad spending and the deprecation of third-party cookies, brands must focus on building first-party databases and leveraging AI-driven solutions for personalized customer experiences.",
     date: "April 10, 2024",
