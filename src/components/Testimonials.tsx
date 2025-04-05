@@ -1,4 +1,36 @@
 import { useEffect, useRef } from 'react';
+import { ArrowRight, ShoppingBag, TrendingUp, Percent, Infinity } from 'lucide-react';
+
+// Featured testimonials with metrics
+const featuredTestimonials = [
+  {
+    quote: "I've cut my return rate by 80% since using Vesti! Now I shop with complete confidence.",
+    author: "Olivia T.",
+    role: "Online Shopper",
+    metric: "80%",
+    metricLabel: "Fewer Returns",
+    icon: <Percent className="h-5 w-5" />,
+    gradient: "from-purple-600 to-pink-600"
+  },
+  {
+    quote: "I used to buy 3 sizes of everything. Now I get the right size every time with Vesti.",
+    author: "Mark S.",
+    role: "Content Creator",
+    metric: "100%",
+    metricLabel: "Size Confidence",
+    icon: <TrendingUp className="h-5 w-5" />,
+    gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
+  },
+  {
+    quote: "As a retailer, we've seen a 40% drop in returns since recommending Vesti to customers.",
+    author: "Rachel M.",
+    role: "Boutique Owner",
+    metric: "40%",
+    metricLabel: "Return Reduction",
+    icon: <ShoppingBag className="h-5 w-5" />,
+    gradient: "from-pink-600 to-purple-600"
+  }
+];
 
 const testimonialRows = [
   // Row 1 - Moving Left
@@ -16,7 +48,7 @@ const testimonialRows = [
       gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
     },
     {
-      quote: "This is the future of online shopping. Amazing AR technology!",
+      quote: "This is the future of online shopping. Amazing AI technology!",
       author: "Emma L.",
       role: "Style Consultant",
       gradient: "from-pink-600 to-purple-600"
@@ -203,16 +235,86 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
           <span className="inline-block px-5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-600 text-sm font-medium mb-5 border border-purple-100/20">
-            Testimonials
+            Success Stories
           </span>
           <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
-            Loved by{' '}
+            People Are{' '}
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Thousands of Shoppers
+              Shopping with Confidence
             </span>
           </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+            Our premium Chrome extension has helped thousands of shoppers reduce returns and shop with confidence
+          </p>
         </div>
 
+        {/* Featured Testimonials with Metrics */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {featuredTestimonials.map((testimonial, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl shadow-xl p-6 border border-purple-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden"
+            >
+              <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-purple-100/30 to-pink-100/30 rounded-full blur-lg"></div>
+              
+              {/* Metric Highlight */}
+              <div className="flex justify-between items-start mb-6">
+                <div className="flex flex-col">
+                  <span className={`text-4xl font-bold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
+                    {testimonial.metric}
+                  </span>
+                  <span className="text-sm text-gray-500 font-medium">
+                    {testimonial.metricLabel}
+                  </span>
+                </div>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-r ${testimonial.gradient} text-white`}>
+                  {testimonial.icon}
+                </div>
+              </div>
+              
+              {/* Quote */}
+              <div className="mb-6 relative">
+                <svg className="w-8 h-8 text-purple-200 absolute -top-4 -left-2 opacity-50" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+                <p className="text-gray-700 relative z-10 pl-5">{testimonial.quote}</p>
+              </div>
+              
+              {/* Author */}
+              <div className="flex items-center">
+                <div className={`h-8 w-0.5 rounded-full bg-gradient-to-b ${testimonial.gradient} mr-3`}></div>
+                <div>
+                  <p className="font-medium text-gray-900">{testimonial.author}</p>
+                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Premium Banner */}
+        <div className="text-center py-8 mb-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-xl relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:14px_14px]"></div>
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/20 rounded-full blur-2xl"></div>
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
+          
+          <div className="relative">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Infinity className="h-6 w-6 text-white" />
+              <h3 className="text-xl font-bold text-white">Shop with Complete Confidence</h3>
+            </div>
+            <p className="text-white/90 mb-6 max-w-2xl mx-auto px-4">
+              Experience the full potential of Vesti with unrestricted access to our premium AI technology
+            </p>
+            <button className="inline-flex items-center px-8 py-3 rounded-full bg-white text-purple-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+              Add to Chrome - Premium Access
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Scrolling testimonials wall */}
         <div className="space-y-8">
           {testimonialRows.map((row, rowIndex) => (
             <div key={rowIndex} className="relative overflow-hidden py-2">
@@ -248,9 +350,7 @@ export function Testimonials() {
                       <div className="flex items-center pt-1 border-t border-purple-100/20">
                         <div className={`h-8 w-0.5 rounded-full bg-gradient-to-b ${testimonial.gradient} mr-3`}></div>
                         <div>
-                          <p className="font-medium text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                            {testimonial.author}
-                          </p>
+                          <p className="font-medium text-gray-900 text-sm">{testimonial.author}</p>
                           <p className="text-xs text-gray-500">{testimonial.role}</p>
                         </div>
                       </div>

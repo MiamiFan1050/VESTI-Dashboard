@@ -1,83 +1,140 @@
-import { Chrome, ArrowRight, Play, Sparkles } from 'lucide-react';
-import { Button } from './ui/Button';
-import { VideoModal } from './TutorialVideo/VideoModal';
-import { useModal } from '../hooks/useModal';
+import { ArrowRight, Infinity } from 'lucide-react';
 import TryOnSlideshow from './TryOnSlideshow';
 
 export function Hero() {
-  const { isOpen, open, close } = useModal();
-
   return (
-    <section className="pt-40 pb-16 bg-gradient-to-br from-purple-50 via-white to-pink-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Enhanced animated background elements */}
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full filter blur-3xl animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
-        
-        <div className="text-center space-y-8 relative">
-          <div className="animate-fade-in-up">
-            {/* Enhanced badge design */}
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full text-purple-700 mb-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <span className="relative flex h-3 w-3 mr-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
-              </span>
-              <span className="font-medium flex items-center">
-                <Sparkles className="h-4 w-4 mr-2 text-purple-600" />
-                New: AI-powered size recommendations
-              </span>
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-pink-50"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      
+      {/* Decorative Elements */}
+      <div className="absolute top-20 right-0 w-2/3 h-2/3 bg-gradient-to-br from-purple-200/20 to-pink-200/20 rounded-full filter blur-3xl"></div>
+      <div className="absolute -bottom-32 -left-32 w-2/3 h-2/3 bg-gradient-to-br from-pink-200/20 to-purple-200/20 rounded-full filter blur-3xl"></div>
+      
+      {/* Animated particles */}
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-purple-400 opacity-30 animate-pulse"></div>
+      <div className="absolute top-3/4 left-1/3 w-3 h-3 rounded-full bg-pink-400 opacity-20 animate-ping"></div>
+      <div className="absolute top-1/2 right-1/4 w-2 h-2 rounded-full bg-purple-300 opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-2 h-2 rounded-full bg-pink-300 opacity-20 animate-ping"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+          {/* Left Column - Content */}
+          <div>
+            <div className="mb-6 inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-700 text-sm font-medium border border-purple-100/20">
+              <Infinity className="h-4 w-4 mr-2" />
+              <span>Premium Experience</span>
             </div>
-
-            {/* Enhanced typography and gradient */}
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight tracking-tight">
-              Try Before You Buy,
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 mt-2 animate-gradient">
-                Virtually Perfect
+            
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
+              Try Clothes On 
+              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                {' '}for Confident Shopping
               </span>
             </h1>
-            <p className="mt-8 text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Experience clothes shopping like never before. Try on outfits virtually in real-time,
-              right from your browser with <span className="font-semibold text-purple-600">AI-powered precision</span>.
+            
+            <p className="text-xl text-gray-600 mb-8 max-w-lg">
+              Our premium Chrome extension uses AI to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
             </p>
+            
+            {/* Benefits */}
+            <div className="space-y-4 mb-10">
+              <div className="flex items-center">
+                <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+                  <svg className="h-3 w-3 text-white" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <p className="ml-3 text-gray-700">Advanced AI technology for realistic try-ons</p>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+                  <svg className="h-3 w-3 text-white" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <p className="ml-3 text-gray-700">Unlimited virtual try-ons with premium access</p>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+                  <svg className="h-3 w-3 text-white" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <p className="ml-3 text-gray-700">Works with all major shopping sites</p>
+              </div>
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <button className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
+                Add to Chrome - Premium Access
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </button>
+              
+              <button className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-900 font-medium shadow-md hover:shadow-lg border border-gray-200 transition-all duration-300">
+                Watch Demo
+              </button>
+            </div>
+            
+            {/* Trust Metrics */}
+            <div className="flex flex-wrap gap-6 text-sm text-gray-600">
+              <div className="flex items-center">
+                <div className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center mr-2">
+                  <span className="text-xs font-medium text-gray-800">85%</span>
+                </div>
+                <span>Fewer Returns</span>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center mr-2">
+                  <span className="text-xs font-medium text-gray-800">50K+</span>
+                </div>
+                <span>Active Users</span>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center mr-2">
+                  <span className="text-xs font-medium text-gray-800">∞</span>
+                </div>
+                <span>Unlimited Try-Ons</span>
+              </div>
+            </div>
           </div>
           
-          {/* Enhanced button group */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in">
-            <Button 
-              size="lg" 
-              className="group w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-            >
-              <Chrome className="h-5 w-5 mr-2 animate-spin-slow" />
-              <span>Add to Chrome - It's Free</span>
-              <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              onClick={open}
-              className="w-full sm:w-auto group backdrop-blur-sm bg-white/80 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-            >
-              <Play className="h-5 w-5 mr-2 transform group-hover:scale-110 transition-transform text-purple-600" />
-              Watch Demo
-            </Button>
-          </div>
-
-          {/* Try-On Slideshow with enhanced container */}
-          <div className="mt-16 relative animate-fade-in-up">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-2xl"></div>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-purple-100">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-              <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-pink-500/50 to-transparent"></div>
-              <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-purple-500/50 to-transparent"></div>
-              <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-pink-500/50 to-transparent"></div>
+          {/* Right Column - Browser Demo */}
+          <div className="relative">
+            {/* Browser Chrome Effect */}
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 relative z-10">
+              {/* Browser Header */}
+              <div className="bg-gray-100 border-b border-gray-200 p-3 flex items-center gap-2">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+                
+                <div className="flex-1 flex justify-center">
+                  <div className="bg-white rounded-full shadow-sm h-7 w-72 flex items-center justify-center text-xs text-gray-500 px-3">
+                    shopping.example.com
+                  </div>
+                </div>
+                
+                <div className="h-5 w-5"></div>
+              </div>
+              
+              {/* Browser Content - Try On Slideshow */}
               <TryOnSlideshow />
             </div>
+            
+            {/* Decorative Elements */}
+            <div className="absolute -bottom-10 -right-10 w-56 h-56 bg-gradient-to-br from-purple-300/20 to-pink-300/20 rounded-full filter blur-2xl z-0"></div>
           </div>
         </div>
       </div>
-
-      <VideoModal isOpen={isOpen} onClose={close} />
     </section>
   );
 }

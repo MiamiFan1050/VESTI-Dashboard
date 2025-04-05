@@ -94,17 +94,17 @@ export function LandingPage() {
         <section id="stats" className="relative">
           <Stats />
         </section>
-        <section id="features" className="relative">
-          <Features />
-        </section>
-        <section id="brands" className="relative">
-          <Brands />
-        </section>
         <section id="how-it-works" className="relative">
           <HowItWorks />
         </section>
+        <section id="features" className="relative">
+          <Features />
+        </section>
         <section id="testimonials" className="relative">
           <Testimonials />
+        </section>
+        <section id="brands" className="relative">
+          <Brands />
         </section>
         <section id="newsletter" className="relative">
           <Newsletter />

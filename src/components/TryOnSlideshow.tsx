@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 interface TryOnSlideshowProps {
   modelImages?: string[];
@@ -34,64 +33,40 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
   resultImages = defaultImages.result,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const totalSets = Math.min(modelImages.length, clothingImages.length, resultImages.length);
 
-  const nextSet = useCallback(() => {
-    setCurrentIndex(current => 
-      current < totalSets - 1 ? current + 1 : current
-    );
+  // Auto-scroll without pause/play functionality
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(current => 
+        current === totalSets - 1 ? 0 : current + 1
+      );
+    }, 3000);
+    
+    return () => clearInterval(intervalId);
   }, [totalSets]);
 
-  const prevSet = useCallback(() => {
-    setCurrentIndex(current => 
-      current > 0 ? current - 1 : current
-    );
-  }, []);
-
-  const toggleAutoPlay = useCallback(() => {
-    setIsPlaying(current => !current);
-  }, []);
-
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout | null = null;
-
-    if (isPlaying) {
-      intervalId = setInterval(() => {
-        setCurrentIndex(current => 
-          current === totalSets - 1 ? 0 : current + 1
-        );
-      }, 3000);
-    }
-
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [isPlaying, totalSets]);
-
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 py-12 bg-gradient-to-br from-purple-50/50 via-white/50 to-pink-50/50 rounded-3xl">
-      <div className="showcase relative">
-        {/* Flow Arrows */}
-        <div className="hidden md:block absolute top-1/2 left-[33%] right-[33%] -translate-y-1/2 z-0 pointer-events-none">
-          <div className="w-full flex justify-between items-center">
-            <div className="flex items-center">
-              <div className="w-16 h-[0.5px] bg-gradient-to-r from-purple-400/60 via-purple-400/40 to-purple-400/10"></div>
-            </div>
-            <div className="flex items-center">
-              <div className="w-16 h-[0.5px] bg-gradient-to-r from-purple-400/60 via-purple-400/40 to-purple-400/10"></div>
-            </div>
-          </div>
-        </div>
+    <div className="w-full max-w-7xl mx-auto px-6 py-8 rounded-3xl">
+      {/* Title and Benefit Section */}
+      <div className="text-center mb-10">
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">See the Magic in Action</h3>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Our Chrome extension removes your current outfit and shows any clothing item on your body in seconds
+        </p>
+      </div>
 
+      <div className="showcase relative">
+        {/* Removing the Flow Arrows that connect the panels */}
+        
         {/* Panels */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative z-10">
           {/* Original Photo Panel */}
-          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
+          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="panel-header py-4 text-center">
-              <span className="text-sm text-purple-400 mb-1 block">Step 1</span>
+              <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 1</span>
               <h3 className="text-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Original Photo
+                Upload Your Photo
               </h3>
             </div>
             <div className="panel-content relative aspect-[3/4]">
@@ -109,11 +84,11 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
           </div>
 
           {/* Selected Item Panel */}
-          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
+          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="panel-header py-4 text-center">
-              <span className="text-sm text-purple-400 mb-1 block">Step 2</span>
+              <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 2</span>
               <h3 className="text-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Selected Item
+                Select Any Clothing
               </h3>
             </div>
             <div className="panel-content relative aspect-[3/4]">
@@ -131,11 +106,11 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
           </div>
 
           {/* Result Panel */}
-          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
+          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200">
             <div className="panel-header py-4 text-center">
-              <span className="text-sm text-purple-400 mb-1 block">Step 3</span>
+              <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 3</span>
               <h3 className="text-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Virtual Try-On Result
+                See It On Your Body
               </h3>
             </div>
             <div className="panel-content relative aspect-[3/4]">
@@ -153,32 +128,17 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
           </div>
         </div>
       </div>
-
-      {/* Controls */}
-      <div className="controls mt-8 flex justify-center gap-3">
-        <button
-          onClick={prevSet}
-          disabled={currentIndex === 0}
-          className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 disabled:bg-purple-300 disabled:cursor-not-allowed shadow-lg transition-all duration-300 hover:-translate-y-1 active:translate-y-0 disabled:hover:translate-y-0 disabled:shadow-none"
+      
+      {/* Action Button */}
+      <div className="mt-10 text-center">
+        <button 
+          className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
+          aria-label="Add to Chrome with unlimited try-ons"
         >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-        <button
-          onClick={toggleAutoPlay}
-          className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 shadow-lg transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
-        >
-          {isPlaying ? (
-            <Pause className="h-6 w-6" />
-          ) : (
-            <Play className="h-6 w-6" />
-          )}
-        </button>
-        <button
-          onClick={nextSet}
-          disabled={currentIndex === totalSets - 1}
-          className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 disabled:bg-purple-300 disabled:cursor-not-allowed shadow-lg transition-all duration-300 hover:-translate-y-1 active:translate-y-0 disabled:hover:translate-y-0 disabled:shadow-none"
-        >
-          <ChevronRight className="h-6 w-6" />
+          Add to Chrome - Unlimited Try-Ons
+          <svg className="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </button>
       </div>
     </div>
