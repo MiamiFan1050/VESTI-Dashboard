@@ -1,4 +1,4 @@
-import { ShoppingBag, Twitter, Instagram, Facebook } from 'lucide-react';
+import { ShoppingBag, Twitter, Instagram, Facebook, Linkedin } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -109,6 +109,14 @@ export function Footer() {
                 className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 p-3 rounded-xl text-gray-400 hover:text-white transition-colors"
               >
                 <Facebook className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/vesti-ext/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 p-3 rounded-xl text-gray-400 hover:text-white transition-colors"
+              >
+                <Linkedin className="h-6 w-6" />
               </a>
             </div>
             <div className="mt-8">

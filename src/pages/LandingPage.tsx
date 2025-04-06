@@ -6,6 +6,7 @@ import { HowItWorks } from '../components/HowItWorks';
 import { Testimonials } from '../components/Testimonials';
 import { Newsletter } from '../components/Newsletter';
 import { Helmet } from 'react-helmet-async';
+import { CTASection } from '../components/CTASection';
 
 export function LandingPage() {
   // SEO description optimized for virtual try-on
@@ -108,6 +109,9 @@ export function LandingPage() {
         </section>
         <section id="newsletter" className="relative">
           <Newsletter />
+        </section>
+        <section id="cta" className="relative">
+          <CTASection />
         </section>
       </main>
     </>

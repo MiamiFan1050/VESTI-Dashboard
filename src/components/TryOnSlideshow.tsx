@@ -41,7 +41,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
       setCurrentIndex(current => 
         current === totalSets - 1 ? 0 : current + 1
       );
-    }, 3000);
+    }, 1800);
     
     return () => clearInterval(intervalId);
   }, [totalSets]);

@@ -35,13 +35,6 @@ export function Header() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <a 
-            href="#features" 
-            className="text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium relative group"
-          >
-            Features
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a 
             href="#how-it-works" 
             className="text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium relative group"
           >
@@ -60,6 +53,20 @@ export function Header() {
             className="text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium relative group"
           >
             Blog
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+          <Link 
+            to="/get-featured" 
+            className="text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium relative group"
+          >
+            Get Featured
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+          <Link 
+            to="/faq" 
+            className="text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium relative group"
+          >
+            FAQ
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
           </Link>
           <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-md hover:shadow-lg active:shadow-md font-medium text-sm">
@@ -84,12 +91,6 @@ export function Header() {
       }`}>
         <div className="px-4 py-3 space-y-4">
           <a 
-            href="#features" 
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
-          >
-            Features
-          </a>
-          <a 
             href="#how-it-works" 
             className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
           >
@@ -106,6 +107,18 @@ export function Header() {
             className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
           >
             Blog
+          </Link>
+          <Link 
+            to="/get-featured" 
+            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+          >
+            Get Featured
+          </Link>
+          <Link 
+            to="/faq" 
+            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+          >
+            FAQ
           </Link>
           <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium text-sm">
             Add to Chrome
