@@ -92,14 +92,70 @@ export function LandingPage() {
         <section id="hero" className="relative">
           <Hero />
         </section>
+        
+        {/* Chrome Web Store Showcase */}
+        <section className="py-16 bg-gradient-to-b from-white to-purple-50/30 relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Available on{' '}
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Chrome Web Store
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600">
+                Join thousands of users who are already shopping with confidence
+              </p>
+            </div>
+            
+            <div className="relative">
+              <img 
+                src="/images/esti.png" 
+                alt="VESTI Chrome Extension on Chrome Web Store" 
+                className="w-full h-auto block"
+                style={{ 
+                  backgroundColor: '#fffeff',
+                  filter: 'brightness(1.02) contrast(1.01)',
+                  mixBlendMode: 'normal'
+                }}
+              />
+              
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full filter blur-xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-pink-300/30 to-purple-300/30 rounded-full filter blur-xl"></div>
+            </div>
+            
+            {/* Additional Images */}
+            <div className="mt-0">
+              <img 
+                src="/images/1.png" 
+                alt="VESTI Feature 1" 
+                className="w-full h-auto block"
+                style={{ 
+                  backgroundColor: '#fffeff',
+                  filter: 'brightness(1.02) contrast(1.01)',
+                  mixBlendMode: 'normal'
+                }}
+              />
+            </div>
+            
+            <div className="mt-0">
+              <img 
+                src="/images/2.png" 
+                alt="VESTI Feature 2" 
+                className="w-full h-auto block"
+                style={{ 
+                  backgroundColor: '#fffeff',
+                  filter: 'brightness(1.02) contrast(1.01)',
+                  mixBlendMode: 'normal'
+                }}
+              />
+            </div>
+          </div>
+        </section>
+        
         <section id="stats" className="relative">
           <Stats />
-        </section>
-        <section id="how-it-works" className="relative">
-          <HowItWorks />
-        </section>
-        <section id="features" className="relative">
-          <Features />
         </section>
         <section id="testimonials" className="relative">
           <Testimonials />

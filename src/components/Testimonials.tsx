@@ -248,50 +248,6 @@ export function Testimonials() {
           </p>
         </div>
 
-        {/* Featured Testimonials with Metrics */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {featuredTestimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="bg-white rounded-2xl shadow-xl p-6 border border-purple-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden"
-            >
-              <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-purple-100/30 to-pink-100/30 rounded-full blur-lg"></div>
-              
-              {/* Metric Highlight */}
-              <div className="flex justify-between items-start mb-6">
-                <div className="flex flex-col">
-                  <span className={`text-4xl font-bold bg-gradient-to-r ${testimonial.gradient} bg-clip-text text-transparent`}>
-                    {testimonial.metric}
-                  </span>
-                  <span className="text-sm text-gray-500 font-medium">
-                    {testimonial.metricLabel}
-                  </span>
-                </div>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-r ${testimonial.gradient} text-white`}>
-                  {testimonial.icon}
-                </div>
-              </div>
-              
-              {/* Quote */}
-              <div className="mb-6 relative">
-                <svg className="w-8 h-8 text-purple-200 absolute -top-4 -left-2 opacity-50" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-                <p className="text-gray-700 relative z-10 pl-5">{testimonial.quote}</p>
-              </div>
-              
-              {/* Author */}
-              <div className="flex items-center">
-                <div className={`h-8 w-0.5 rounded-full bg-gradient-to-b ${testimonial.gradient} mr-3`}></div>
-                <div>
-                  <p className="font-medium text-gray-900">{testimonial.author}</p>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Premium Banner */}
         <div className="text-center py-8 mb-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-xl relative overflow-hidden">
           {/* Background Elements */}
