@@ -80,12 +80,15 @@ export function Newsletter() {
                 </div>
               </div>
               
-              <Button 
+              <a 
+                href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg hover:shadow-xl font-medium flex items-center justify-center gap-2"
               >
                 <Chrome className="w-5 h-5" />
                 Add to Chrome - Premium Access
-              </Button>
+              </a>
               
               <div className="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-purple-400/30 to-transparent"></div>
                 

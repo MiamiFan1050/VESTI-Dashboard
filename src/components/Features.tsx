@@ -92,7 +92,7 @@ export function Features() {
         </div>
 
         {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-20">
           {features.map((feature, i) => (
             <div 
               key={i} 
@@ -133,10 +133,15 @@ export function Features() {
           </div>
           
           <div className="text-center mt-10">
-            <button className="inline-flex items-center px-8 py-4 bg-white text-purple-700 rounded-xl font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <a 
+              href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-4 bg-white text-purple-700 rounded-xl font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+            >
               Add to Chrome - Premium Access
               <Smartphone className="ml-3 h-5 w-5 text-purple-500" />
-            </button>
+            </a>
           </div>
         </div>
         

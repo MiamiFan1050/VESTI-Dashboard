@@ -94,7 +94,7 @@ export function Stats() {
         </div>
         
         {/* Stats Grid - Enhanced with Animations and Visual Appeal */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-24">
           {stats.map((stat, i) => (
             <div 
               key={i} 
@@ -110,8 +110,8 @@ export function Stats() {
                 <ArrowUpRight className="h-5 w-5 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-700 to-pink-600 bg-clip-text text-transparent mb-2">{stat.value}</div>
-              <div className="text-base md:text-lg font-semibold text-slate-800 mb-2">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-700 to-pink-600 bg-clip-text text-transparent mb-2">{stat.value}</div>
+              <div className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 mb-2">{stat.label}</div>
               <p className="text-slate-600 text-sm">{stat.description}</p>
             </div>
           ))}
@@ -163,10 +163,15 @@ export function Stats() {
         
         {/* Enhanced CTA Button with Animation */}
         <div className="text-center">
-          <button className="inline-flex items-center px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-pulse hover:animate-none">
+          <a 
+            href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-pulse hover:animate-none"
+          >
             Add to Chrome - Unlimited Try-Ons
             <ArrowUpRight className="ml-3 h-5 w-5" />
-          </button>
+          </a>
           <p className="text-slate-600 mt-4 text-sm font-medium">Join thousands of confident shoppers today</p>
         </div>
       </div>

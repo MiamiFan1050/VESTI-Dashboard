@@ -177,7 +177,9 @@ export function BlogPostPage() {
           VESTI's Chrome extension brings the most advanced virtual try-on technology to your favorite online stores, with unlimited try-ons and unmatched accuracy.
         </p>
         <a 
-          href="#" 
+          href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-purple-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
         >
           Add VESTI to Chrome
@@ -331,7 +333,9 @@ export function BlogPostPage() {
           Add VESTI to your Chrome browser for free and experience the future of confident online shopping with unlimited virtual try-ons.
         </p>
         <a 
-          href="#" 
+          href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-purple-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
         >
           Add VESTI to Chrome
@@ -457,7 +461,9 @@ export function BlogPostPage() {
           Add VESTI to Chrome today and transform your online shopping experience with unlimited virtual try-ons and perfect fit, every time.
         </p>
         <a 
-          href="#" 
+          href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-purple-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
         >
           Add VESTI to Chrome

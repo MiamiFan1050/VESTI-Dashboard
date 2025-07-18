@@ -66,12 +66,17 @@ export function CTASection() {
             </div>
             
             {/* CTA Button */}
-            <button className="group inline-flex items-center px-8 py-4 bg-white text-purple-700 rounded-xl font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <a 
+              href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center px-8 py-4 bg-white text-purple-700 rounded-xl font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+            >
               Add to Chrome - Premium Access
               <div className="w-6 h-6 rounded-full bg-purple-100 ml-3 flex items-center justify-center group-hover:bg-purple-200 transition-colors">
                 <ArrowRight className="h-3.5 w-3.5 text-purple-700" />
               </div>
-            </button>
+            </a>
             
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-6 mt-8">

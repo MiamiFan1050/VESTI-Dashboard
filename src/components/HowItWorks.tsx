@@ -179,10 +179,15 @@ export function HowItWorks() {
               
               {/* CTA Button */}
               {activeStep === steps.length - 1 && (
-                <button className="mt-8 inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-md hover:shadow-lg transition-all">
+                <a 
+                  href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-md hover:shadow-lg transition-all"
+                >
                   Add to Chrome - Premium Access
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </button>
+                </a>
               )}
             </div>
           </div>

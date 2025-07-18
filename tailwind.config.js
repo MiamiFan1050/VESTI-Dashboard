@@ -1,8 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
+      screens: {
+        'xs': '480px', // Custom breakpoint for larger phones
+      },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out',
         'fade-in-up': 'fade-in-up 0.5s ease-out',

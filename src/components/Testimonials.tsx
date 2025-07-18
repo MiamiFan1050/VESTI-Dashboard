@@ -263,10 +263,15 @@ export function Testimonials() {
             <p className="text-white/90 mb-6 max-w-2xl mx-auto px-4">
               Experience the full potential of Vesti with unrestricted access to our premium AI technology
             </p>
-            <button className="inline-flex items-center px-8 py-3 rounded-full bg-white text-purple-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+            <a 
+              href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-3 rounded-full bg-white text-purple-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
+            >
               Add to Chrome - Premium Access
               <ArrowRight className="ml-2 h-4 w-4" />
-            </button>
+            </a>
           </div>
         </div>
 

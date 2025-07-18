@@ -164,7 +164,9 @@ export function Demo() {
                 </div>
                 
                 <a 
-                  href="#" 
+                  href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-xl font-medium flex items-center shadow-lg hover:shadow-xl transition-all"
                   aria-label="Add to Chrome - Unlimited Try-Ons"
                 >

@@ -19,7 +19,7 @@ export function Hero() {
       <div className="absolute bottom-1/4 right-1/3 w-2 h-2 rounded-full bg-pink-300 opacity-20 animate-ping"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div className="grid xs:grid-cols-2 gap-6 xs:gap-8 lg:gap-20 items-center">
           {/* Left Column - Content */}
           <div>
             <div className="mb-6 inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-700 text-sm font-medium border border-purple-100/20">
@@ -27,14 +27,14 @@ export function Hero() {
               <span>Premium Experience</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
               Try Clothes On 
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {' '}for Confident Shopping
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-lg">
+            <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-8 max-w-lg">
               Our premium Chrome extension uses AI to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
             </p>
             
@@ -70,10 +70,15 @@ export function Hero() {
             
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <button className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
+              <a 
+                href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0"
+              >
                 Add to Chrome - Premium Access
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
+              </a>
               
               <button className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-900 font-medium shadow-md hover:shadow-lg border border-gray-200 transition-all duration-300">
                 Watch Demo

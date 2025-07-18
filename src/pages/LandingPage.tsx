@@ -7,8 +7,25 @@ import { Testimonials } from '../components/Testimonials';
 import { Newsletter } from '../components/Newsletter';
 import { Helmet } from 'react-helmet-async';
 import { CTASection } from '../components/CTASection';
+import { useEffect } from 'react';
 
 export function LandingPage() {
+  // Handle hash scrolling when coming from other pages
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start' 
+          });
+        }
+      }, 100); // Small delay to ensure page is rendered
+    }
+  }, []);
+
   // SEO description optimized for virtual try-on
   const seoDescription = "Transform your online shopping experience with VESTI's revolutionary virtual try-on technology. Our AI-powered virtual fitting room lets you try clothes virtually before buying, ensuring perfect fit and zero returns. Experience the future of fashion with our advanced virtual dressing room.";
   
@@ -94,16 +111,16 @@ export function LandingPage() {
         </section>
         
         {/* Chrome Web Store Showcase */}
-        <section className="py-16 bg-gradient-to-b from-white to-purple-50/30 relative">
+        <section id="how-it-works" className="py-16 bg-gradient-to-b from-white to-purple-50/30 relative">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
                 Available on{' '}
                 <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                   Chrome Web Store
                 </span>
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-base sm:text-lg text-gray-600">
                 Join thousands of users who are already shopping with confidence
               </p>
             </div>
