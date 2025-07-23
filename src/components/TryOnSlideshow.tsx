@@ -8,22 +8,40 @@ interface TryOnSlideshowProps {
 
 const defaultImages = {
   model: [
-    '/images/Model_01_before.jpg',
+    '/images/Model_01_before.jpeg',
     '/images/Model_02_before.jpg',
     '/images/Model_03_before.jpg',
-    '/images/Model_04_before.jpg'
+    '/images/Model_04_before.jpg',
+    '/images/Model_05_before.png',
+    '/images/Model_06_before.jpeg',
+    '/images/Model_07_before.jpeg',
+    '/images/Model_08_before.jpeg',
+    '/images/Model_09_before.jpeg',
+    '/images/Model_10_before.png'
   ],
   clothing: [
-    '/images/Clothing_01.jpg',
+    '/images/Clothing_01.jpeg',
     '/images/Clothing_02.jpg',
     '/images/Clothing_03.jpg',
-    '/images/Clothing_04.jpg'
+    '/images/Clothing_04.jpg',
+    '/images/Clothing_05.png',
+    '/images/Clothing_06.png',
+    '/images/Clothing_07.jpeg',
+    '/images/Clothing_08.png',
+    '/images/Clothing_09.png',
+    '/images/Clothing_10.png'
   ],
   result: [
-    '/images/Model_01_after.jpg',
+    '/images/Model_01_after.jpeg',
     '/images/model_02_after.jpg',
     '/images/Model_03_after.jpg',
-    '/images/Model_04_after.jpg'
+    '/images/Model_04_after.jpg',
+    '/images/Model_05_after.png',
+    '/images/Model_06_after.jpeg',
+    '/images/Model_07_after.jpeg',
+    '/images/Model_08_after.jpeg',
+    '/images/Model_09_after.jpeg',
+    '/images/Model_10_after.png'
   ]
 };
 
