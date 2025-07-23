@@ -102,23 +102,31 @@ export function CTASection() {
             <div className="relative z-10 bg-white p-3 rounded-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.3)] transform md:rotate-3 hover:rotate-0 transition-transform duration-500">
               <div className="bg-gradient-to-r from-purple-100 to-pink-50 rounded-xl p-5">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-lg shadow-inner">
-                  <img 
-                    src="/images/cta-preview.jpg" 
-                    alt="Vesti virtual try-on preview" 
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  {/* Before/After Overlay */}
-                  <div className="absolute inset-0 flex">
+                  {/* Split view with separate before and after images */}
+                  <div className="flex h-full">
+                    {/* Before Section */}
                     <div className="w-1/2 relative overflow-hidden">
+                      <img 
+                        src="/images/Model_04_before.jpg" 
+                        alt="Before virtual try-on" 
+                        className="w-full h-full object-cover"
+                      />
                       {/* Before Label */}
                       <div className="absolute top-3 left-3 px-2 py-1 bg-black/60 text-white text-xs rounded-md">
                         Before
                       </div>
-                      {/* This is just for effect, the image already has the before/after split */}
-                      <div className="absolute right-0 top-0 bottom-0 w-0.5 bg-white"></div>
                     </div>
-                    <div className="w-1/2 relative">
+                    
+                    {/* Divider line */}
+                    <div className="w-0.5 bg-white"></div>
+                    
+                    {/* After Section */}
+                    <div className="w-1/2 relative overflow-hidden">
+                      <img 
+                        src="/images/Model_04_after.jpg" 
+                        alt="After virtual try-on" 
+                        className="w-full h-full object-cover"
+                      />
                       {/* After Label */}
                       <div className="absolute top-3 right-3 px-2 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs rounded-md">
                         After

@@ -1,4 +1,4 @@
-import { ShoppingBag, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -67,13 +67,13 @@ export function Header() {
     }`}>
       <div className="absolute inset-0 bg-gradient-to-r from-purple-50/30 to-pink-50/30"></div>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="bg-gradient-to-br from-purple-600 to-pink-600 p-2 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105">
-            <ShoppingBag className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            VESTI
-          </span>
+        <Link to="/" className="transform transition-all duration-300 hover:scale-105" style={{ marginLeft: '-192px' }}>
+          <img 
+            src="/images/vesti-logo.png" 
+            alt="VESTI Logo" 
+            className="object-contain"
+            style={{ width: '300px', height: '90px' }}
+          />
         </Link>
         
         {/* Desktop Navigation */}
