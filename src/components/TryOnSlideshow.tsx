@@ -22,7 +22,8 @@ const defaultImages = {
     '/images/Model_12_before.jpg',
     '/images/Model_13_before.jpg',
     '/images/Model_14_before.png',
-    '/images/Model_15_before.png'
+    '/images/Model_15_before.png',
+    '/images/Model_before_16.jpg'
   ],
   clothing: [
     '/images/Clothing_01.jpeg',
@@ -39,7 +40,8 @@ const defaultImages = {
     '/images/Clothing_12.jpg',
     '/images/Clothing_13.jpg',
     '/images/Clothing_14.jpg',
-    '/images/Clothing_15.png'
+    '/images/Clothing_15.png',
+    '/images/Clothing_16.jpg'
   ],
   result: [
     '/images/Model_01_after.jpeg',
@@ -56,7 +58,8 @@ const defaultImages = {
     '/images/Model_12_after.jpg',
     '/images/Model_13_after.jpg',
     '/images/Model_14_after.jpg',
-    '/images/Model_15_after.jpg'
+    '/images/Model_15_after.jpg',
+    '/images/Model_after_16.jpg'
   ]
 };
 
