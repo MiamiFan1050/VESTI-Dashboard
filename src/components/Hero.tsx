@@ -136,11 +136,19 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative">
         {/* Mobile layout: Intro -> Slideshow -> Details */}
         <div className="md:hidden">
-          <Intro />
-          <div className="my-6">
-            <SlideshowFrame />
+          <div className="animate-fade-in-up">
+            <Intro />
           </div>
-          <Details />
+          <div className="my-6 relative">
+            {/* animated halo */}
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-purple-500/20 via-pink-500/10 to-purple-500/20 blur-2xl animate-gradient"></div>
+            <div className="relative">
+              <SlideshowFrame />
+            </div>
+          </div>
+          <div className="animate-fade-in">
+            <Details />
+          </div>
         </div>
 
         {/* Desktop layout: Text left (Intro + Details), Slideshow right */}
