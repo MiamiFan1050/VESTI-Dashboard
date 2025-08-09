@@ -61,7 +61,7 @@ const advantages = [
 
 export function Stats() {
   return (
-    <section className="py-16 md:py-20 relative overflow-hidden bg-white">
+    <section className="py-24 relative overflow-hidden bg-white">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-purple-50 to-transparent"></div>

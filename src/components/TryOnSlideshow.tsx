@@ -56,15 +56,15 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const totalSets = Math.min(modelImages.length, clothingImages.length, resultImages.length);
 
-  // Intersection Observer for fade-in effect
+  // Enhanced Intersection Observer for fade-in effect
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.1,
-        rootMargin: '-50px 0px -50px 0px'
+        threshold: 0.2,
+        rootMargin: '-30px 0px -30px 0px'
       }
     );
 
@@ -79,7 +79,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
     };
   }, []);
 
-  // Scroll-based animation
+  // Enhanced scroll-based animation with better performance
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -87,15 +87,24 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
       const rect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate scroll progress (0 to 1)
-      const progress = Math.max(0, Math.min(1, 1 - (rect.top + rect.height / 2) / windowHeight));
+      // Improved scroll progress calculation for smoother animation
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = windowHeight / 2;
+      const distance = viewportCenter - elementCenter;
+      const maxDistance = windowHeight / 2;
+      
+      const progress = Math.max(0, Math.min(1, 1 - (distance / maxDistance)));
       setScrollProgress(progress);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const throttledScroll = () => {
+      requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
     handleScroll(); // Initial call
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', throttledScroll);
   }, []);
 
   // Auto-scroll without pause/play functionality
@@ -109,48 +118,53 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
     return () => clearInterval(intervalId);
   }, [totalSets]);
 
-  // Calculate opacity and transform based on scroll progress
+  // Enhanced panel style calculation with better animations
   const getPanelStyle = useCallback((panelIndex: number) => {
     const baseOpacity = isVisible ? 1 : 0;
-    const scrollOpacity = Math.max(0, Math.min(1, (scrollProgress - panelIndex * 0.2) * 2));
-    const opacity = baseOpacity * (0.7 + scrollOpacity * 0.3);
+    const scrollOpacity = Math.max(0, Math.min(1, (scrollProgress - panelIndex * 0.15) * 3));
+    const opacity = baseOpacity * (0.8 + scrollOpacity * 0.2);
     
-    const transform = `translateY(${Math.sin(scrollProgress * Math.PI + panelIndex * 0.5) * 20}px) scale(${0.95 + scrollOpacity * 0.05})`;
+    // Enhanced transform with parallax-like movement
+    const translateY = Math.sin(scrollProgress * Math.PI + panelIndex * 0.3) * 15;
+    const scale = 0.98 + scrollOpacity * 0.02;
+    const translateX = Math.sin(scrollProgress * Math.PI + panelIndex * 0.7) * 5;
+    
+    const transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
     
     return {
       opacity,
       transform,
-      transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+      transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
     };
   }, [isVisible, scrollProgress]);
 
   return (
-    <div ref={containerRef} className="w-full max-w-7xl mx-auto px-6 py-8 rounded-3xl relative">
-      {/* Title and Benefit Section */}
+    <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 py-4 rounded-3xl relative">
+      {/* Title and Benefit Section - Reduced spacing */}
       <div 
-        className="text-center mb-10 transition-all duration-1000 ease-out"
+        className="text-center mb-6 transition-all duration-1000 ease-out"
         style={{
           opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(30px)'
+          transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
         }}
       >
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">See the Magic in Action</h3>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <h3 className="text-xl font-bold text-gray-900 mb-2">See the Magic in Action</h3>
+        <p className="text-gray-600 max-w-xl mx-auto text-sm">
           Our Chrome extension removes your current outfit and shows any clothing item on your body in seconds
         </p>
       </div>
 
       <div className="showcase relative">
-        {/* Panels with scroll-based animations */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 relative z-10">
+        {/* Panels with enhanced scroll-based animations and tighter spacing */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 lg:gap-4 relative z-10">
           {/* Original Photo Panel */}
           <div 
-            className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
+            className="panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
             style={getPanelStyle(0)}
           >
-            <div className="panel-header py-4 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 1</span>
-              <h3 className="text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="panel-header py-3 text-center">
+              <span className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 1</span>
+              <h3 className="text-sm md:text-base font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Upload Your Photo
               </h3>
             </div>
@@ -170,12 +184,12 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
 
           {/* Selected Item Panel */}
           <div 
-            className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
+            className="panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
             style={getPanelStyle(1)}
           >
-            <div className="panel-header py-4 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 2</span>
-              <h3 className="text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="panel-header py-3 text-center">
+              <span className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 2</span>
+              <h3 className="text-sm md:text-base font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Select Any Clothing
               </h3>
             </div>
@@ -195,12 +209,12 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
 
           {/* Result Panel */}
           <div 
-            className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200"
+            className="panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200"
             style={getPanelStyle(2)}
           >
-            <div className="panel-header py-4 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 3</span>
-              <h3 className="text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="panel-header py-3 text-center">
+              <span className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 3</span>
+              <h3 className="text-sm md:text-base font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 See It On Your Body
               </h3>
             </div>
@@ -220,19 +234,19 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
         </div>
       </div>
       
-      {/* Action Button */}
+      {/* Action Button - Reduced spacing */}
       <div 
-        className="mt-10 text-center transition-all duration-1000 ease-out"
+        className="mt-6 text-center transition-all duration-1000 ease-out"
         style={{
           opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(30px)'
+          transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
         }}
       >
         <a 
           href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
+          className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-sm"
           aria-label="Add to Chrome with unlimited try-ons"
         >
           Add to Chrome - Unlimited Try-Ons
