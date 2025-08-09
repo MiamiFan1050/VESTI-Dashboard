@@ -156,26 +156,55 @@ export function Testimonials() {
           </div>
         </div>
 
-        {/* Featured Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-12">
+        {/* Featured Metrics - Mobile carousel */}
+        <div className="md:hidden -mx-4 px-4 mb-10">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2">
+            {featuredTestimonials.map((item, i) => (
+              <div key={i} className="min-w-[85%] snap-center">
+                <div className="bg-white rounded-2xl p-5 shadow-xl border border-purple-100 relative overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-5`}></div>
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center text-purple-700">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <div className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-600">{item.metric}</div>
+                          <div className="text-xs text-slate-600">{item.metricLabel}</div>
+                        </div>
+                      </div>
+                      <div className="text-xs text-slate-500">Verified</div>
+                    </div>
+                    <p className="text-slate-700 text-sm mb-3">{item.quote}</p>
+                    <div className="text-slate-500 text-xs">— {item.author}, {item.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Metrics - Desktop grid */}
+        <div className="hidden md:grid grid-cols-3 gap-6 mb-12">
           {featuredTestimonials.map((item, i) => (
-            <div key={i} className="bg-white rounded-2xl p-5 md:p-6 shadow-xl border border-purple-100 relative overflow-hidden">
+            <div key={i} className="bg-white rounded-2xl p-6 shadow-xl border border-purple-100 relative overflow-hidden">
               <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-5`}></div>
               <div className="relative">
-                <div className="flex items-center justify-between mb-3 md:mb-4">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center text-purple-700">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center text-purple-700">
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-600">{item.metric}</div>
-                      <div className="text-xs md:text-sm text-slate-600">{item.metricLabel}</div>
+                      <div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-600">{item.metric}</div>
+                      <div className="text-sm text-slate-600">{item.metricLabel}</div>
                     </div>
                   </div>
-                  <div className="text-xs md:text-sm text-slate-500">Verified</div>
+                  <div className="text-sm text-slate-500">Verified</div>
                 </div>
-                <p className="text-slate-700 text-sm md:text-base mb-3 md:mb-4">{item.quote}</p>
-                <div className="text-slate-500 text-xs md:text-sm">— {item.author}, {item.role}</div>
+                <p className="text-slate-700 text-base mb-4">{item.quote}</p>
+                <div className="text-slate-500 text-sm">— {item.author}, {item.role}</div>
               </div>
             </div>
           ))}

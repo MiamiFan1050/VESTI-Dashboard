@@ -124,49 +124,71 @@ export function LandingPage() {
                 Join thousands of users who are already shopping with confidence
               </p>
             </div>
+
+            {/* Mobile: swipeable screenshot gallery */}
+            <div className="md:hidden -mx-4 px-4">
+              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2">
+                {["/images/esti.png", "/images/1.png", "/images/2.png"].map((src, i) => (
+                  <div key={i} className="min-w-[85%] snap-center">
+                    <img
+                      src={src}
+                      alt={`VESTI screenshot ${i + 1}`}
+                      className="w-full h-auto rounded-2xl shadow-xl border border-purple-100 bg-white"
+                      style={{
+                        backgroundColor: '#fffeff',
+                        filter: 'brightness(1.02) contrast(1.01)',
+                        mixBlendMode: 'normal'
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
             
-            <div className="relative">
-              <img 
-                src="/images/esti.png" 
-                alt="VESTI Chrome Extension on Chrome Web Store" 
-                className="w-full h-auto block"
-                style={{ 
-                  backgroundColor: '#fffeff',
-                  filter: 'brightness(1.02) contrast(1.01)',
-                  mixBlendMode: 'normal'
-                }}
-              />
+            {/* Desktop/Tablet: original layout */}
+            <div className="hidden md:block">
+              <div className="relative">
+                <img 
+                  src="/images/esti.png" 
+                  alt="VESTI Chrome Extension on Chrome Web Store" 
+                  className="w-full h-auto block rounded-2xl shadow-xl border border-purple-100"
+                  style={{ 
+                    backgroundColor: '#fffeff',
+                    filter: 'brightness(1.02) contrast(1.01)',
+                    mixBlendMode: 'normal'
+                  }}
+                />
+                {/* Decorative Elements (desktop only) */}
+                <div className="absolute -top-3 md:-top-4 -right-3 md:-right-4 w-14 md:w-20 h-14 md:h-20 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full filter blur-xl"></div>
+                <div className="absolute -bottom-3 md:-bottom-4 -left-3 md:-left-4 w-12 md:w-16 h-12 md:h-16 bg-gradient-to-br from-pink-300/30 to-purple-300/30 rounded-full filter blur-xl"></div>
+              </div>
               
-              {/* Decorative Elements */}
-              <div className="absolute -top-3 md:-top-4 -right-3 md:-right-4 w-14 md:w-20 h-14 md:h-20 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full filter blur-xl"></div>
-              <div className="absolute -bottom-3 md:-bottom-4 -left-3 md:-left-4 w-12 md:w-16 h-12 md:h-16 bg-gradient-to-br from-pink-300/30 to-purple-300/30 rounded-full filter blur-xl"></div>
-            </div>
-            
-            {/* Additional Images */}
-            <div className="mt-4 md:mt-6">
-              <img 
-                src="/images/1.png" 
-                alt="VESTI Feature 1" 
-                className="w-full h-auto block"
-                style={{ 
-                  backgroundColor: '#fffeff',
-                  filter: 'brightness(1.02) contrast(1.01)',
-                  mixBlendMode: 'normal'
-                }}
-              />
-            </div>
-            
-            <div className="mt-4 md:mt-6">
-              <img 
-                src="/images/2.png" 
-                alt="VESTI Feature 2" 
-                className="w-full h-auto block"
-                style={{ 
-                  backgroundColor: '#fffeff',
-                  filter: 'brightness(1.02) contrast(1.01)',
-                  mixBlendMode: 'normal'
-                }}
-              />
+              {/* Additional Images */}
+              <div className="mt-6">
+                <img 
+                  src="/images/1.png" 
+                  alt="VESTI Feature 1" 
+                  className="w-full h-auto block rounded-2xl shadow-xl border border-purple-100"
+                  style={{ 
+                    backgroundColor: '#fffeff',
+                    filter: 'brightness(1.02) contrast(1.01)',
+                    mixBlendMode: 'normal'
+                  }}
+                />
+              </div>
+              
+              <div className="mt-6">
+                <img 
+                  src="/images/2.png" 
+                  alt="VESTI Feature 2" 
+                  className="w-full h-auto block rounded-2xl shadow-xl border border-purple-100"
+                  style={{ 
+                    backgroundColor: '#fffeff',
+                    filter: 'brightness(1.02) contrast(1.01)',
+                    mixBlendMode: 'normal'
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>

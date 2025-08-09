@@ -32,9 +32,36 @@ export function Brands() {
           </p>
         </div>
         
-        {/* Key Benefits */}
-        <div className="grid grid-cols-1 xs:grid-cols-3 gap-6 xs:gap-8 mb-16">
-          <div className="bg-white rounded-2xl p-6 xs:p-8 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 text-center group">
+        {/* Key Benefits - Mobile carousel */}
+        <div className="md:hidden -mx-4 px-4 mb-10">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2">
+            <div className="min-w-[85%] snap-center bg-white rounded-2xl p-5 shadow-lg border border-purple-100 text-center">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-4 mx-auto">
+                <Globe className="h-7 w-7 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Universal Support</h3>
+              <p className="text-slate-600 text-sm">Works on any shopping website automatically - no setup required</p>
+            </div>
+            <div className="min-w-[85%] snap-center bg-white rounded-2xl p-5 shadow-lg border border-purple-100 text-center">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-4 mx-auto">
+                <ShoppingBag className="h-7 w-7 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">One-Click Try-On</h3>
+              <p className="text-slate-600 text-sm">Instantly see how any item looks on you with a single click</p>
+            </div>
+            <div className="min-w-[85%] snap-center bg-white rounded-2xl p-5 shadow-lg border border-purple-100 text-center">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-4 mx-auto">
+                <Store className="h-7 w-7 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Millions of Stores</h3>
+              <p className="text-slate-600 text-sm">Compatible with major retailers, marketplaces, and boutique stores</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Benefits - Desktop grid */}
+        <div className="hidden md:grid grid-cols-3 gap-8 mb-16">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 text-center group">
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <Globe className="h-8 w-8 text-purple-600" />
             </div>
@@ -42,7 +69,7 @@ export function Brands() {
             <p className="text-slate-600">Works on any shopping website automatically - no setup required</p>
           </div>
           
-          <div className="bg-white rounded-2xl p-6 xs:p-8 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 text-center group">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 text-center group">
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <ShoppingBag className="h-8 w-8 text-purple-600" />
             </div>
@@ -50,7 +77,7 @@ export function Brands() {
             <p className="text-slate-600">Instantly see how any item looks on you with a single click</p>
           </div>
           
-          <div className="bg-white rounded-2xl p-6 xs:p-8 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 text-center group">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-purple-100 hover:shadow-xl transition-all duration-300 text-center group">
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <Store className="h-8 w-8 text-purple-600" />
             </div>
