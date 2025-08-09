@@ -1,4 +1,4 @@
-import { Menu } from 'lucide-react';
+import { Menu, ShoppingBag } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,6 @@ export function Header() {
     e.preventDefault();
     
     if (location.pathname === '/') {
-      // Already on main page, just scroll
       const element = document.querySelector('#how-it-works');
       if (element) {
         element.scrollIntoView({ 
@@ -30,11 +29,8 @@ export function Header() {
         });
       }
     } else {
-      // Navigate to main page with hash
       navigate('/#how-it-works');
     }
-    
-    // Close mobile menu if open
     setMobileMenuOpen(false);
   };
 
@@ -42,7 +38,6 @@ export function Header() {
     e.preventDefault();
     
     if (location.pathname === '/') {
-      // Already on main page, just scroll
       const element = document.querySelector('#testimonials');
       if (element) {
         element.scrollIntoView({ 
@@ -51,11 +46,8 @@ export function Header() {
         });
       }
     } else {
-      // Navigate to main page with hash
       navigate('/#testimonials');
     }
-    
-    // Close mobile menu if open
     setMobileMenuOpen(false);
   };
 
@@ -63,17 +55,18 @@ export function Header() {
     <header className={`fixed w-full z-50 transition-all duration-300 ${
       scrolled 
         ? 'bg-white/90 backdrop-blur-md shadow-lg py-2' 
-        : 'bg-transparent py-4'
+        : 'bg-white/70 backdrop-blur-md py-2'
     }`}>
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/30 to-pink-50/30"></div>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
-        <Link to="/" className="transform transition-all duration-300 hover:scale-105" style={{ marginLeft: '-192px' }}>
-          <img 
-            src="/images/vesti-logo.png" 
-            alt="VESTI Logo" 
-            className="object-contain"
-            style={{ width: '300px', height: '90px' }}
-          />
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/40 to-pink-50/40"></div>
+      <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between relative">
+        {/* Responsive Inline Logo (icon + wordmark) */}
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 relative z-10">
+          <span className="inline-flex items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-gradient-to-tr from-purple-600 to-pink-600 text-white shadow-sm">
+            <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5" />
+          </span>
+          <span className="font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 text-lg sm:text-xl">
+            Vesti
+          </span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -124,10 +117,11 @@ export function Header() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="xs:hidden">
+        <div className="xs:hidden relative z-10">
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 transition-colors duration-200"
+            aria-label="Toggle menu"
           >
             <Menu className="h-6 w-6" />
           </button>
@@ -138,7 +132,7 @@ export function Header() {
       <div className={`xs:hidden absolute w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
         mobileMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
       }`}>
-        <div className="px-4 py-3 space-y-4">
+        <div className="px-4 py-3 space-y-3">
           <button 
             onClick={handleHowItWorksClick}
             className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2 text-left w-full"
