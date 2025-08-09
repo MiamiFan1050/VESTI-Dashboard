@@ -153,12 +153,15 @@ export function Hero() {
 
         {/* Desktop layout: Text left (Intro + Details), Slideshow right */}
         <div className="hidden md:grid xs:grid-cols-2 gap-6 lg:gap-12 items-center">
-          <div>
+          <div className="animate-fade-in-up">
             <Intro />
             <Details />
           </div>
-          <div className="relative">
-            <SlideshowFrame />
+          <div className="relative animate-fade-in">
+            <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-purple-500/20 via-pink-500/10 to-purple-500/20 blur-2xl animate-gradient"></div>
+            <div className="relative">
+              <SlideshowFrame />
+            </div>
             <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-gradient-to-br from-purple-300/20 to-pink-300/20 rounded-full filter blur-2xl z-0"></div>
           </div>
         </div>
