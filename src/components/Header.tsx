@@ -1,21 +1,11 @@
 import { Menu } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleHowItWorksClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -60,12 +50,7 @@ export function Header() {
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/90 backdrop-blur-md shadow-lg py-2' 
-        : 'bg-transparent py-4'
-    }`}>
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/30 to-pink-50/30"></div>
+    <header className="fixed w-full z-50 top-0 bg-white/95 backdrop-blur-md shadow-lg py-4">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
         <Link to="/" className="transform transition-all duration-300 hover:scale-105" style={{ marginLeft: '-192px' }}>
           <img 
@@ -117,23 +102,22 @@ export function Header() {
             href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 sm:px-4 lg:px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-md hover:shadow-lg active:shadow-md font-medium text-xs sm:text-sm"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium text-sm"
           >
             Add to Chrome
           </a>
         </div>
-
+        
         {/* Mobile Menu Button */}
-        <div className="xs:hidden">
-          <button 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 transition-colors duration-200"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-        </div>
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="xs:hidden p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+          aria-label="Toggle mobile menu"
+        >
+          <Menu className="h-6 w-6 text-gray-600" />
+        </button>
       </nav>
-
+      
       {/* Mobile Menu */}
       <div className={`xs:hidden absolute w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
         mobileMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'

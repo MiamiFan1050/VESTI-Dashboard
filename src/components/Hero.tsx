@@ -3,7 +3,7 @@ import TryOnSlideshow from './TryOnSlideshow';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+    <section className="relative min-h-[80svh] flex flex-col justify-center overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-pink-50"></div>
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:14px_24px]"></div>
@@ -18,7 +18,7 @@ export function Hero() {
       <div className="absolute top-1/2 right-1/4 w-2 h-2 rounded-full bg-purple-300 opacity-30 animate-pulse"></div>
       <div className="absolute bottom-1/4 right-1/3 w-2 h-2 rounded-full bg-pink-300 opacity-20 animate-ping"></div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 md:pb-10 lg:pb-12 relative">
         <div className="grid xs:grid-cols-2 gap-6 xs:gap-8 lg:gap-20 items-center">
           {/* Left Column - Content */}
           <div>

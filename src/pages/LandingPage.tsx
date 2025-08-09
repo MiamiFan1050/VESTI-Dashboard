@@ -7,12 +7,10 @@ import { Testimonials } from '../components/Testimonials';
 import { Newsletter } from '../components/Newsletter';
 import { Helmet } from 'react-helmet-async';
 import { CTASection } from '../components/CTASection';
-import { useEffect, useRef, useState } from 'react';
+import StackedScroller from '../components/StackedScroller';
+import { useEffect } from 'react';
 
 export function LandingPage() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const sectionsRef = useRef<(HTMLElement | null)[]>([]);
-
   // Handle hash scrolling when coming from other pages
   useEffect(() => {
     const hash = window.location.hash;
@@ -25,59 +23,8 @@ export function LandingPage() {
             block: 'start' 
           });
         }
-      }, 100);
+      }, 100); // Small delay to ensure page is rendered
     }
-  }, []);
-
-  // Scroll-based overlay effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      sectionsRef.current.forEach((section, index) => {
-        if (!section) return;
-        
-        const rect = section.getBoundingClientRect();
-        const sectionTop = rect.top + scrollY;
-        const sectionHeight = section.offsetHeight;
-        
-        // Calculate progress through this section (0 to 1)
-        const progress = Math.max(0, Math.min(1, (scrollY - sectionTop + windowHeight * 0.5) / (sectionHeight + windowHeight * 0.3)));
-        
-        // Apply overlay effect with smoother transitions
-        if (progress > 0 && progress < 1) {
-          // Create overlay effect for smooth transitions
-          const opacity = Math.min(1, Math.pow(progress, 0.8) * 1.2);
-          const transform = `translateY(${(1 - progress) * -30}px) scale(${0.98 + progress * 0.02})`;
-          const zIndex = Math.floor(progress * 15) + 1;
-          
-          section.style.opacity = opacity.toString();
-          section.style.transform = transform;
-          section.style.zIndex = zIndex.toString();
-          section.style.position = 'relative';
-        } else if (progress >= 1) {
-          // Section is fully visible
-          section.style.opacity = '1';
-          section.style.transform = 'translateY(0) scale(1)';
-          section.style.zIndex = '15';
-          section.style.position = 'relative';
-        } else {
-          // Section is not yet visible
-          section.style.opacity = '0';
-          section.style.transform = 'translateY(30px) scale(0.98)';
-          section.style.zIndex = '0';
-          section.style.position = 'relative';
-        }
-      });
-      
-      setScrollProgress(scrollY / (document.body.scrollHeight - windowHeight));
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial call
-
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // SEO description optimized for virtual try-on
@@ -161,168 +108,29 @@ export function LandingPage() {
 
       <main className="overflow-hidden">
         {/* Hero Section */}
-        <section 
-          ref={(el) => (sectionsRef.current[0] = el)}
-          id="hero" 
-          className="relative transition-all duration-700 ease-out"
-          style={{ 
-            opacity: 1,
-            transform: 'translateY(0) scale(1)',
-            zIndex: 10
-          }}
-        >
+        <section id="hero" className="relative">
           <Hero />
         </section>
         
-        {/* Chrome Web Store Showcase - Overlay Effect */}
-        <section 
-          ref={(el) => (sectionsRef.current[1] = el)}
-          id="how-it-works" 
-          className="py-8 bg-gradient-to-b from-white to-purple-50/30 relative transition-all duration-1000 ease-out"
-          style={{ 
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.98)',
-            zIndex: 0,
-            marginTop: '-120px', // Reduce gap more
-            position: 'relative'
-          }}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
-                Available on{' '}
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Chrome Web Store
-                </span>
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600">
-                Join thousands of users who are already shopping with confidence
-              </p>
-            </div>
-            
-            <div className="relative">
-              <img 
-                src="/images/esti.png" 
-                alt="VESTI Chrome Extension on Chrome Web Store" 
-                className="w-full h-auto block"
-                style={{ 
-                  backgroundColor: '#fffeff',
-                  filter: 'brightness(1.02) contrast(1.01)',
-                  mixBlendMode: 'normal'
-                }}
-              />
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full filter blur-xl"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-pink-300/30 to-purple-300/30 rounded-full filter blur-xl"></div>
-            </div>
-            
-            {/* Additional Images */}
-            <div className="mt-0">
-              <img 
-                src="/images/1.png" 
-                alt="VESTI Feature 1" 
-                className="w-full h-auto block"
-                style={{ 
-                  backgroundColor: '#fffeff',
-                  filter: 'brightness(1.02) contrast(1.01)',
-                  mixBlendMode: 'normal'
-                }}
-              />
-            </div>
-            
-            <div className="mt-0">
-              <img 
-                src="/images/2.png" 
-                alt="VESTI Feature 2" 
-                className="w-full h-auto block"
-                style={{ 
-                  backgroundColor: '#fffeff',
-                  filter: 'brightness(1.02) contrast(1.01)',
-                  mixBlendMode: 'normal'
-                }}
-              />
-            </div>
-          </div>
-        </section>
+        {/* Stacked Scroller Section */}
+        <StackedScroller />
         
-        {/* Stats Section - Overlay Effect */}
-        <section 
-          ref={(el) => (sectionsRef.current[2] = el)}
-          id="stats" 
-          className="relative transition-all duration-1000 ease-out"
-          style={{ 
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.98)',
-            zIndex: 0,
-            marginTop: '-80px', // Reduce gap
-            position: 'relative'
-          }}
-        >
+        {/* Confidence Advantage Section */}
+        <section id="stats" className="relative">
           <Stats />
         </section>
-
-        {/* Testimonials Section - Overlay Effect */}
-        <section 
-          ref={(el) => (sectionsRef.current[3] = el)}
-          id="testimonials" 
-          className="relative transition-all duration-1000 ease-out"
-          style={{ 
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.98)',
-            zIndex: 0,
-            marginTop: '-80px', // Reduce gap
-            position: 'relative'
-          }}
-        >
+        
+        {/* Normal flow sections */}
+        <section id="testimonials" className="relative">
           <Testimonials />
         </section>
-
-        {/* Brands Section - Overlay Effect */}
-        <section 
-          ref={(el) => (sectionsRef.current[4] = el)}
-          id="brands" 
-          className="relative transition-all duration-1000 ease-out"
-          style={{ 
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.98)',
-            zIndex: 0,
-            marginTop: '-80px', // Reduce gap
-            position: 'relative'
-          }}
-        >
+        <section id="brands" className="relative">
           <Brands />
         </section>
-
-        {/* Newsletter Section - Overlay Effect */}
-        <section 
-          ref={(el) => (sectionsRef.current[5] = el)}
-          id="newsletter" 
-          className="relative transition-all duration-1000 ease-out"
-          style={{ 
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.98)',
-            zIndex: 0,
-            marginTop: '-80px', // Reduce gap
-            position: 'relative'
-          }}
-        >
+        <section id="newsletter" className="relative">
           <Newsletter />
         </section>
-
-        {/* CTA Section - Overlay Effect */}
-        <section 
-          ref={(el) => (sectionsRef.current[6] = el)}
-          id="cta" 
-          className="relative transition-all duration-1000 ease-out"
-          style={{ 
-            opacity: 0,
-            transform: 'translateY(30px) scale(0.98)',
-            zIndex: 0,
-            marginTop: '-80px', // Reduce gap
-            position: 'relative'
-          }}
-        >
+        <section id="cta" className="relative">
           <CTASection />
         </section>
       </main>
