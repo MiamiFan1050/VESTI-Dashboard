@@ -10,14 +10,19 @@ const defaultImages = {
   model: [
     '/images/Model_01_before.jpeg',
     '/images/Model_02_before.jpg',
-    '/images/Model_03_before.jpg',
+    '/images/Model_03_beforee.jpg',
     '/images/Model_04_before.jpg',
     '/images/Model_05_before.png',
     '/images/Model_06_before.jpeg',
     '/images/Model_07_before.jpeg',
     '/images/Model_08_before.jpeg',
     '/images/Model_09_before.jpeg',
-    '/images/Model_10_before.png'
+    '/images/Model_10_before.png',
+    '/images/Model_11_before.jpg',
+    '/images/Model_12_before.jpg',
+    '/images/Model_13_before.jpg',
+    '/images/Model_14_before.png',
+    '/images/Model_15_before.png'
   ],
   clothing: [
     '/images/Clothing_01.jpeg',
@@ -29,7 +34,12 @@ const defaultImages = {
     '/images/Clothing_07.jpeg',
     '/images/Clothing_08.png',
     '/images/Clothing_09.png',
-    '/images/Clothing_10.png'
+    '/images/Clothing_10.png',
+    '/images/Clothing_11.jpg',
+    '/images/Clothing_12.jpg',
+    '/images/Clothing_13.jpg',
+    '/images/Clothing_14.jpg',
+    '/images/Clothing_15.png'
   ],
   result: [
     '/images/Model_01_after.jpeg',
@@ -41,7 +51,12 @@ const defaultImages = {
     '/images/Model_07_after.jpeg',
     '/images/Model_08_after.jpeg',
     '/images/Model_09_after.jpeg',
-    '/images/Model_10_after.png'
+    '/images/Model_10_after.png',
+    '/images/Model_11_after.jpg',
+    '/images/Model_12_after.jpg',
+    '/images/Model_13_after.jpg',
+    '/images/Model_14_after.jpg',
+    '/images/Model_15_after.jpg'
   ]
 };
 
