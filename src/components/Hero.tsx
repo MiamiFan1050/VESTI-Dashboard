@@ -115,7 +115,7 @@ export function Hero() {
             {/* Browser Chrome Effect */}
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 relative z-10">
               {/* Browser Header */}
-              <div className="bg-gray-100 border-b border-gray-200 p-2 flex items-center gap-2">
+              <div className="bg-gray-100 border-b border-gray-200 p-1.5 flex items-center gap-2">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-400"></div>
                   <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
@@ -123,7 +123,7 @@ export function Hero() {
                 </div>
                 
                 <div className="flex-1 flex justify-center">
-                  <div className="bg-white rounded-full shadow-sm h-6 w-64 flex items-center justify-center text-xs text-gray-500 px-3">
+                  <div className="bg-white rounded-full shadow-sm h-5 w-60 flex items-center justify-center text-xs text-gray-500 px-2">
                     shopping.example.com
                   </div>
                 </div>
@@ -132,7 +132,9 @@ export function Hero() {
               </div>
               
               {/* Browser Content - Try On Slideshow */}
-              <TryOnSlideshow />
+              <div className="p-0">
+                <TryOnSlideshow />
+              </div>
             </div>
             
             {/* Decorative Elements */}

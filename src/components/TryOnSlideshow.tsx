@@ -139,32 +139,32 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
   }, [isVisible, scrollProgress]);
 
   return (
-    <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 py-4 rounded-3xl relative">
+    <div ref={containerRef} className="w-full max-w-7xl mx-auto px-2 py-3 rounded-3xl relative">
       {/* Title and Benefit Section - Reduced spacing */}
       <div 
-        className="text-center mb-6 transition-all duration-1000 ease-out"
+        className="text-center mb-4 transition-all duration-1000 ease-out"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
         }}
       >
-        <h3 className="text-xl font-bold text-gray-900 mb-2">See the Magic in Action</h3>
-        <p className="text-gray-600 max-w-xl mx-auto text-sm">
+        <h3 className="text-lg font-bold text-gray-900 mb-1">See the Magic in Action</h3>
+        <p className="text-gray-600 max-w-lg mx-auto text-sm">
           Our Chrome extension removes your current outfit and shows any clothing item on your body in seconds
         </p>
       </div>
 
       <div className="showcase relative">
-        {/* Panels with enhanced scroll-based animations and tighter spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 lg:gap-4 relative z-10">
+        {/* Panels with ultra-tight spacing and enhanced scroll-based animations */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-2 lg:gap-3 relative z-10 -mx-2 md:-mx-4">
           {/* Original Photo Panel */}
           <div 
-            className="panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
+            className="panel bg-white/80 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 mx-1 md:mx-2"
             style={getPanelStyle(0)}
           >
-            <div className="panel-header py-3 text-center">
-              <span className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 1</span>
-              <h3 className="text-sm md:text-base font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="panel-header py-2 text-center">
+              <span className="inline-block px-2 py-0.5 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 1</span>
+              <h3 className="text-xs md:text-sm font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Upload Your Photo
               </h3>
             </div>
@@ -184,12 +184,12 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
 
           {/* Selected Item Panel */}
           <div 
-            className="panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
+            className="panel bg-white/80 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 mx-1 md:mx-2"
             style={getPanelStyle(1)}
           >
-            <div className="panel-header py-3 text-center">
-              <span className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 2</span>
-              <h3 className="text-sm md:text-base font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="panel-header py-2 text-center">
+              <span className="inline-block px-2 py-0.5 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 2</span>
+              <h3 className="text-xs md:text-sm font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Select Any Clothing
               </h3>
             </div>
@@ -209,12 +209,12 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
 
           {/* Result Panel */}
           <div 
-            className="panel bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200"
+            className="panel bg-white/80 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200 mx-1 md:mx-2"
             style={getPanelStyle(2)}
           >
-            <div className="panel-header py-3 text-center">
-              <span className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 3</span>
-              <h3 className="text-sm md:text-base font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="panel-header py-2 text-center">
+              <span className="inline-block px-2 py-0.5 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-1">Step 3</span>
+              <h3 className="text-xs md:text-sm font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 See It On Your Body
               </h3>
             </div>
@@ -236,7 +236,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
       
       {/* Action Button - Reduced spacing */}
       <div 
-        className="mt-6 text-center transition-all duration-1000 ease-out"
+        className="mt-4 text-center transition-all duration-1000 ease-out"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
@@ -246,7 +246,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
           href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-sm"
+          className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-sm"
           aria-label="Add to Chrome with unlimited try-ons"
         >
           Add to Chrome - Unlimited Try-Ons
