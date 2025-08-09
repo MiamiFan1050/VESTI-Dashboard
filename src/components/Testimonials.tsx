@@ -35,156 +35,36 @@ const featuredTestimonials = [
 const testimonialRows = [
   // Row 1 - Moving Left
   [
-    {
-      quote: "Vesti has completely changed how I shop online. No more guessing!",
-      author: "Sarah J.",
-      role: "Fashion Blogger",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "The virtual try-on is incredibly accurate. Saved so much on returns!",
-      author: "Michael R.",
-      role: "Regular Shopper",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    },
-    {
-      quote: "This is the future of online shopping. Amazing AI technology!",
-      author: "Emma L.",
-      role: "Style Consultant",
-      gradient: "from-pink-600 to-purple-600"
-    },
-    {
-      quote: "Shopping has never been more confident. Love the previews!",
-      author: "David K.",
-      role: "Tech Enthusiast",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "Game-changing technology for online retail!",
-      author: "Rachel M.",
-      role: "Boutique Owner",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    },
-    {
-      quote: "The accuracy is mind-blowing. Every store needs this!",
-      author: "James P.",
-      role: "Digital Marketer",
-      gradient: "from-pink-600 to-purple-600"
-    },
-    {
-      quote: "I've cut my return rate by 80% since using Vesti!",
-      author: "Olivia T.",
-      role: "Online Shopper",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "Perfect for trying clothes before committing to purchase.",
-      author: "Daniel F.",
-      role: "Fashion Enthusiast",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    }
+    { quote: "Vesti has completely changed how I shop online. No more guessing!", author: "Sarah J.", role: "Fashion Blogger", gradient: "from-purple-600 to-pink-600" },
+    { quote: "The virtual try-on is incredibly accurate. Saved so much on returns!", author: "Michael R.", role: "Regular Shopper", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" },
+    { quote: "This is the future of online shopping. Amazing AI technology!", author: "Emma L.", role: "Style Consultant", gradient: "from-pink-600 to-purple-600" },
+    { quote: "Shopping has never been more confident. Love the previews!", author: "David K.", role: "Tech Enthusiast", gradient: "from-purple-600 to-pink-600" },
+    { quote: "Game-changing technology for online retail!", author: "Rachel M.", role: "Boutique Owner", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" },
+    { quote: "The accuracy is mind-blowing. Every store needs this!", author: "James P.", role: "Digital Marketer", gradient: "from-pink-600 to-purple-600" },
+    { quote: "I've cut my return rate by 80% since using Vesti!", author: "Olivia T.", role: "Online Shopper", gradient: "from-purple-600 to-pink-600" },
+    { quote: "Perfect for trying clothes before committing to purchase.", author: "Daniel F.", role: "Fashion Enthusiast", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" }
   ],
   // Row 2 - Moving Right
   [
-    {
-      quote: "Finally, no more size uncertainty when shopping online!",
-      author: "Lisa T.",
-      role: "Fashion Designer",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "The AR preview is incredibly realistic. Love it!",
-      author: "Mark S.",
-      role: "Content Creator",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    },
-    {
-      quote: "Best online shopping experience I've ever had!",
-      author: "Nina C.",
-      role: "Lifestyle Blogger",
-      gradient: "from-pink-600 to-purple-600"
-    },
-    {
-      quote: "Revolutionary way to shop for clothes online!",
-      author: "Tom H.",
-      role: "Product Designer",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "Perfect fit every time. No more returns!",
-      author: "Alice W.",
-      role: "Fashion Editor",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    },
-    {
-      quote: "Can't imagine shopping without Vesti now!",
-      author: "Peter M.",
-      role: "Tech Reviewer",
-      gradient: "from-pink-600 to-purple-600"
-    },
-    {
-      quote: "Vesti has saved me countless hours of shopping frustration.",
-      author: "Jennifer K.",
-      role: "Working Professional",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "The most innovative shopping tool I've seen in years!",
-      author: "Brandon L.",
-      role: "Innovation Consultant",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    }
+    { quote: "Finally, no more size uncertainty when shopping online!", author: "Lisa T.", role: "Fashion Designer", gradient: "from-purple-600 to-pink-600" },
+    { quote: "The AR preview is incredibly realistic. Love it!", author: "Mark S.", role: "Content Creator", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" },
+    { quote: "Best online shopping experience I've ever had!", author: "Nina C.", role: "Lifestyle Blogger", gradient: "from-pink-600 to-purple-600" },
+    { quote: "Revolutionary way to shop for clothes online!", author: "Tom H.", role: "Product Designer", gradient: "from-purple-600 to-pink-600" },
+    { quote: "Perfect fit every time. No more returns!", author: "Alice W.", role: "Fashion Editor", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" },
+    { quote: "Can't imagine shopping without Vesti now!", author: "Peter M.", role: "Tech Reviewer", gradient: "from-pink-600 to-purple-600" },
+    { quote: "Vesti has saved me countless hours of shopping frustration.", author: "Jennifer K.", role: "Working Professional", gradient: "from-purple-600 to-pink-600" },
+    { quote: "The most innovative shopping tool I've seen in years!", author: "Brandon L.", role: "Innovation Consultant", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" }
   ],
   // Row 3 - Moving Left
   [
-    {
-      quote: "Transformed my online shopping confidence!",
-      author: "Kate B.",
-      role: "Style Influencer",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "The future of fashion retail is here!",
-      author: "Ryan D.",
-      role: "E-commerce Manager",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    },
-    {
-      quote: "Incredible accuracy in size predictions!",
-      author: "Sophie L.",
-      role: "Fashion Consultant",
-      gradient: "from-pink-600 to-purple-600"
-    },
-    {
-      quote: "Makes online shopping so much more fun!",
-      author: "Chris P.",
-      role: "UX Designer",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "Finally, a solution to online fitting rooms!",
-      author: "Maria G.",
-      role: "Retail Analyst",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    },
-    {
-      quote: "Every online store should use this!",
-      author: "Andrew R.",
-      role: "Tech Journalist",
-      gradient: "from-pink-600 to-purple-600"
-    },
-    {
-      quote: "Shopping with confidence from the comfort of my home!",
-      author: "Samantha J.",
-      role: "Remote Worker",
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      quote: "Vesti has revolutionized my online shopping habits completely.",
-      author: "Ethan M.",
-      role: "Sustainability Advocate",
-      gradient: "from-purple-600 via-fuchsia-600 to-pink-600"
-    }
+    { quote: "Transformed my online shopping confidence!", author: "Kate B.", role: "Style Influencer", gradient: "from-purple-600 to-pink-600" },
+    { quote: "The future of fashion retail is here!", author: "Ryan D.", role: "E-commerce Manager", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" },
+    { quote: "Incredible accuracy in size predictions!", author: "Sophie L.", role: "Fashion Consultant", gradient: "from-pink-600 to-purple-600" },
+    { quote: "Makes online shopping so much more fun!", author: "Chris P.", role: "UX Designer", gradient: "from-purple-600 to-pink-600" },
+    { quote: "Finally, a solution to online fitting rooms!", author: "Maria G.", role: "Retail Analyst", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" },
+    { quote: "Every online store should use this!", author: "Andrew R.", role: "Tech Journalist", gradient: "from-pink-600 to-purple-600" },
+    { quote: "Shopping with confidence from the comfort of my home!", author: "Samantha J.", role: "Remote Worker", gradient: "from-purple-600 to-pink-600" },
+    { quote: "Vesti has revolutionized my online shopping habits completely.", author: "Ethan M.", role: "Sustainability Advocate", gradient: "from-purple-600 via-fuchsia-600 to-pink-600" }
   ]
 ];
 
@@ -226,96 +106,90 @@ export function Testimonials() {
   }, []);
 
   return (
-    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-white via-purple-50/20 to-white">
+    <section className="py-16 md:py-20 relative overflow-hidden bg-gradient-to-b from-white via-purple-50/20 to-white">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       <div className="absolute -top-40 right-0 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full filter blur-3xl"></div>
       <div className="absolute -bottom-40 left-0 w-[800px] h-[800px] bg-gradient-to-br from-pink-500/5 to-purple-500/5 rounded-full filter blur-3xl"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-12">
-          <span className="inline-block px-5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-600 text-sm font-medium mb-5 border border-purple-100/20">
+        <div className="text-center mb-10 md:mb-12">
+          <span className="inline-block px-4 md:px-5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-600 text-xs md:text-sm font-medium mb-4 md:mb-5 border border-purple-100/20">
             Success Stories
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
+          <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
             People Are{' '}
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               Shopping with Confidence
             </span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mt-3 md:mt-4">
             Our premium Chrome extension has helped thousands of shoppers reduce returns and shop with confidence
           </p>
         </div>
 
         {/* Premium Banner */}
-        <div className="text-center py-8 mb-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-xl relative overflow-hidden">
+        <div className="text-center py-6 md:py-8 mb-12 md:mb-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-xl relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:14px_14px]"></div>
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/20 rounded-full blur-2xl"></div>
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
           
           <div className="relative">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Infinity className="h-6 w-6 text-white" />
-              <h3 className="text-xl font-bold text-white">Shop with Complete Confidence</h3>
+            <div className="flex items-center justify-center gap-2 mb-2 md:mb-3">
+              <Infinity className="h-5 w-5 md:h-6 md:w-6 text-white" />
+              <span className="text-white font-semibold text-sm md:text-base">Premium Unlimited Try-Ons</span>
             </div>
-            <p className="text-white/90 mb-6 max-w-2xl mx-auto px-4">
-              Experience the full potential of Vesti with unrestricted access to our premium AI technology
+            <h3 className="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Shop with Complete Confidence</h3>
+            <p className="text-white/90 max-w-2xl mx-auto text-sm md:text-base">
+              Try on any outfit virtually before you buy. Reduce returns, save time, and shop with confidence.
             </p>
             <a 
               href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-3 rounded-full bg-white text-purple-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
+              className="mt-5 inline-flex items-center px-6 md:px-8 py-2.5 md:py-3.5 bg-white text-purple-700 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
             >
-              Add to Chrome - Premium Access
+              Add to Chrome
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </div>
         </div>
 
-        {/* Scrolling testimonials wall */}
-        <div className="space-y-8">
-          {testimonialRows.map((row, rowIndex) => (
-            <div key={rowIndex} className="relative overflow-hidden py-2">
-              <div
-                ref={rowRefs[rowIndex]}
-                className="flex gap-4"
-                style={{ willChange: 'transform' }}
-              >
-                {/* Triple the items for extra seamless loop */}
-                {[...row, ...row, ...row].map((testimonial, index) => (
-                  <div
-                    key={index}
-                    className="w-[280px] shrink-0"
-                  >
-                    <div 
-                      className="relative bg-white/90 rounded-xl p-5 shadow-[0_5px_15px_-3px_rgba(168,85,247,0.1)] backdrop-blur-sm 
-                        transform transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_-4px_rgba(168,85,247,0.15)]
-                        border border-purple-100/20 group h-full"
-                    >
-                      <div className="absolute -top-3 left-5">
-                        <div className={`bg-gradient-to-r ${testimonial.gradient} w-7 h-7 rounded-lg flex items-center justify-center shadow-md
-                          transform transition-transform duration-300 group-hover:scale-110`}>
-                          <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                          </svg>
-                        </div>
-                      </div>
-                      
-                      <div className="mb-4 mt-2.5">
-                        <p className="text-gray-700 text-sm leading-relaxed font-light">{testimonial.quote}</p>
-                      </div>
-
-                      <div className="flex items-center pt-1 border-t border-purple-100/20">
-                        <div className={`h-8 w-0.5 rounded-full bg-gradient-to-b ${testimonial.gradient} mr-3`}></div>
-                        <div>
-                          <p className="font-medium text-gray-900 text-sm">{testimonial.author}</p>
-                          <p className="text-xs text-gray-500">{testimonial.role}</p>
-                        </div>
-                      </div>
+        {/* Featured Testimonials */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-12">
+          {featuredTestimonials.map((item, i) => (
+            <div key={i} className="bg-white rounded-2xl p-5 md:p-6 shadow-xl border border-purple-100 relative overflow-hidden">
+              <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-5`}></div>
+              <div className="relative">
+                <div className="flex items-center justify-between mb-3 md:mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center text-purple-700">
+                      {item.icon}
                     </div>
+                    <div>
+                      <div className="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-600">{item.metric}</div>
+                      <div className="text-xs md:text-sm text-slate-600">{item.metricLabel}</div>
+                    </div>
+                  </div>
+                  <div className="text-xs md:text-sm text-slate-500">Verified</div>
+                </div>
+                <p className="text-slate-700 text-sm md:text-base mb-3 md:mb-4">{item.quote}</p>
+                <div className="text-slate-500 text-xs md:text-sm">— {item.author}, {item.role}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Marquee Rows */}
+        <div className="space-y-6 md:space-y-8">
+          {testimonialRows.map((row, index) => (
+            <div key={index} className="overflow-x-hidden">
+              <div ref={rowRefs[index]} className="flex gap-3 md:gap-4 will-change-transform">
+                {[...row, ...row].map((t, i) => (
+                  <div key={i} className="min-w-[280px] md:min-w-[360px] bg-white rounded-xl p-4 md:p-6 shadow-lg border border-purple-100">
+                    <p className="text-slate-700 text-sm md:text-base mb-2 md:mb-3">{t.quote}</p>
+                    <div className="text-slate-500 text-xs md:text-sm">— {t.author}, {t.role}</div>
                   </div>
                 ))}
               </div>
