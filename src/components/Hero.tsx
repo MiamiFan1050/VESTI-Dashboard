@@ -21,7 +21,7 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative">
         <div className="grid xs:grid-cols-2 gap-4 xs:gap-6 lg:gap-12 items-center">
           {/* Left Column - Content */}
-          <div>
+          <div className="order-last md:order-none">
             <div className="mb-4 inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-700 text-sm font-medium border border-purple-100/20">
               <Infinity className="h-4 w-4 mr-2" />
               <span>Premium Experience</span>
@@ -111,7 +111,7 @@ export function Hero() {
           </div>
           
           {/* Right Column - Browser Demo */}
-          <div className="relative">
+          <div className="relative order-first md:order-none w-full xs:w-auto ml-auto mb-6 md:mb-0">
             {/* Browser Chrome Effect */}
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 relative z-10">
               {/* Browser Header */}
