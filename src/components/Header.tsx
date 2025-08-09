@@ -64,7 +64,7 @@ export function Header() {
           <img 
             src="/images/vesti-logo.png" 
             alt="VESTI Logo"
-            className="h-8 sm:h-12 w-auto object-contain"
+            className="h-8 sm:h-14 md:h-16 lg:h-20 w-auto object-contain"
           />
         </Link>
         
