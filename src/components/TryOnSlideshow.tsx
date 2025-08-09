@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface TryOnSlideshowProps {
   modelImages?: string[];
@@ -51,7 +51,52 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
   resultImages = defaultImages.result,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const totalSets = Math.min(modelImages.length, clothingImages.length, resultImages.length);
+
+  // Intersection Observer for fade-in effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px'
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  // Scroll-based animation
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate scroll progress (0 to 1)
+      const progress = Math.max(0, Math.min(1, 1 - (rect.top + rect.height / 2) / windowHeight));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Auto-scroll without pause/play functionality
   useEffect(() => {
@@ -64,10 +109,31 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
     return () => clearInterval(intervalId);
   }, [totalSets]);
 
+  // Calculate opacity and transform based on scroll progress
+  const getPanelStyle = useCallback((panelIndex: number) => {
+    const baseOpacity = isVisible ? 1 : 0;
+    const scrollOpacity = Math.max(0, Math.min(1, (scrollProgress - panelIndex * 0.2) * 2));
+    const opacity = baseOpacity * (0.7 + scrollOpacity * 0.3);
+    
+    const transform = `translateY(${Math.sin(scrollProgress * Math.PI + panelIndex * 0.5) * 20}px) scale(${0.95 + scrollOpacity * 0.05})`;
+    
+    return {
+      opacity,
+      transform,
+      transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+    };
+  }, [isVisible, scrollProgress]);
+
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 py-8 rounded-3xl">
+    <div ref={containerRef} className="w-full max-w-7xl mx-auto px-6 py-8 rounded-3xl relative">
       {/* Title and Benefit Section */}
-      <div className="text-center mb-10">
+      <div 
+        className="text-center mb-10 transition-all duration-1000 ease-out"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(30px)'
+        }}
+      >
         <h3 className="text-2xl font-bold text-gray-900 mb-3">See the Magic in Action</h3>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Our Chrome extension removes your current outfit and shows any clothing item on your body in seconds
@@ -75,15 +141,16 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
       </div>
 
       <div className="showcase relative">
-        {/* Removing the Flow Arrows that connect the panels */}
-        
-        {/* Panels */}
-        <div className="grid grid-cols-1 xs:grid-cols-3 gap-6 xs:gap-6 lg:gap-8 relative z-10">
+        {/* Panels with scroll-based animations */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 relative z-10">
           {/* Original Photo Panel */}
-          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <div 
+            className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
+            style={getPanelStyle(0)}
+          >
             <div className="panel-header py-4 text-center">
               <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 1</span>
-              <h3 className="text-base xs:text-lg sm:text-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h3 className="text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Upload Your Photo
               </h3>
             </div>
@@ -93,7 +160,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
                   key={`model-${index}`}
                   src={image}
                   alt={`Model photo ${index + 1}`}
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
@@ -102,10 +169,13 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
           </div>
 
           {/* Selected Item Panel */}
-          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <div 
+            className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1"
+            style={getPanelStyle(1)}
+          >
             <div className="panel-header py-4 text-center">
               <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 2</span>
-              <h3 className="text-lg sm:text-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h3 className="text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Select Any Clothing
               </h3>
             </div>
@@ -115,7 +185,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
                   key={`clothing-${index}`}
                   src={image}
                   alt={`Clothing item ${index + 1}`}
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
@@ -124,10 +194,13 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
           </div>
 
           {/* Result Panel */}
-          <div className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200">
+          <div 
+            className="panel bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 border-2 border-purple-200"
+            style={getPanelStyle(2)}
+          >
             <div className="panel-header py-4 text-center">
               <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-medium mb-2">Step 3</span>
-              <h3 className="text-lg sm:text-xl font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h3 className="text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 See It On Your Body
               </h3>
             </div>
@@ -137,7 +210,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
                   key={`result-${index}`}
                   src={image}
                   alt={`Result ${index + 1}`}
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
@@ -148,7 +221,13 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
       </div>
       
       {/* Action Button */}
-      <div className="mt-10 text-center">
+      <div 
+        className="mt-10 text-center transition-all duration-1000 ease-out"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(30px)'
+        }}
+      >
         <a 
           href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
           target="_blank"
