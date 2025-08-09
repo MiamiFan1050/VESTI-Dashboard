@@ -156,7 +156,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
 
       <div className="showcase relative">
         {/* Panels with ultra-tight spacing and enhanced scroll-based animations */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-2 lg:gap-3 relative z-10 -mx-2 md:-mx-4">
+        <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-3 relative z-10 -mx-2 md:-mx-4">
           {/* Original Photo Panel */}
           <div 
             className="panel bg-white/80 backdrop-blur-sm rounded-xl shadow-xl overflow-hidden transform transition-all duration-700 hover:shadow-2xl hover:-translate-y-1 mx-1 md:mx-2"
