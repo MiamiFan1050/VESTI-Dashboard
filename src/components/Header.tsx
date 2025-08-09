@@ -1,4 +1,4 @@
-import { Menu, ShoppingBag } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -55,18 +55,17 @@ export function Header() {
     <header className={`fixed w-full z-50 transition-all duration-300 ${
       scrolled 
         ? 'bg-white/90 backdrop-blur-md shadow-lg py-2' 
-        : 'bg-white/70 backdrop-blur-md py-2'
+        : 'bg-white/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-0 py-2 sm:py-4'
     }`}>
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/40 to-pink-50/40"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/40 to-pink-50/40 sm:bg-transparent"></div>
       <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between relative">
-        {/* Responsive Inline Logo (icon + wordmark) */}
-        <Link to="/" className="flex items-center gap-2 sm:gap-3 relative z-10">
-          <span className="inline-flex items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-gradient-to-tr from-purple-600 to-pink-600 text-white shadow-sm">
-            <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5" />
-          </span>
-          <span className="font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 text-lg sm:text-xl">
-            Vesti
-          </span>
+        {/* Brand logo – same asset for mobile and desktop, responsive sizing */}
+        <Link to="/" className="relative z-10">
+          <img 
+            src="/images/vesti-logo.png" 
+            alt="VESTI Logo"
+            className="h-8 sm:h-12 w-auto object-contain"
+          />
         </Link>
         
         {/* Desktop Navigation */}
