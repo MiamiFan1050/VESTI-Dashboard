@@ -29,7 +29,8 @@ import {
   Music,
   Hash,
   List,
-  CheckSquare
+  CheckSquare,
+  Send
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BeforeAfterTemplate } from '../components/BeforeAfterTemplate';
@@ -51,10 +52,18 @@ export default function DashboardPage() {
     "content strategy..."
   ];
 
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('content');
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [displayText, setDisplayText] = useState(baseText);
-  const [isTyping, setIsTyping] = useState(true);
+  const [inputValue, setInputValue] = useState("");
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      type: 'ai',
+      content: "Hi! I'm your VESTI AI Assistant. I can help with content creation, brand strategy, and everything VESTI-related. What would you like to work on?"
+    }
+  ]);
 
   // Typewriter effect
   React.useEffect(() => {
@@ -96,6 +105,95 @@ export default function DashboardPage() {
 
     return () => clearInterval(typeInterval);
   }, [placeholderIndex]);
+
+  const handleSend = () => {
+    if (inputValue.trim()) {
+      const userMessage = {
+        id: Date.now(),
+        type: 'user',
+        content: inputValue.trim()
+      };
+      
+      setMessages(prev => [...prev, userMessage]);
+      
+      // Generate intelligent VESTI-specific response
+      const aiResponse = generateVESTIResponse(inputValue.trim());
+      
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          id: Date.now() + 1,
+          type: 'ai',
+          content: aiResponse
+        }]);
+      }, 1000);
+      
+      setInputValue('');
+    }
+  };
+
+  const generateVESTIResponse = (userInput: string) => {
+    const input = userInput.toLowerCase();
+    
+    // VESTI Product & Business Knowledge
+    if (input.includes('vesti') || input.includes('product') || input.includes('what is') || input.includes('how does')) {
+      return `VESTI is an AI-powered virtual try-on platform that helps customers see how clothes look on them before buying. Our technology uses advanced computer vision to create realistic virtual fittings, reducing returns and improving customer confidence. We work with fashion brands to integrate this technology into their e-commerce platforms. What specific aspect of VESTI would you like to know more about?`;
+    }
+    
+    // Content Creation - Hooks
+    if (input.includes('hook') || input.includes('viral') || input.includes('attention')) {
+      return `Here are some VESTI-specific hook ideas:\n\n💡 "I spent $500 on clothes that didn't fit until I found VESTI! 💸"\n💡 "Watch this outfit transform with VESTI! ✨"\n💡 "This AI just saved me from another return nightmare! 🤖"\n💡 "The future of online shopping is here - and it's mind-blowing! 🚀"\n\nKey elements: emotional pain points, specific dollar amounts, transformation promises, and tech excitement. Want me to generate more for a specific product category?`;
+    }
+    
+    // Content Creation - Captions
+    if (input.includes('caption') || input.includes('description') || input.includes('text')) {
+      return `Here's a VESTI caption template:\n\n"Just discovered the future of online shopping! 🛍️✨ Virtual try-on has never been easier with VESTI's AI-powered technology. No more guessing if something will fit - see it on yourself instantly! Perfect for anyone who's tired of returns and wants to shop with confidence. #VirtualTryOn #AIFashion #VESTI #FutureOfShopping"\n\nWant me to customize this for a specific product or platform?`;
+    }
+    
+    // Content Creation - Shot Lists
+    if (input.includes('shot') || input.includes('video') || input.includes('filming')) {
+      return `Here's a VESTI video shot list:\n\n📹 Opening Hook (0-3s): Person frustrated with ill-fitting clothes\n📹 Problem Setup (3-8s): Show pile of returns or wrong sizes\n📹 VESTI Introduction (8-12s): "But what if you could try before you buy?"\n📹 Demo (12-20s): Show VESTI virtual try-on in action\n📹 Results (20-25s): Happy customer with perfect fit\n📹 CTA (25-30s): "Try VESTI today!"\n\nNeed this adapted for a specific product category?`;
+    }
+    
+    // Brand Voice & Guidelines
+    if (input.includes('brand') || input.includes('voice') || input.includes('tone')) {
+      return `VESTI's brand voice:\n\n🎯 Confident but not arrogant - We're proud of our tech but humble about solving real problems\n🎯 Tech-savvy but accessible - Advanced AI explained simply\n🎯 Fashion-forward but inclusive - For everyone, not just fashionistas\n🎯 Problem-solver focused - We fix real shopping pain points\n\nAvoid: "100% accurate," "perfect fit," "guaranteed viral," medical claims about body image\n\nNeed help applying this to specific content?`;
+    }
+    
+    // Target Audience
+    if (input.includes('audience') || input.includes('target') || input.includes('demographic')) {
+      return `VESTI's target audiences:\n\n👥 Primary: Online shoppers (18-45) who've experienced sizing issues\n👥 Secondary: Fashion brands looking to reduce returns\n👥 Tertiary: Tech-savvy consumers interested in AI innovation\n\nPain points we solve:\n• Uncertainty about fit when shopping online\n• High return rates and wasted money\n• Time spent on returns and exchanges\n• Lack of confidence in online purchases\n\nWant content tailored to a specific audience segment?`;
+    }
+    
+    // Platform-Specific Content
+    if (input.includes('tiktok') || input.includes('instagram') || input.includes('youtube')) {
+      const platform = input.includes('tiktok') ? 'TikTok' : input.includes('instagram') ? 'Instagram' : 'YouTube';
+      return `${platform} content strategy for VESTI:\n\n📱 ${platform} Best Practices:\n• Keep it short and engaging (${platform === 'TikTok' ? '15-60s' : platform === 'Instagram' ? '30s-1min' : '2-5min'})\n• Start with a strong hook\n• Show the transformation clearly\n• Use trending sounds/music\n• Include clear CTA\n\nContent Ideas:\n• Before/after try-on comparisons\n• "Day in the life" with VESTI\n• Customer testimonials\n• Behind-the-scenes tech demos\n\nNeed specific ${platform} content ideas?`;
+    }
+    
+    // Competitor Analysis
+    if (input.includes('competitor') || input.includes('vs') || input.includes('difference')) {
+      return `VESTI's competitive advantages:\n\n🏆 AI-Powered Accuracy: More precise than basic AR filters\n🏆 E-commerce Integration: Seamless shopping experience\n🏆 Return Reduction: Proven to reduce returns by 30-50%\n🏆 Brand Partnerships: Works with major fashion brands\n🏆 User-Friendly: No app download required\n\nKey Differentiators:\n• Realistic body mapping technology\n• Integration with existing e-commerce platforms\n• Focus on reducing returns, not just visualization\n• Brand-agnostic solution\n\nWant to create content highlighting these advantages?`;
+    }
+    
+    // Technical Questions
+    if (input.includes('how') && (input.includes('work') || input.includes('technology') || input.includes('ai'))) {
+      return `How VESTI works:\n\n🤖 AI Technology:\n• Advanced computer vision algorithms\n• Real-time body mapping and measurement\n• Machine learning for accurate fit prediction\n• Integration with e-commerce platforms\n\nUser Experience:\n1. Customer uploads photo or uses live camera\n2. AI analyzes body measurements and proportions\n3. Virtual try-on renders clothing realistically\n4. Customer sees exactly how items will fit\n5. Confident purchase decision\n\nBenefits:\n• Reduces returns by 30-50%\n• Increases conversion rates\n• Improves customer satisfaction\n• Saves money for both customers and brands\n\nNeed technical details for content creation?`;
+    }
+    
+    // General Help
+    if (input.includes('help') || input.includes('assist') || input.includes('support')) {
+      return `I'm your VESTI AI assistant! I can help you with:\n\n📝 Content Creation: Hooks, captions, shot lists, scripts\n🎨 Design: Canva templates, brand assets, color guides\n📊 Strategy: Platform-specific content, audience targeting\n🏢 Business: Product knowledge, competitive advantages\n💡 Ideas: Viral content concepts, trend adaptation\n\nJust ask me anything about VESTI, content creation, or marketing strategy. What would you like to work on today?`;
+    }
+    
+    // Default response for unrecognized queries
+    return `Thanks for your message! I'm here to help you with all things VESTI - from content creation and brand strategy to product knowledge and marketing ideas. Could you be more specific about what you'd like to work on? I can help with hooks, captions, video scripts, brand guidelines, or any VESTI-related content!`;
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  };
 
   const handleSignOut = () => {
     if (window.confirm('Are you sure you want to sign out?')) {
@@ -171,278 +269,134 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* VESTI AI Chat Interface */}
-          <div className="bg-gradient-to-br from-white/8 to-white/4 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden mb-8 shadow-2xl">
-            {/* Chat Header */}
-            <div className="bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-purple-600/20 p-8 border-b border-white/20">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <div className="relative">
-                    <div className="w-14 h-14 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <MessageSquare className="w-7 h-7 text-white" />
-                    </div>
-                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-white mb-1">VESTI AI Assistant</h2>
-                    <p className="text-gray-300 text-sm flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                      Online • Ready to help with content creation
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="px-4 py-2 bg-white/10 rounded-xl border border-white/20">
-                    <span className="text-white text-sm font-medium">AI Powered</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Chat Messages */}
-            <div className="h-[500px] overflow-y-auto p-8 space-y-6 custom-scrollbar">
-              {/* AI Welcome Message */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <MessageSquare className="w-5 h-5 text-white" />
-                </div>
-                <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-6 max-w-[85%] border border-white/10 shadow-lg">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-purple-300 font-semibold text-sm">VESTI AI</span>
-                    <span className="text-gray-400 text-xs">• Just now</span>
-                  </div>
-                  <p className="text-white text-base leading-relaxed">
-                    Hi! I'm your VESTI AI assistant, designed to help you create viral content that converts. I can generate hooks, write captions, create shot lists, adapt trends, and much more. What would you like to work on today?
-                  </p>
-                </div>
-              </div>
-
-              {/* Sample AI Response */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <MessageSquare className="w-5 h-5 text-white" />
-                </div>
-                <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-6 max-w-[85%] border border-white/10 shadow-lg">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-purple-300 font-semibold text-sm">VESTI AI</span>
-                    <span className="text-gray-400 text-xs">• 2 min ago</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-purple-300 font-semibold text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <Zap className="w-4 h-4" />
-                        Viral Hooks
-                      </h4>
-                      <div className="space-y-3">
-                        <div className="bg-white/10 rounded-xl p-4 flex items-center justify-between group hover:bg-white/15 transition-all duration-200">
-                          <p className="text-white text-sm font-medium">"I spent $500 on clothes that didn't fit until I found VESTI! 💸"</p>
-                          <button className="text-purple-400 hover:text-purple-300 transition-colors opacity-0 group-hover:opacity-100" title="Copy hook">
-                            <Copy className="h-4 w-4" />
-                          </button>
-                        </div>
-                        <div className="bg-white/10 rounded-xl p-4 flex items-center justify-between group hover:bg-white/15 transition-all duration-200">
-                          <p className="text-white text-sm font-medium">"Watch this outfit transform with VESTI! ✨"</p>
-                          <button className="text-purple-400 hover:text-purple-300 transition-colors opacity-0 group-hover:opacity-100" title="Copy hook">
-                            <Copy className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="text-blue-300 font-semibold text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <FileText className="w-4 h-4" />
-                        Caption
-                      </h4>
-                      <div className="bg-white/10 rounded-xl p-4 flex items-center justify-between group hover:bg-white/15 transition-all duration-200">
-                        <p className="text-white text-sm leading-relaxed">Just discovered the future of online shopping! 🛍️✨ Virtual try-on has never been easier with VESTI's AI-powered technology.</p>
-                        <button className="text-purple-400 hover:text-purple-300 transition-colors opacity-0 group-hover:opacity-100" title="Copy caption">
-                          <Copy className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Chat Input */}
-            <div className="p-8 border-t border-white/20 bg-gradient-to-r from-white/5 to-white/10">
-              <div className="flex gap-4 mb-6">
-                <div className="flex-1 relative">
-                  <input
-                    type="text"
-                    placeholder={displayText}
-                    className="w-full p-5 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-200 text-base"
-                  />
-                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
-                    <button className="text-gray-400 hover:text-white transition-colors" title="Voice input">
-                      <MessageSquare className="h-5 w-5" />
-                    </button>
-                  </div>
-
-                </div>
-                <button className="px-8 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
-                  Send
-                </button>
-              </div>
-              
-              {/* Enhanced Quick Suggestions */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-gray-400 text-sm font-medium">Quick Actions:</span>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <button className="p-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 text-white rounded-xl hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-200 border border-white/10 group">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Zap className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-sm font-medium">Generate Hook</span>
-                    </div>
-                  </button>
-                  <button className="p-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-white rounded-xl hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-200 border border-white/10 group">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <FileText className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-sm font-medium">Write Caption</span>
-                    </div>
-                  </button>
-                  <button className="p-4 bg-gradient-to-r from-green-600/20 to-teal-600/20 text-white rounded-xl hover:from-green-600/30 hover:to-teal-600/30 transition-all duration-200 border border-white/10 group">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <List className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-sm font-medium">Shot List</span>
-                    </div>
-                  </button>
-                  <button className="p-4 bg-gradient-to-r from-orange-600/20 to-red-600/20 text-white rounded-xl hover:from-orange-600/30 hover:to-red-600/30 transition-all duration-200 border border-white/10 group">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Music className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-sm font-medium">Adapt Trend</span>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Tabs */}
-          <div className="flex space-x-2 mb-8 overflow-x-auto">
-            {[
-              { id: 'overview', label: 'Overview', icon: BarChart3 },
-              { id: 'content', label: 'Content Creation', icon: FileText },
-              { id: 'campaigns', label: 'Campaigns', icon: Target },
-              { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-              { id: 'calendar', label: 'Calendar', icon: Calendar },
-              { id: 'team', label: 'Team', icon: Users },
-              { id: 'canva', label: 'Canva', icon: Image },
-              { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
-            ].map((tab) => (
+                                {/* Chat Toggle Button */}
+            <div className="flex justify-center mb-8">
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 whitespace-nowrap ${
-                  activeTab === tab.id
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
-                }`}
+                onClick={() => setIsChatOpen(!isChatOpen)}
+                className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md text-white rounded-xl hover:bg-white/20 transition-all duration-200 font-medium border border-white/20"
               >
-                <tab.icon className="h-4 w-4" />
-                <span>{tab.label}</span>
+                <MessageSquare className="w-4 h-4" />
+                {isChatOpen ? 'Close Chat' : 'Open VESTI AI Assistant'}
               </button>
-            ))}
+            </div>
+
+                      {/* VESTI AI Chat Interface */}
+            {isChatOpen && (
+           <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden mb-8">
+             
+             {/* Chat Header */}
+             <div className="p-4 border-b border-white/10">
+               <div className="flex items-center gap-3">
+                 <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                 <h2 className="text-lg font-medium text-white">VESTI AI Assistant</h2>
+               </div>
+             </div>
+
+                         {/* Chat Messages */}
+             <div className="p-4 space-y-4 max-h-80 overflow-y-auto">
+               {messages.map((message) => (
+                 <div key={message.id} className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : ''}`}>
+                   {message.type === 'ai' && (
+                     <div className="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                       <span className="text-white text-xs font-medium">AI</span>
+                     </div>
+                   )}
+                   <div className={`${message.type === 'user' ? 'order-1' : 'flex-1'}`}>
+                     <div className={`rounded-xl p-3 ${
+                       message.type === 'user' 
+                         ? 'bg-purple-600 text-white' 
+                         : 'bg-white/5 text-gray-200'
+                     }`}>
+                       <p className="text-sm">
+                         {message.content}
+                       </p>
+                     </div>
+                   </div>
+                   {message.type === 'user' && (
+                     <div className="w-7 h-7 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                       <span className="text-white text-xs font-medium">U</span>
+                     </div>
+                   )}
+                 </div>
+               ))}
+             </div>
+
+                         {/* Input */}
+             <div className="p-4 border-t border-white/10">
+               <div className="flex gap-2">
+                 <input
+                   type="text"
+                   value={inputValue}
+                   onChange={(e) => setInputValue(e.target.value)}
+                   onKeyPress={handleKeyPress}
+                   placeholder={displayText}
+                   className="flex-1 px-3 py-2 bg-white/5 rounded-lg border border-white/10 text-white placeholder-gray-400 text-sm focus:outline-none focus:border-white/20 transition-all duration-200"
+                 />
+                 <button
+                   onClick={handleSend}
+                   className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-200"
+                   title="Send message"
+                 >
+                   <Send className="w-4 h-4" />
+                 </button>
+               </div>
+             </div>
           </div>
+          )}
 
-          {/* Tab Content */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 shadow-2xl min-h-[60vh]">
-            {activeTab === 'overview' && (
-              <div className="space-y-8">
-                {/* Welcome & Stats */}
-                <div className="text-center">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                    Welcome, Marketing Intern!
-                  </h2>
-                  <p className="text-gray-300 text-lg mb-6">
-                    Here's a quick overview of your impact and upcoming tasks.
-                  </p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center gap-3">
-                        <Eye className="h-5 w-5 text-blue-400" />
-                        <div>
-                          <p className="text-gray-400 text-sm">Total Views</p>
-                          <p className="text-white font-bold text-xl">2.4M</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center gap-3">
-                        <Heart className="h-5 w-5 text-red-400" />
-                        <div>
-                          <p className="text-gray-400 text-sm">Engagement</p>
-                          <p className="text-white font-bold text-xl">156K</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center gap-3">
-                        <Share2 className="h-5 w-5 text-green-400" />
-                        <div>
-                          <p className="text-gray-400 text-sm">Shares</p>
-                          <p className="text-white font-bold text-xl">89K</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center gap-3">
-                        <TrendingUp className="h-5 w-5 text-purple-400" />
-                        <div>
-                          <p className="text-gray-400 text-sm">Growth</p>
-                          <p className="text-white font-bold text-xl">+23%</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Recent Activity */}
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-purple-400" />
-                    Recent Activity
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">TikTok video published</p>
-                        <p className="text-gray-400 text-xs">2 hours ago</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">Instagram Reel created</p>
-                        <p className="text-gray-400 text-xs">4 hours ago</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">Campaign performance reviewed</p>
-                        <p className="text-gray-400 text-xs">1 day ago</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      {/* Navigation Tabs */}
+            <div className="relative mb-8 overflow-hidden">
+              <div className="flex space-x-2 animate-scroll-tabs">
+                {/* First set of tabs */}
+                {[
+                  { id: 'content', label: 'Content Creation', icon: FileText },
+                  { id: 'canva', label: 'Canva Templates', icon: Image },
+                  { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
+                  { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
+                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
+                  { id: 'brand-assets', label: 'Brand Assets', icon: Award },
+                ].map((tab) => (
+                  <button
+                    key={`first-${tab.id}`}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                      activeTab === tab.id
+                        ? 'bg-white/20 text-white'
+                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <tab.icon className="h-4 w-4" />
+                    <span className="text-sm font-medium">{tab.label}</span>
+                  </button>
+                ))}
+                
+                {/* Duplicate set for seamless loop */}
+                {[
+                  { id: 'content', label: 'Content Creation', icon: FileText },
+                  { id: 'canva', label: 'Canva Templates', icon: Image },
+                  { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
+                  { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
+                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
+                  { id: 'brand-assets', label: 'Brand Assets', icon: Award },
+                ].map((tab) => (
+                  <button
+                    key={`second-${tab.id}`}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                      activeTab === tab.id
+                        ? 'bg-white/20 text-white'
+                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <tab.icon className="h-4 w-4" />
+                    <span className="text-sm font-medium">{tab.label}</span>
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
 
+            {/* Tab Content */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 shadow-2xl min-h-[60vh]">
             {activeTab === 'content' && (
               <div className="space-y-6">
                 <div className="text-center">
@@ -452,114 +406,349 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-                        <Sparkles className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-white">Script Generator</h3>
-                        <p className="text-sm text-gray-400">AI-powered content ideas</p>
-                      </div>
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                         <Sparkles className="w-6 h-6 text-white" />
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Script Generator</h3>
+                         <p className="text-sm text-gray-400">AI-powered content ideas</p>
+                       </div>
+                     </div>
+                     <button
+                       onClick={() => setActiveTab('script-generator')}
+                       className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
+                     >
+                       Open Generator
+                     </button>
+                   </div>
+
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                         <Image className="w-6 h-6 text-white" />
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Canva Templates</h3>
+                         <p className="text-sm text-gray-400">Design references</p>
+                       </div>
+                     </div>
+                     <button
+                       onClick={() => setActiveTab('canva')}
+                       className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+                     >
+                       Open Canva
+                     </button>
+                   </div>
+
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                         <Video className="w-6 h-6 text-white" />
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Video Editor</h3>
+                         <p className="text-sm text-gray-400">Coming soon</p>
+                       </div>
+                     </div>
+                     <button className="w-full bg-white/10 text-white py-3 px-4 rounded-lg cursor-not-allowed opacity-50">
+                       Coming Soon
+                     </button>
+                   </div>
+                 </div>
+              </div>
+            )}
+
+            {activeTab === 'script-tutorials' && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-white mb-4">Script Tutorials</h2>
+                  <p className="text-gray-300 mb-6">
+                    Learn how to write compelling scripts that convert.
+                  </p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <p className="text-gray-300">Script tutorials coming soon...</p>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'veo-tutorials' && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-white mb-4">Veo Tutorials</h2>
+                  <p className="text-gray-300 mb-6">
+                    Master viral video creation with Google Veo + VESTI AI
+                  </p>
+                </div>
+
+                {/* Veo Prompt Formula */}
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">🎬 VESTI AI + Google Veo "Viral Prompt" Formula</h3>
+                  <div className="space-y-4">
+                                         <div className="bg-white/10 rounded-xl p-4">
+                       <h4 className="font-medium text-white mb-2">1. Lead with Character (Head to Toe)</h4>
+                       <p className="text-gray-300 text-sm">Describe one memorable person in the first sentence - skin tone, hair, outfit, vibe. Make them visually loud!</p>
+                       <div className="mt-2 p-3 bg-purple-600/20 rounded-lg">
+                         <p className="text-white text-sm italic">"A 5'2" fashion influencer with neon pink hair extensions, wearing a thrift store blazer three sizes too big, and carrying a Starbucks cup with 'VESTI' written in Sharpie, looking absolutely defeated."</p>
+                       </div>
+                     </div>
+
+                     <div className="bg-white/10 rounded-xl p-4">
+                       <h4 className="font-medium text-white mb-2">2. Set the Scene Like a Movie</h4>
+                       <p className="text-gray-300 text-sm">Location + time of day + mood + lighting + one ridiculous detail</p>
+                       <div className="mt-2 p-3 bg-purple-600/20 rounded-lg">
+                         <p className="text-white text-sm italic">"In a messy apartment bedroom at 2 AM, surrounded by piles of returned clothes and empty shopping bags, with only the glow of their phone screen lighting the scene."</p>
+                       </div>
+                     </div>
+
+                     <div className="bg-white/10 rounded-xl p-4">
+                       <h4 className="font-medium text-white mb-2">3. Single Out-of-Pocket Action</h4>
+                       <p className="text-gray-300 text-sm">Funny but logical to the character - avoid generic actions</p>
+                       <div className="mt-2 p-3 bg-purple-600/20 rounded-lg">
+                         <p className="text-white text-sm italic">"They dramatically throw their phone across the bed, then immediately grab it back and frantically open the VESTI app, saying..."</p>
+                       </div>
+                     </div>
+
+                     <div className="bg-white/10 rounded-xl p-4">
+                       <h4 className="font-medium text-white mb-2">4. Dialogue (6 Words or Less)</h4>
+                       <p className="text-gray-300 text-sm">Punchy, Gen Z slang, unprofessional if character should be professional</p>
+                       <div className="mt-2 p-3 bg-purple-600/20 rounded-lg">
+                         <p className="text-white text-sm italic">"This fit is about to be FIRE!"</p>
+                       </div>
+                     </div>
+
+                     <div className="bg-white/10 rounded-xl p-4">
+                       <h4 className="font-medium text-white mb-2">5. VESTI Transformation Moment</h4>
+                       <p className="text-gray-300 text-sm">Describe the visual transformation - swirl-on, flash-snap, wrap-around</p>
+                       <div className="mt-2 p-3 bg-purple-600/20 rounded-lg">
+                         <p className="text-white text-sm italic">"With a magical swipe, their oversized blazer transforms into a perfectly fitted leather jacket — the sleeves now the right length, the shoulders perfectly structured, and the whole look suddenly expensive."</p>
+                       </div>
+                     </div>
+
+                     <div className="bg-white/10 rounded-xl p-4">
+                       <h4 className="font-medium text-white mb-2">6. Punchy VESTI Tag</h4>
+                       <p className="text-gray-300 text-sm">Short, shareable, dripping with confidence</p>
+                       <div className="mt-2 p-3 bg-purple-600/20 rounded-lg">
+                         <p className="text-white text-sm italic">"VESTI: Where fits find you."</p>
+                       </div>
+                     </div>
+                  </div>
+                </div>
+
+                {/* Prompt Template */}
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">📝 Copy-Paste Prompt Template</h3>
+                  <div className="bg-gray-900 rounded-xl p-4 border border-gray-700">
+                    <p className="text-gray-300 text-sm font-mono">
+                      [Scene Length in Seconds]<br/>
+                      A [full physical description of character], wearing [detailed outfit], in [specific location + time of day + mood]. The camera [describe angle and movement]. They [funny, unexpected action]. They say: "[short, viral line]". Then [describe dramatic clothing transformation in detail]. On-screen text: "[short VESTI tag]".
+                    </p>
+                  </div>
+                </div>
+
+                {/* Example Prompts */}
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">💡 Viral Prompt Examples</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white/10 rounded-xl p-4">
+                      <h4 className="font-medium text-white mb-2">The Money-Saver</h4>
+                      <p className="text-gray-300 text-sm">"A college student in oversized thrift store clothes, standing in a messy dorm room. They pull out their phone dramatically and say: 'I spent $500 on clothes that didn't fit until I found VESTI!' Then their outfit transforms into a perfect-fitting designer look. On-screen: 'VESTI: Try Before You Buy'"</p>
                     </div>
-                    <button
-                      onClick={() => setActiveTab('script-generator')}
-                      className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
+                    <div className="bg-white/10 rounded-xl p-4">
+                      <h4 className="font-medium text-white mb-2">The Transformation</h4>
+                      <p className="text-gray-300 text-sm">"A stressed office worker in wrinkled business casual, sitting at a desk covered in coffee stains. They dramatically swipe their phone and say: 'Watch this outfit transform!' Then their clothes morph into a sleek, modern techwear ensemble. On-screen: 'VESTI: Instant Style Upgrade'"</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Helpful Resources */}
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">🔗 Helpful Resources</h3>
+                  <div className="space-y-3">
+                    <a 
+                      href="https://veo.google/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-200 group"
                     >
-                      Open Generator
-                    </button>
-                  </div>
-
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <Image className="w-6 h-6 text-white" />
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">Canva Templates</h3>
-                        <p className="text-sm text-gray-400">Design references</p>
+                        <p className="text-white font-medium">Google Veo Official Site</p>
+                        <p className="text-gray-400 text-sm">Learn more about Veo AI capabilities</p>
                       </div>
-                    </div>
-                    <button
-                      onClick={() => setActiveTab('canva')}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+                    </a>
+                    
+                    <a 
+                      href="https://www.tiktok.com/@googleveo" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-200 group"
                     >
-                      Open Canva
-                    </button>
-                  </div>
-
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
-                        <Video className="w-6 h-6 text-white" />
+                      <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-red-600 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                        </svg>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">Video Editor</h3>
-                        <p className="text-sm text-gray-400">Coming soon</p>
+                        <p className="text-white font-medium">Google Veo TikTok</p>
+                        <p className="text-gray-400 text-sm">See official Veo examples and trends</p>
                       </div>
+                    </a>
+
+                    <a 
+                      href="https://www.youtube.com/results?search_query=google+veo+tutorial" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-200 group"
+                    >
+                      <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">YouTube Veo Tutorials</p>
+                        <p className="text-gray-400 text-sm">Learn from community creators</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Best Practices */}
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">⭐ Veo Best Practices</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="font-medium text-white mb-2">Do's</h4>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>• Keep scenes under 10 seconds</li>
+                        <li>• Use specific, vivid descriptions</li>
+                        <li>• Include camera movements</li>
+                        <li>• Add VESTI transformation moments</li>
+                        <li>• Use trending sounds and music</li>
+                      </ul>
                     </div>
-                    <button className="w-full bg-white/10 text-white py-3 px-4 rounded-lg cursor-not-allowed opacity-50">
-                      Coming Soon
-                    </button>
+                    <div>
+                      <h4 className="font-medium text-white mb-2">Don'ts</h4>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>• Don't use generic actions</li>
+                        <li>• Avoid complex multi-character scenes</li>
+                        <li>• Don't forget the VESTI brand integration</li>
+                        <li>• Avoid overly long dialogue</li>
+                        <li>• Don't skip the transformation moment</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
 
-            {activeTab === 'campaigns' && (
+            {activeTab === 'brand-assets' && (
               <div className="space-y-6">
                 <div className="text-center">
-                  <h2 className="text-2xl font-bold text-white mb-4">Campaign Management</h2>
+                  <h2 className="text-2xl font-bold text-white mb-4">Brand Assets</h2>
                   <p className="text-gray-300 mb-6">
-                    Track and manage your marketing campaigns.
+                    Access logos, colors, fonts, and brand guidelines for VESTI.
                   </p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <p className="text-gray-300">Campaign management features coming soon...</p>
-                </div>
-              </div>
-            )}
+                
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                   {/* Logo Assets */}
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
+                         <Award className="w-6 h-6 text-white" />
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Logo Files</h3>
+                         <p className="text-sm text-gray-400">PNG, SVG, JPG formats</p>
+                       </div>
+                     </div>
+                     <div className="space-y-2">
+                       <button className="w-full bg-gradient-to-r from-violet-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 text-sm">
+                         Download Primary Logo
+                       </button>
+                       <button className="w-full bg-white/10 text-white py-2 px-4 rounded-lg hover:bg-white/20 transition-all duration-200 text-sm">
+                         Download Secondary Logo
+                       </button>
+                     </div>
+                   </div>
 
-            {activeTab === 'analytics' && (
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold text-white mb-4">Analytics Dashboard</h2>
-                  <p className="text-gray-300 mb-6">
-                    View detailed analytics and performance metrics.
-                  </p>
-                </div>
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <p className="text-gray-300">Analytics dashboard coming soon...</p>
-                </div>
-              </div>
-            )}
+                   {/* Color Palette */}
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                         <div className="w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-500 rounded"></div>
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Color Palette</h3>
+                         <p className="text-sm text-gray-400">Brand colors & hex codes</p>
+                       </div>
+                     </div>
+                     <div className="grid grid-cols-4 gap-2 mb-4">
+                       <div className="w-full h-8 bg-purple-600 rounded"></div>
+                       <div className="w-full h-8 bg-pink-600 rounded"></div>
+                       <div className="w-full h-8 bg-blue-600 rounded"></div>
+                       <div className="w-full h-8 bg-emerald-600 rounded"></div>
+                     </div>
+                     <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-sm">
+                       Download Color Guide
+                     </button>
+                   </div>
 
-            {activeTab === 'calendar' && (
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold text-white mb-4">Content Calendar</h2>
-                  <p className="text-gray-300 mb-6">
-                    Plan and schedule your content.
-                  </p>
-                </div>
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <p className="text-gray-300">Content calendar coming soon...</p>
-                </div>
-              </div>
-            )}
+                   {/* Typography */}
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                         <FileText className="w-6 h-6 text-white" />
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Typography</h3>
+                         <p className="text-sm text-gray-400">Fonts & text styles</p>
+                       </div>
+                     </div>
+                     <div className="space-y-2 mb-4">
+                       <div className="text-white font-bold text-lg">VESTI</div>
+                       <div className="text-gray-300 font-medium">Primary Font</div>
+                       <div className="text-gray-400 text-sm">Secondary Font</div>
+                     </div>
+                     <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm">
+                       Download Fonts
+                     </button>
+                   </div>
+                 </div>
 
-            {activeTab === 'team' && (
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold text-white mb-4">Team Collaboration</h2>
-                  <p className="text-gray-300 mb-6">
-                    Collaborate with your team members.
-                  </p>
-                </div>
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <p className="text-gray-300">Team collaboration features coming soon...</p>
-                </div>
+                 {/* Brand Guidelines */}
+                 <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                   <h3 className="text-lg font-semibold text-white mb-4">Brand Guidelines</h3>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div className="space-y-3">
+                       <h4 className="font-medium text-white">Logo Usage</h4>
+                       <ul className="text-gray-300 text-sm space-y-1">
+                         <li>• Minimum size: 24px height</li>
+                         <li>• Clear space: 1x logo height</li>
+                         <li>• Don't stretch or distort</li>
+                         <li>• Use on light backgrounds only</li>
+                       </ul>
+                     </div>
+                     <div className="space-y-3">
+                       <h4 className="font-medium text-white">Color Usage</h4>
+                       <ul className="text-gray-300 text-sm space-y-1">
+                         <li>• Primary: Purple (#8B5CF6)</li>
+                         <li>• Secondary: Pink (#EC4899)</li>
+                         <li>• Accent: Blue (#3B82F6)</li>
+                         <li>• Success: Emerald (#10B981)</li>
+                       </ul>
+                     </div>
+                   </div>
+                 </div>
               </div>
             )}
 
@@ -572,128 +761,128 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {/* Canva Reference Link */}
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-white">Design Reference</h3>
-                        <p className="text-sm text-gray-400">Template inspiration</p>
-                      </div>
-                    </div>
-                    
-                    <div className="mb-4">
-                      <div className="w-full h-40 bg-gradient-to-r from-pink-400 to-purple-500 rounded-lg relative overflow-hidden">
-                        {/* Template Preview - Post Malone "THIS or THAT" */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-2">
-                          {/* Title */}
-                          <div className="text-center mb-1">
-                            <div className="text-sm font-bold">THIS or THAT</div>
-                            <div className="text-xs opacity-80">Post Malone Edition</div>
-                          </div>
-                          
-                          {/* Banner */}
-                          <div className="w-full h-4 bg-white rounded-sm mb-2 relative">
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="text-black text-xs">What They Wore → What They Could Wear</div>
-                            </div>
-                            <div className="absolute top-0 left-0 right-0 h-0.5 bg-green-500"></div>
-                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500"></div>
-                          </div>
-                          
-                          {/* Image frames */}
-                          <div className="flex gap-1 w-full mb-1">
-                            <div className="flex-1 h-12 bg-white/20 rounded border border-white/30"></div>
-                            <div className="flex-1 h-12 bg-white/20 rounded border border-white/30"></div>
-                          </div>
-                          
-                          {/* Labels */}
-                          <div className="flex gap-1 w-full mb-1">
-                            <div className="flex-1 h-3 bg-gray-300 rounded flex items-center justify-center">
-                              <span className="text-black text-xs font-bold">The Fit</span>
-                            </div>
-                            <div className="flex-1 h-3 bg-gray-300 rounded flex items-center justify-center">
-                              <span className="text-black text-xs font-bold">The Look</span>
-                            </div>
-                          </div>
-                          
-                          {/* Footer */}
-                          <div className="text-xs opacity-80 mt-1">getvesti.com</div>
-                        </div>
-                      </div>
-                    </div>
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                   {/* Canva Reference Link */}
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                         <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                         </svg>
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Design Reference</h3>
+                         <p className="text-sm text-gray-400">Template inspiration</p>
+                       </div>
+                     </div>
+                     
+                     <div className="mb-4">
+                       <div className="w-full h-40 bg-gradient-to-r from-pink-400 to-purple-500 rounded-lg relative overflow-hidden">
+                         {/* Template Preview - Post Malone "THIS or THAT" */}
+                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-2">
+                           {/* Title */}
+                           <div className="text-center mb-1">
+                             <div className="text-sm font-bold">THIS or THAT</div>
+                             <div className="text-xs opacity-80">Post Malone Edition</div>
+                           </div>
+                           
+                           {/* Banner */}
+                           <div className="w-full h-4 bg-white rounded-sm mb-2 relative">
+                             <div className="absolute inset-0 flex items-center justify-center">
+                               <div className="text-black text-xs">What They Wore → What They Could Wear</div>
+                             </div>
+                             <div className="absolute top-0 left-0 right-0 h-0.5 bg-green-500"></div>
+                             <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500"></div>
+                           </div>
+                           
+                           {/* Image frames */}
+                           <div className="flex gap-1 w-full mb-1">
+                             <div className="flex-1 h-12 bg-white/20 rounded border border-white/30"></div>
+                             <div className="flex-1 h-12 bg-white/20 rounded border border-white/30"></div>
+                           </div>
+                           
+                           {/* Labels */}
+                           <div className="flex gap-1 w-full mb-1">
+                             <div className="flex-1 h-3 bg-gray-300 rounded flex items-center justify-center">
+                               <span className="text-black text-xs font-bold">The Fit</span>
+                             </div>
+                             <div className="flex-1 h-3 bg-gray-300 rounded flex items-center justify-center">
+                               <span className="text-black text-xs font-bold">The Look</span>
+                             </div>
+                           </div>
+                           
+                           {/* Footer */}
+                           <div className="text-xs opacity-80 mt-1">getvesti.com</div>
+                         </div>
+                       </div>
+                     </div>
 
-                    <a
-                      href="https://www.canva.com/design/DAGvnM1n3E8/dg3mYC2U2QsfM2VmNJH5uQ/view?utm_content=DAGvnM1n3E8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3bb13dd900"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                      Open in Canva
-                    </a>
-                  </div>
+                     <a
+                       href="https://www.canva.com/design/DAGvnM1n3E8/dg3mYC2U2QsfM2VmNJH5uQ/view?utm_content=DAGvnM1n3E8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3bb13dd900"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
+                     >
+                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                       </svg>
+                       Open in Canva
+                     </a>
+                   </div>
 
-                  {/* Add more reference links here */}
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-white">Coming Soon</h3>
-                        <p className="text-sm text-gray-400">More references</p>
-                      </div>
-                    </div>
-                    
-                    <div className="mb-4">
-                      <div className="w-full h-32 bg-gradient-to-br from-green-400 to-teal-600 rounded-lg flex items-center justify-center">
-                        <div className="text-white text-center">
-                          <div className="text-lg font-bold">More Templates</div>
-                          <div className="text-sm opacity-80">Coming Soon</div>
-                        </div>
-                      </div>
-                    </div>
+                   {/* Add more reference links here */}
+                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                     <div className="flex items-center gap-4 mb-4">
+                       <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                         <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                           <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                         </svg>
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-white">Coming Soon</h3>
+                         <p className="text-sm text-gray-400">More references</p>
+                       </div>
+                     </div>
+                     
+                     <div className="mb-4">
+                       <div className="w-full h-32 bg-gradient-to-br from-green-400 to-teal-600 rounded-lg flex items-center justify-center">
+                         <div className="text-white text-center">
+                           <div className="text-lg font-bold">More Templates</div>
+                           <div className="text-sm opacity-80">Coming Soon</div>
+                         </div>
+                       </div>
+                     </div>
 
-                    <button className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-300 cursor-not-allowed opacity-50">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                      Add Reference
-                    </button>
-                  </div>
-                </div>
+                     <button className="inline-flex items-center gap-2 w-full justify-center px-4 py-2 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-300 cursor-not-allowed opacity-50">
+                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                       </svg>
+                       Add Reference
+                     </button>
+                   </div>
+                 </div>
 
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-white mb-3">How to Use Reference Links</h3>
-                  <ul className="text-gray-300 space-y-2 text-sm">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Click on any reference link to open it in Canva
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Use these designs as inspiration for your content
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Adapt colors, layouts, and styles to match Vesti's brand
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Create your own variations using the template tools above
-                    </li>
-                  </ul>
-                </div>
+                 <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                   <h3 className="text-lg font-semibold text-white mb-3">How to Use Reference Links</h3>
+                   <ul className="text-gray-300 space-y-2 text-sm">
+                     <li className="flex items-center gap-2">
+                       <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                       Click on any reference link to open it in Canva
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                       Use these designs as inspiration for your content
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                       Adapt colors, layouts, and styles to match Vesti's brand
+                     </li>
+                     <li className="flex items-center gap-2">
+                       <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+                       Create your own variations using the template tools above
+                     </li>
+                   </ul>
+                 </div>
               </div>
             )}
 
@@ -706,86 +895,86 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                {/* Content Creation Tools */}
-                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-white mb-6">Content Creation Tools</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <button className="p-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 group">
-                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">📝</div>
-                      <span className="text-sm font-medium">Generate Script</span>
-                    </button>
-                    <button className="p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 group">
-                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🎨</div>
-                      <span className="text-sm font-medium">Canva Templates</span>
-                    </button>
-                    <button className="p-6 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-200 group">
-                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🔄</div>
-                      <span className="text-sm font-medium">Content Generators</span>
-                    </button>
-                    <button className="p-6 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl hover:from-orange-700 hover:to-red-700 transition-all duration-200 group">
-                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🎬</div>
-                      <span className="text-sm font-medium">Veo Tutorials</span>
-                    </button>
-                  </div>
-                </div>
+                 {/* Content Creation Tools */}
+                 <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                   <h3 className="text-lg font-semibold text-white mb-6">Content Creation Tools</h3>
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                     <button className="p-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 group">
+                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">📝</div>
+                       <span className="text-sm font-medium">Generate Script</span>
+                     </button>
+                     <button className="p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 group">
+                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🎨</div>
+                       <span className="text-sm font-medium">Canva Templates</span>
+                     </button>
+                     <button className="p-6 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-200 group">
+                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🔄</div>
+                       <span className="text-sm font-medium">Content Generators</span>
+                     </button>
+                     <button className="p-6 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl hover:from-orange-700 hover:to-red-700 transition-all duration-200 group">
+                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🎬</div>
+                       <span className="text-sm font-medium">Veo Tutorials</span>
+                     </button>
+                   </div>
+                 </div>
 
-                {/* Trend Adaptation */}
-                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-white mb-4">Adapt Viral Trends</h3>
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      placeholder="Paste TikTok/IG link here..."
-                      className="flex-1 p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none"
-                    />
-                    <button className="px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200">
-                      Adapt for VESTI
-                    </button>
-                  </div>
-                </div>
+                 {/* Trend Adaptation */}
+                 <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                   <h3 className="text-lg font-semibold text-white mb-4">Adapt Viral Trends</h3>
+                   <div className="flex gap-3">
+                     <input
+                       type="text"
+                       placeholder="Paste TikTok/IG link here..."
+                       className="flex-1 p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none"
+                     />
+                     <button className="px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200">
+                       Adapt for VESTI
+                     </button>
+                   </div>
+                 </div>
 
-                {/* Best Practices & Examples */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Best Practices */}
-                  <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-lg font-semibold text-white mb-4">Best Practices</h3>
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-medium text-white mb-2">Brand Tone</h4>
-                        <ul className="text-gray-300 text-sm space-y-1">
-                          <li>• Confident but not arrogant</li>
-                          <li>• Tech-savvy but accessible</li>
-                          <li>• Fashion-forward but inclusive</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-white mb-2">Claims to Avoid</h4>
-                        <ul className="text-gray-300 text-sm space-y-1">
-                          <li>• "100% accurate" or "perfect fit"</li>
-                          <li>• "Guaranteed to go viral"</li>
-                          <li>• Medical claims about body image</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                 {/* Best Practices & Examples */}
+                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                   {/* Best Practices */}
+                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                     <h3 className="text-lg font-semibold text-white mb-4">Best Practices</h3>
+                     <div className="space-y-4">
+                       <div>
+                         <h4 className="font-medium text-white mb-2">Brand Tone</h4>
+                         <ul className="text-gray-300 text-sm space-y-1">
+                           <li>• Confident but not arrogant</li>
+                           <li>• Tech-savvy but accessible</li>
+                           <li>• Fashion-forward but inclusive</li>
+                         </ul>
+                       </div>
+                       <div>
+                         <h4 className="font-medium text-white mb-2">Claims to Avoid</h4>
+                         <ul className="text-gray-300 text-sm space-y-1">
+                           <li>• "100% accurate" or "perfect fit"</li>
+                           <li>• "Guaranteed to go viral"</li>
+                           <li>• Medical claims about body image</li>
+                         </ul>
+                       </div>
+                     </div>
+                   </div>
 
-                  {/* Winning Examples */}
-                  <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-lg font-semibold text-white mb-4">Winning Examples</h3>
-                    <div className="space-y-4">
-                      <div className="bg-white/10 rounded-xl p-4">
-                        <h4 className="font-medium text-white mb-2">Money-Saving Hook</h4>
-                        <p className="text-gray-300 text-sm mb-2">"I spent $500 on clothes that didn't fit until I found VESTI! 💸"</p>
-                        <p className="text-purple-300 text-xs">Why it worked: Emotional pain point + specific dollar amount</p>
-                      </div>
-                      <div className="bg-white/10 rounded-xl p-4">
-                        <h4 className="font-medium text-white mb-2">Transformation Hook</h4>
-                        <p className="text-gray-300 text-sm mb-2">"Watch this outfit transform with VESTI! ✨"</p>
-                        <p className="text-purple-300 text-xs">Why it worked: Visual promise + magic element</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                   {/* Winning Examples */}
+                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                     <h3 className="text-lg font-semibold text-white mb-4">Winning Examples</h3>
+                     <div className="space-y-4">
+                       <div className="bg-white/10 rounded-xl p-4">
+                         <h4 className="font-medium text-white mb-2">Money-Saving Hook</h4>
+                         <p className="text-gray-300 text-sm mb-2">"I spent $500 on clothes that didn't fit until I found VESTI! 💸"</p>
+                         <p className="text-purple-300 text-xs">Why it worked: Emotional pain point + specific dollar amount</p>
+                       </div>
+                       <div className="bg-white/10 rounded-xl p-4">
+                         <h4 className="font-medium text-white mb-2">Transformation Hook</h4>
+                         <p className="text-gray-300 text-sm mb-2">"Watch this outfit transform with VESTI! ✨"</p>
+                         <p className="text-purple-300 text-xs">Why it worked: Visual promise + magic element</p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
               </div>
             )}
           </div>
@@ -793,5 +982,4 @@ export default function DashboardPage() {
       </div>
     </>
   );
-} 
- 
+}

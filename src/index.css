@@ -144,6 +144,20 @@ input:focus::placeholder {
   opacity: 0;
 }
 
+/* Horizontal scrolling animation for navigation tabs */
+@keyframes scroll-tabs {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-tabs {
+  animation: scroll-tabs 20s linear infinite;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem; /* Increased for better visibility */
