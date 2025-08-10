@@ -105,6 +105,13 @@ export function Header() {
             FAQ
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
           </Link>
+          <Link 
+            to="/careers" 
+            className="text-gray-600 hover:text-purple-600 transition-colors duration-200 text-xs sm:text-sm font-medium relative group"
+          >
+            Careers
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></span>
+          </Link>
           <a 
             href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
             target="_blank"
@@ -161,6 +168,12 @@ export function Header() {
             className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
           >
             FAQ
+          </Link>
+          <Link 
+            to="/careers" 
+            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+          >
+            Careers
           </Link>
           <a 
             href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"

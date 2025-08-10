@@ -5,6 +5,11 @@ import { Footer } from './components/Footer';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { LandingPage } from './pages/LandingPage';
+import CareersPage from './pages/CareersPage';
+import InternshipsPage from './pages/InternshipsPage';
+import FullTimePage from './pages/FullTimePage';
+import MarketingInternPage from './pages/MarketingInternPage';
+import ManagementInternPage from './pages/ManagementInternPage';
 import { GetFeatured } from './components/GetFeatured';
 import { FAQ } from './components/FAQ';
 import { BackToTop } from './components/ui/BackToTop';
@@ -20,6 +25,11 @@ export function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/careers/internships" element={<InternshipsPage />} />
+          <Route path="/careers/full-time" element={<FullTimePage />} />
+          <Route path="/careers/interns/marketing" element={<MarketingInternPage />} />
+          <Route path="/careers/interns/management" element={<ManagementInternPage />} />
           <Route path="/get-featured" element={<GetFeatured />} />
           <Route path="/faq" element={<FAQ />} />
         </Routes>
