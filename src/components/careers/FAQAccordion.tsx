@@ -59,3 +59,5 @@ export function FAQAccordion({ faqs, title = "Frequently Asked Questions", class
     </div>
   );
 } 
+ 
+ 

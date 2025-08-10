@@ -10,6 +10,8 @@ import InternshipsPage from './pages/InternshipsPage';
 import FullTimePage from './pages/FullTimePage';
 import MarketingInternPage from './pages/MarketingInternPage';
 import ManagementInternPage from './pages/ManagementInternPage';
+import SignInPage from './pages/SignInPage';
+import DashboardPage from './pages/DashboardPage';
 import { GetFeatured } from './components/GetFeatured';
 import { FAQ } from './components/FAQ';
 import { BackToTop } from './components/ui/BackToTop';
@@ -30,6 +32,8 @@ export function App() {
           <Route path="/careers/full-time" element={<FullTimePage />} />
           <Route path="/careers/interns/marketing" element={<MarketingInternPage />} />
           <Route path="/careers/interns/management" element={<ManagementInternPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/get-featured" element={<GetFeatured />} />
           <Route path="/faq" element={<FAQ />} />
         </Routes>

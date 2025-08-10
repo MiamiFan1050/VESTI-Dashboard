@@ -42,3 +42,5 @@ export function Hero({ title, subtitle, description, background = 'gradient', cl
     </section>
   );
 } 
+ 
+ 

@@ -1,4 +1,5 @@
-import { ShoppingBag, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { ShoppingBag, Twitter, Instagram, Linkedin, LogIn } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
@@ -80,12 +81,12 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Social */}
+          {/* Social & Employee Portal */}
           <div>
             <h3 className="font-semibold text-white mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Follow Us
+              Connect
             </h3>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-6">
               <a 
                 href="https://twitter.com" 
                 target="_blank"
@@ -111,12 +112,22 @@ export function Footer() {
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>
-            <div className="mt-8">
+            
+            {/* Employee Portal */}
+            <div className="space-y-3">
+              <Link 
+                to="/signin"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 text-white rounded-xl hover:from-purple-600/30 hover:to-pink-600/30 transition-all duration-300 border border-purple-500/30 hover:border-purple-500/50"
+              >
+                <LogIn className="h-4 w-4" />
+                <span className="text-sm font-medium">Employee Portal</span>
+              </Link>
+              
               <a 
                 href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transform hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transform hover:-translate-y-0.5 transition-all duration-200 text-sm"
               >
                 Install Extension
               </a>
