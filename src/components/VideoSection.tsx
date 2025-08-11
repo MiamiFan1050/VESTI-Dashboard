@@ -252,7 +252,7 @@ export function VideoSection({ isVisible, onClose }: VideoSectionProps) {
                 preload="metadata"
                 onClick={handleVideoClick}
               >
-                <source src="/videos/vesti-demo.mp4" type="video/mp4" />
+                <source src="/videos/vesti-demo-new.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               
