@@ -119,23 +119,27 @@ export function Stats() {
           })}
         </div>
         
-        {/* Key Advantages: 2 columns on mobile */}
-        <div className="bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl md:rounded-3xl p-6 md:p-10 mb-14 md:mb-20 shadow-xl">
-          <div className="text-center mb-6 md:mb-10">
-            <h3 className="text-xl md:text-3xl font-bold text-white mb-3 md:mb-4">Why Shoppers Choose Vesti</h3>
-            <p className="text-purple-100 max-w-2xl mx-auto text-sm md:text-base">
+        {/* Key Advantages: Mobile optimized */}
+        <div className="bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl md:rounded-3xl p-3 md:p-10 mb-8 md:mb-20 shadow-xl">
+          <div className="text-center mb-3 md:mb-10">
+            <h3 className="text-base md:text-3xl font-bold text-white mb-1 md:mb-4">Why Shoppers Choose Vesti</h3>
+            <p className="text-purple-100 max-w-2xl mx-auto text-xs md:text-base">
               The key advantages that have made us the preferred choice for confident online shopping
             </p>
           </div>
           
-          <div className="flex gap-2 md:grid md:grid-cols-3 md:gap-8">
+          <div className="space-y-2 md:grid md:grid-cols-3 md:gap-8 md:space-y-0">
             {advantages.map((advantage, i) => (
-              <div key={i} className="basis-1/3 bg-white/10 backdrop-blur-lg rounded-xl p-3 md:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <div className="w-9 h-9 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-2.5 md:mb-5 shadow-lg">
-                  {advantage.icon}
+              <div key={i} className="bg-white/10 backdrop-blur-lg rounded-lg md:rounded-xl p-2.5 md:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div className="flex items-center space-x-3 md:block">
+                  <div className="w-6 h-6 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 md:mb-5 shadow-lg">
+                    {advantage.icon}
+                  </div>
+                  <div className="flex-1 md:block">
+                    <h4 className="text-xs md:text-xl font-bold text-white mb-0.5 md:mb-3 text-left">{advantage.title}</h4>
+                    <p className="text-purple-100 text-xs md:text-base text-left">{advantage.description}</p>
+                  </div>
                 </div>
-                <h4 className="text-sm md:text-xl font-bold text-white mb-1 md:mb-3 text-center md:text-left">{advantage.title}</h4>
-                <p className="text-purple-100 text-xs md:text-base text-center md:text-left">{advantage.description}</p>
               </div>
             ))}
           </div>

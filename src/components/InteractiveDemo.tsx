@@ -10,9 +10,9 @@ interface DemoOption {
 
 const people: DemoOption[] = [
   { id: 'model-01', name: 'Sarah', image: '/images/sarah-before.jpg', gender: 'female' },
-  { id: 'model-02', name: 'Alex', image: '/images/alex-before', gender: 'female' },
-  { id: 'model-03', name: 'Jordan', image: '/images/Model_03_beforee.jpg', gender: 'male' },
-  { id: 'model-04', name: 'Taylor', image: '/images/Model_04_before.jpg', gender: 'male' },
+  { id: 'model-02', name: 'Alex', image: '/images/alex-before.webp', gender: 'male' },
+  { id: 'model-03', name: 'Jordan', image: '/images/jordan-before.avif', gender: 'male' },
+  { id: 'model-04', name: 'Taylor', image: '/images/taylor-before.webp', gender: 'female' },
 ]
 
 const womenClothing: DemoOption[] = [
@@ -22,11 +22,32 @@ const womenClothing: DemoOption[] = [
   { id: 'w-clothing-04', name: 'Metallic Bronze Bikini', image: '/images/Sarahb-4.webp', gender: 'female' },
 ]
 
+const alexClothing: DemoOption[] = [
+  { id: 'a-clothing-01', name: 'Casual Polo Shirt', image: '/images/alex-b1.webp', gender: 'male' },
+  { id: 'a-clothing-02', name: 'Denim Jacket', image: '/images/alex-b2.jpg', gender: 'male' },
+  { id: 'a-clothing-03', name: 'Formal Business Suit', image: '/images/alex-b3.webp', gender: 'male' },
+  { id: 'a-clothing-04', name: 'Athletic Hoodie', image: '/images/alex-b4.jpg', gender: 'male' },
+]
+
+const taylorClothing: DemoOption[] = [
+  { id: 't-clothing-01', name: 'Floral Two-Piece Set', image: '/images/taylor-1b.webp', gender: 'female' },
+  { id: 't-clothing-02', name: 'Ribbed Button-Up Top', image: '/images/taylor-2b.webp', gender: 'female' },
+  { id: 't-clothing-03', name: 'Leopard Print Halter Top', image: '/images/taylor-3b.webp', gender: 'female' },
+  { id: 't-clothing-04', name: 'Striped Collared Shirt', image: '/images/taylor-4b.webp', gender: 'female' },
+]
+
 const menClothing: DemoOption[] = [
   { id: 'm-clothing-01', name: 'Casual T-Shirt', image: '/images/Clothing_01.jpeg', gender: 'male' },
   { id: 'm-clothing-02', name: 'Denim Jacket', image: '/images/Clothing_02.jpg', gender: 'male' },
   { id: 'm-clothing-03', name: 'Formal Shirt', image: '/images/Clothing_04.jpg', gender: 'male' },
   { id: 'm-clothing-04', name: 'Hoodie', image: '/images/Clothing_05.png', gender: 'male' },
+]
+
+const jordanClothing: DemoOption[] = [
+  { id: 'j-clothing-01', name: 'Textured Zip-Up Hoodie', image: '/images/jordan-b1.avif', gender: 'male' },
+  { id: 'j-clothing-02', name: 'Knitted Button-Up Shirt', image: '/images/jordan-b2.avif', gender: 'male' },
+  { id: 'j-clothing-03', name: 'Striped Collared Shirt', image: '/images/jordan-b3.avif', gender: 'male' },
+  { id: 'j-clothing-04', name: 'Textured Polo Shirt', image: '/images/jordan-b4.avif', gender: 'male' },
 ]
 
 const results: Record<string, Record<string, string>> = {
@@ -37,22 +58,22 @@ const results: Record<string, Record<string, string>> = {
     'w-clothing-04': '/images/Sarahr-4.webp',
   },
   'model-02': {
-    'w-clothing-01': '/images/alex-r1',
-    'w-clothing-02': '/images/alex-r2',
-    'w-clothing-03': '/images/alex-r3',
-    'w-clothing-04': '/images/alex-r4',
+    'a-clothing-01': '/images/alex-r1.webp',
+    'a-clothing-02': '/images/alex-r2.webp',
+    'a-clothing-03': '/images/alex-r3.webp',
+    'a-clothing-04': '/images/alex-r4.webp',
   },
   'model-03': {
-    'm-clothing-01': '/images/Model_09_after.jpeg',
-    'm-clothing-02': '/images/Model_11_after.jpg',
-    'm-clothing-03': '/images/Model_12_after.jpg',
-    'm-clothing-04': '/images/Model_10_after.png',
+    'j-clothing-01': '/images/jordan-a1.webp',
+    'j-clothing-02': '/images/jordan-a2.webp',
+    'j-clothing-03': '/images/jordan-a3.webp',
+    'j-clothing-04': '/images/jordan-a4.webp',
   },
   'model-04': {
-    'm-clothing-01': '/images/Model_13_after.jpg',
-    'm-clothing-02': '/images/Model_14_after.jpg',
-    'm-clothing-03': '/images/Model_after_16.jpg',
-    'm-clothing-04': '/images/Model_15_after.jpg',
+    't-clothing-01': '/images/taylor-1r.webp',
+    't-clothing-02': '/images/taylor-2r.webp',
+    't-clothing-03': '/images/taylor-3r.webp',
+    't-clothing-04': '/images/taylor-5r.webp',
   },
 }
 
@@ -87,7 +108,11 @@ export function InteractiveDemo() {
   }
 
   const canTryOn = selectedPerson && selectedGarment
-  const availableClothing = selectedPerson?.gender === 'male' ? menClothing : womenClothing
+  const availableClothing = selectedPerson?.id === 'model-01' ? womenClothing : 
+                         selectedPerson?.id === 'model-02' ? alexClothing :
+                         selectedPerson?.id === 'model-03' ? jordanClothing :
+                         selectedPerson?.id === 'model-04' ? taylorClothing :
+                         selectedPerson?.gender === 'male' ? menClothing : womenClothing
 
   return (
     <div className="w-full py-8 sm:py-16">
@@ -298,86 +323,69 @@ export function InteractiveDemo() {
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-4 sm:space-y-6"
                 >
-                  <div className="text-center">
-                    <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-1 sm:mb-2">Your Result</h3>
-                    <p className="text-xs sm:text-sm text-slate-600">See the magic happen</p>
-                  </div>
-                  
                   {isLoading ? (
-                    <div className="aspect-[4/5] bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
+                    <div className="aspect-[3/4] max-w-md mx-auto bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
                       <div className="text-center">
                         <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-purple-600 border-t-transparent mx-auto mb-3 sm:mb-4"></div>
-                        <p className="text-base sm:text-lg font-semibold text-slate-900 mb-1 sm:mb-2">AI Processing...</p>
-                        <p className="text-xs sm:text-sm text-slate-600">Creating your virtual try-on</p>
+                        <p className="text-base sm:text-lg font-semibold text-slate-900 mb-1 sm:mb-2">Processing...</p>
+                        <p className="text-xs sm:text-sm text-slate-600">Creating your try-on</p>
                       </div>
                     </div>
                   ) : showResult ? (
-                    <div className="space-y-4 sm:space-y-6">
-                      {/* Before/After Toggle */}
-                      <div className="flex items-center justify-center">
-                        <div className="bg-slate-100 rounded-full p-1 flex">
-                          <motion.button
-                            onClick={() => setViewMode('before')}
-                            className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
-                              viewMode === 'before'
-                                ? 'bg-white text-slate-900 shadow-sm'
-                                : 'text-slate-600 hover:text-slate-900'
-                            }`}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            Before
-                          </motion.button>
-                          <motion.button
-                            onClick={() => setViewMode('after')}
-                            className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
-                              viewMode === 'after'
-                                ? 'bg-white text-slate-900 shadow-sm'
-                                : 'text-slate-600 hover:text-slate-900'
-                            }`}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            After
-                          </motion.button>
+                    <motion.div
+                      key="result-step"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className="space-y-4 sm:space-y-6"
+                    >
+                      <div className="text-center">
+                        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-1 sm:mb-2">Your Result</h3>
+                        <p className="text-xs sm:text-sm text-slate-600">Virtual try-on complete</p>
+                      </div>
+                      
+                      <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                        {/* Original Model */}
+                        <div className="group relative aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl transition-all duration-300 shadow-md">
+                          <img
+                            src={selectedPerson!.image}
+                            alt={`${selectedPerson?.name} original`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3">
+                            <p className="text-white font-medium text-xs sm:text-sm truncate">{selectedPerson?.name}</p>
+                            <p className="text-white/80 text-xs capitalize truncate">{selectedPerson?.gender}</p>
+                          </div>
+                        </div>
+
+                        {/* Selected Clothing */}
+                        <div className="group relative aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl transition-all duration-300 shadow-md">
+                          <img
+                            src={selectedGarment!.image}
+                            alt={selectedGarment?.name}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3">
+                            <p className="text-white font-medium text-xs sm:text-sm truncate">{selectedGarment?.name}</p>
+                          </div>
+                        </div>
+
+                        {/* Result */}
+                        <div className="group relative aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl transition-all duration-300 shadow-md">
+                          <img
+                            src={results[selectedPerson!.id][selectedGarment!.id]}
+                            alt={`${selectedPerson?.name} wearing ${selectedGarment?.name}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3">
+                            <p className="text-white font-medium text-xs sm:text-sm truncate">Result</p>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Image Display */}
-                      <div className="relative aspect-[4/5] bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden border border-slate-200">
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            key={viewMode}
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.98 }}
-                            className="w-full h-full relative"
-                          >
-                            <img
-                              src={viewMode === 'before' ? selectedPerson!.image : results[selectedPerson!.id][selectedGarment!.id]}
-                              alt={viewMode === 'before' ? `${selectedPerson?.name} before` : `${selectedPerson?.name} after`}
-                              className="w-full h-full object-cover"
-                            />
-                            
-                            {/* AI Badge */}
-                            {viewMode === 'after' && (
-                              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium shadow-lg">
-                                AI Generated
-                              </div>
-                            )}
-                          </motion.div>
-                        </AnimatePresence>
-                      </div>
-
-                      {/* Info Display */}
-                      <div className="text-center">
-                        <p className="text-base sm:text-lg font-semibold text-slate-900 mb-1 sm:mb-2">
-                          {selectedPerson?.name} wearing {selectedGarment?.name}
-                        </p>
-                        <p className="text-xs sm:text-sm text-slate-600">
-                          Tap the buttons above to compare
-                        </p>
-                      </div>
-
-                      {/* Try Again Button */}
                       <motion.button
                         onClick={() => {
                           setActiveStep('person')
@@ -386,14 +394,14 @@ export function InteractiveDemo() {
                           setShowResult(false)
                           setViewMode('after')
                         }}
-                        className="w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105"
-                        whileTap={{ scale: 0.99 }}
+                        className="w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all duration-300 shadow-sm hover:shadow-md"
+                        whileTap={{ scale: 0.98 }}
                       >
                         Try Another Look
                       </motion.button>
-                    </div>
+                    </motion.div>
                   ) : (
-                    <div className="aspect-[4/5] bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
+                    <div className="aspect-[3/4] max-w-md mx-auto bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
                       <div className="text-center">
                         <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 bg-green-100 rounded-full flex items-center justify-center">
                           <svg className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
