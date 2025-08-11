@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BeforeAfterTemplate } from '../components/BeforeAfterTemplate';
+import { ScriptGenerator } from '../components/careers/ScriptGenerator';
 
 export default function DashboardPage() {
   const baseText = "Ask me anything about ";
@@ -351,9 +352,9 @@ export default function DashboardPage() {
                 {[
                   { id: 'content', label: 'Content Creation', icon: FileText },
                   { id: 'canva', label: 'Canva Templates', icon: Image },
+                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
                   { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
                   { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
-                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
                   { id: 'brand-assets', label: 'Brand Assets', icon: Award },
                 ].map((tab) => (
                   <button
@@ -374,9 +375,9 @@ export default function DashboardPage() {
                 {[
                   { id: 'content', label: 'Content Creation', icon: FileText },
                   { id: 'canva', label: 'Canva Templates', icon: Image },
+                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
                   { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
                   { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
-                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
                   { id: 'brand-assets', label: 'Brand Assets', icon: Award },
                 ].map((tab) => (
                   <button
@@ -889,92 +890,12 @@ export default function DashboardPage() {
             {activeTab === 'script-generator' && (
               <div className="space-y-6">
                 <div className="text-center">
-                  <h2 className="text-2xl font-bold text-white mb-4">Advanced Script Tools</h2>
+                  <h2 className="text-2xl font-bold text-white mb-4">AI Script Generator</h2>
                   <p className="text-gray-300 mb-6">
-                    Use the AI chat above for content ideas, or explore these specialized tools below.
+                    Generate viral content ideas, scripts, and execution plans for VESTI. Our AI-powered tool helps you create engaging content across all social media platforms.
                   </p>
                 </div>
-
-                 {/* Content Creation Tools */}
-                 <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                   <h3 className="text-lg font-semibold text-white mb-6">Content Creation Tools</h3>
-                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                     <button className="p-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 group">
-                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">📝</div>
-                       <span className="text-sm font-medium">Generate Script</span>
-                     </button>
-                     <button className="p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 group">
-                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🎨</div>
-                       <span className="text-sm font-medium">Canva Templates</span>
-                     </button>
-                     <button className="p-6 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-200 group">
-                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🔄</div>
-                       <span className="text-sm font-medium">Content Generators</span>
-                     </button>
-                     <button className="p-6 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl hover:from-orange-700 hover:to-red-700 transition-all duration-200 group">
-                       <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">🎬</div>
-                       <span className="text-sm font-medium">Veo Tutorials</span>
-                     </button>
-                   </div>
-                 </div>
-
-                 {/* Trend Adaptation */}
-                 <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                   <h3 className="text-lg font-semibold text-white mb-4">Adapt Viral Trends</h3>
-                   <div className="flex gap-3">
-                     <input
-                       type="text"
-                       placeholder="Paste TikTok/IG link here..."
-                       className="flex-1 p-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none"
-                     />
-                     <button className="px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200">
-                       Adapt for VESTI
-                     </button>
-                   </div>
-                 </div>
-
-                 {/* Best Practices & Examples */}
-                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                   {/* Best Practices */}
-                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                     <h3 className="text-lg font-semibold text-white mb-4">Best Practices</h3>
-                     <div className="space-y-4">
-                       <div>
-                         <h4 className="font-medium text-white mb-2">Brand Tone</h4>
-                         <ul className="text-gray-300 text-sm space-y-1">
-                           <li>• Confident but not arrogant</li>
-                           <li>• Tech-savvy but accessible</li>
-                           <li>• Fashion-forward but inclusive</li>
-                         </ul>
-                       </div>
-                       <div>
-                         <h4 className="font-medium text-white mb-2">Claims to Avoid</h4>
-                         <ul className="text-gray-300 text-sm space-y-1">
-                           <li>• "100% accurate" or "perfect fit"</li>
-                           <li>• "Guaranteed to go viral"</li>
-                           <li>• Medical claims about body image</li>
-                         </ul>
-                       </div>
-                     </div>
-                   </div>
-
-                   {/* Winning Examples */}
-                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                     <h3 className="text-lg font-semibold text-white mb-4">Winning Examples</h3>
-                     <div className="space-y-4">
-                       <div className="bg-white/10 rounded-xl p-4">
-                         <h4 className="font-medium text-white mb-2">Money-Saving Hook</h4>
-                         <p className="text-gray-300 text-sm mb-2">"I spent $500 on clothes that didn't fit until I found VESTI! 💸"</p>
-                         <p className="text-purple-300 text-xs">Why it worked: Emotional pain point + specific dollar amount</p>
-                       </div>
-                       <div className="bg-white/10 rounded-xl p-4">
-                         <h4 className="font-medium text-white mb-2">Transformation Hook</h4>
-                         <p className="text-gray-300 text-sm mb-2">"Watch this outfit transform with VESTI! ✨"</p>
-                         <p className="text-purple-300 text-xs">Why it worked: Visual promise + magic element</p>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
+                <ScriptGenerator />
               </div>
             )}
           </div>

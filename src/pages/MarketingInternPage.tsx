@@ -5,7 +5,6 @@ import { Section } from '../components/careers/Section';
 import { FAQAccordion } from '../components/careers/FAQAccordion';
 import { CTABanner } from '../components/careers/CTABanner';
 import { MarketingSlideDeck } from '../components/careers/MarketingSlideDeck';
-import { ScriptGenerator } from '../components/careers/ScriptGenerator';
 import { CheckCircle, Clock, MapPin, DollarSign, Users, Target, TrendingUp, Instagram, Twitter, Linkedin, Zap, ArrowRight, Video, Palette, MessageSquare, BarChart3, Eye, Heart, Sparkles, Globe, Lightbulb, GraduationCap, Home, Trophy, Briefcase, Award, Rocket } from 'lucide-react';
 import careersContent from '../content/careers';
 import { useScrollToTop } from '../hooks/useScrollToTop';
@@ -145,25 +144,7 @@ export default function MarketingInternPage() {
         <MarketingSlideDeck />
       </Section>
 
-      {/* AI Script Generator */}
-      <Section background="gray">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-100 to-pink-100 px-6 py-3 rounded-full mb-6">
-              <Sparkles className="w-6 h-6 text-purple-600" />
-              <span className="text-purple-700 font-semibold">Content Creation Tools</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              AI Script Generator
-            </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Generate viral content ideas, scripts, and execution plans for VESTI. 
-              Our AI-powered tool helps you create engaging content across all social media platforms.
-            </p>
-          </div>
-          <ScriptGenerator />
-        </div>
-      </Section>
+
 
       {/* Enhanced Role Overview */}
       <Section background="gray">

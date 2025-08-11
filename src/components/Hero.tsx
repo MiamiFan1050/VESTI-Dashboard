@@ -1,6 +1,10 @@
 import { ArrowRight, Infinity } from 'lucide-react';
 import TryOnSlideshow from './TryOnSlideshow';
 
+interface HeroProps {
+  onShowVideo: () => void;
+}
+
 function Intro() {
   return (
     <>
@@ -21,7 +25,7 @@ function Intro() {
   );
 }
 
-function Details() {
+function Details({ onShowVideo }: { onShowVideo: () => void }) {
   return (
     <>
       {/* Benefits */}
@@ -63,7 +67,22 @@ function Details() {
           Add to Chrome - Premium Access
           <ArrowRight className="ml-2 h-4 w-4" />
         </a>
-        <button className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-900 font-medium shadow-md hover:shadow-lg border border-gray-200 transition-all duration-300">
+        <button 
+          onClick={() => {
+            onShowVideo();
+            // Smooth scroll to video section after a brief delay
+            setTimeout(() => {
+              const videoSection = document.getElementById('video-demo');
+              if (videoSection) {
+                videoSection.scrollIntoView({ 
+                  behavior: 'smooth', 
+                  block: 'start' 
+                });
+              }
+            }, 100);
+          }}
+          className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-900 font-medium shadow-md hover:shadow-lg border border-gray-200 transition-all duration-300 hover:scale-105 active:scale-95"
+        >
           Watch Demo
         </button>
       </div>
@@ -116,7 +135,7 @@ function SlideshowFrame() {
   );
 }
 
-export function Hero() {
+export function Hero({ onShowVideo }: HeroProps) {
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Background Elements */}
@@ -147,7 +166,7 @@ export function Hero() {
             </div>
           </div>
           <div className="animate-fade-in">
-            <Details />
+            <Details onShowVideo={onShowVideo} />
           </div>
         </div>
 
@@ -155,7 +174,7 @@ export function Hero() {
         <div className="hidden md:grid xs:grid-cols-2 gap-6 lg:gap-12 items-center">
           <div className="animate-fade-in-up">
             <Intro />
-            <Details />
+            <Details onShowVideo={onShowVideo} />
           </div>
           <div className="relative animate-fade-in">
             <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-purple-500/20 via-pink-500/10 to-purple-500/20 blur-2xl animate-gradient"></div>
