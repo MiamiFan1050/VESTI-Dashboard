@@ -51,6 +51,12 @@ export function Footer() {
                   Testimonials
                 </a>
               </li>
+              <li>
+                <Link to="/careers" className="text-gray-400 hover:text-white transition-colors flex items-center">
+                  <span className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                  Careers
+                </Link>
+              </li>
             </ul>
           </div>
 

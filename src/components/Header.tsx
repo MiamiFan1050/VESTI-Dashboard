@@ -135,54 +135,46 @@ export function Header() {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`xs:hidden absolute w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
-        mobileMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+      <div className={`xs:hidden absolute w-full bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-200 transition-all duration-300 ease-in-out ${
+        mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
       }`}>
-        <div className="px-4 py-3 space-y-3">
+        <div className="px-4 py-4 space-y-2">
           <button 
             onClick={handleHowItWorksClick}
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2 text-left w-full"
+            className="block text-gray-700 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-3 text-left w-full border-b border-gray-100 hover:bg-purple-50 rounded-lg px-2"
           >
             How It Works
           </button>
           <button 
             onClick={handleTestimonialsClick}
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2 text-left w-full"
+            className="block text-gray-700 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-3 text-left w-full border-b border-gray-100 hover:bg-purple-50 rounded-lg px-2"
           >
             Testimonials
           </button>
           <Link 
             to="/blog" 
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+            className="block text-gray-700 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-3 border-b border-gray-100 hover:bg-purple-50 rounded-lg px-2"
           >
             Blog
           </Link>
           <Link 
             to="/get-featured" 
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+            className="block text-gray-700 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-3 border-b border-gray-100 hover:bg-purple-50 rounded-lg px-2"
           >
             Get Featured
           </Link>
           <Link 
             to="/faq" 
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+            className="block text-gray-700 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-3 border-b border-gray-100 hover:bg-purple-50 rounded-lg px-2"
           >
             FAQ
           </Link>
           <Link 
             to="/careers" 
-            className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-2"
+            className="block text-gray-700 hover:text-purple-600 transition-colors duration-200 text-sm font-medium py-3 border-b border-gray-100 hover:bg-purple-50 rounded-lg px-2"
           >
             Careers
           </Link>
-          <a 
-            href="https://chromewebstore.google.com/detail/vesti-ai-free-virtual-try/lakceeelkccloehcppjkiaifkkmfcdin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium text-sm block text-center"
-          >
-            Add to Chrome
-          </a>
         </div>
       </div>
     </header>
