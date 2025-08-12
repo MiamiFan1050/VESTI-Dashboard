@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, 
@@ -35,7 +35,8 @@ import {
 import { Link } from 'react-router-dom';
 import { BeforeAfterTemplate } from '../components/BeforeAfterTemplate';
 import { ScriptGenerator } from '../components/careers/ScriptGenerator';
-
+import { generateVESTIResponse } from '../utils/geminiApi';
+import { renderMarkdown } from '../utils/markdownRenderer';
 export default function DashboardPage() {
   const baseText = "Ask me anything about ";
   const topics = [
@@ -57,7 +58,8 @@ export default function DashboardPage() {
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [displayText, setDisplayText] = useState(baseText);
   const [inputValue, setInputValue] = useState("");
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(true);
+  const [selectedScript, setSelectedScript] = useState<number | null>(null);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -65,6 +67,20 @@ export default function DashboardPage() {
       content: "Hi! I'm your VESTI AI Assistant. I can help with content creation, brand strategy, and everything VESTI-related. What would you like to work on?"
     }
   ]);
+
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new messages are added
+  useEffect(() => {
+    if (chatMessagesRef.current) {
+      // Small delay to ensure the message is rendered
+      setTimeout(() => {
+        if (chatMessagesRef.current) {
+          chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+        }
+      }, 100);
+    }
+  }, [messages]);
 
   // Typewriter effect
   React.useEffect(() => {
@@ -107,88 +123,316 @@ export default function DashboardPage() {
     return () => clearInterval(typeInterval);
   }, [placeholderIndex]);
 
-  const handleSend = () => {
-    if (inputValue.trim()) {
+  const handleSend = async (customInput?: string) => {
+    const messageToSend = customInput || inputValue.trim();
+    
+    if (messageToSend) {
       const userMessage = {
         id: Date.now(),
         type: 'user',
-        content: inputValue.trim()
+        content: messageToSend
       };
       
       setMessages(prev => [...prev, userMessage]);
       
-      // Generate intelligent VESTI-specific response
-      const aiResponse = generateVESTIResponse(inputValue.trim());
+      // Clear input if not using custom input
+      if (!customInput) {
+        setInputValue('');
+      }
       
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
+      // Show loading state
+      const loadingMessage = {
           id: Date.now() + 1,
           type: 'ai',
-          content: aiResponse
-        }]);
-      }, 1000);
+        content: '🤔 Thinking...'
+      };
+      setMessages(prev => [...prev, loadingMessage]);
       
-      setInputValue('');
+      try {
+        // Get AI response using Gemini API
+        const aiResponse = await generateVESTIResponse(messageToSend);
+        
+        // Replace loading message with actual response
+        setMessages(prev => prev.map(msg => 
+          msg.id === loadingMessage.id 
+            ? { ...msg, content: aiResponse }
+            : msg
+        ));
+      } catch (error) {
+        console.error('Error getting AI response:', error);
+        
+        // Replace loading message with error
+        setMessages(prev => prev.map(msg => 
+          msg.id === loadingMessage.id 
+            ? { ...msg, content: 'Sorry, I encountered an error. Please try again.' }
+            : msg
+        ));
+      }
     }
+  };
+  const getScriptDetails = (scriptNumber: number) => {
+    const scripts = {
+      1: {
+        title: "Video 1: Online Shopping Try-On Hack",
+        duration: "42 seconds",
+        color: "from-pink-500 to-purple-600",
+        sections: [
+          {
+            title: "🎬 Hook (0-4s)",
+            description: "Start with a selfie-style shot. Place a split screen next to your face showing two different product photos of the same item from an online store.",
+            onScreenText: "online shopping try on hack???",
+            dialogue: "Does anyone else go online shopping and cannot tell if it's the clothes that are cute or if it's just the model making the clothes cute?"
+          },
+          {
+            title: "💡 Problem (5-9s)",
+            description: "Continue talking to the camera, explaining the problem. Remove the on-screen text and the split screen.",
+            dialogue: "Like that's the one reason why I like going in-person shopping, but I found a way to digitally try on the clothes."
+          },
+          {
+            title: "🔧 Solution (10-14s)",
+            description: "Transition to a close-up of your phone screen showing the Vesti AI app.",
+            onScreenText: "this is the app 'Vesti'",
+            dialogue: "The app is called Vesti and you just upload four selfies, and then you could try on clothes online."
+          },
+          {
+            title: "👗 First Try-On (15-25s)",
+            description: "Show a split-screen. On one side, show the product page of a sweater. On the other side, show your face superimposed on the model.",
+            dialogue: "I really wanted to see if this sweater would look good on me from addicted, and I use the extension Vesti, and then look what it gave me. Like, that's literally me. Is that not insane?"
+          },
+          {
+            title: "👗 Second Try-On (26-31s)",
+            description: "Repeat the process with a different item, like a dress. Show the product page and then the try-on result.",
+            dialogue: "Then I decided I was going to try some darker colors because I didn't like the way the white and pink looked on me. I tried this dress and hello."
+          },
+          {
+            title: "💾 Save Feature (32-37s)",
+            description: "Show the app's interface with the saved outfits.",
+            dialogue: "My outfits that I digitally try on are all saved here with a link for me to actually purchase them."
+          },
+          {
+            title: "🎯 Conclusion (38-42s)",
+            description: "Use a split screen to show a product page and then the Vesti try-on result.",
+            dialogue: "I'm so happy I downloaded this because I do not know color theory and I need to physically like try on clothes, so this is such a great hack."
+          }
+        ]
+      },
+      2: {
+        title: "Video 2: AI Model Generation",
+        duration: "20 seconds",
+        color: "from-blue-500 to-cyan-600",
+        sections: [
+          {
+            title: "🎬 Hook (0-5s)",
+            description: "Start with a POV shot of you sitting on a bed, looking at your phone with a product laid out next to you.",
+            onScreenText: "POV: your budget said no to the expensive photoshoot but you suck at taking photos..."
+          },
+          {
+            title: "😅 The Problem (6-7s)",
+            description: "Film yourself standing, wearing the product, and posing awkwardly.",
+            onScreenText: "Me taking ✨awkward✨ still photos of my product"
+          },
+          {
+            title: "🔧 The Solution (8-10s)",
+            description: "Film a screen recording of you on your computer, going to getvesti.com. Upload a photo of the product.",
+            onScreenText: "Generate ai model and Upload product photo 👕"
+          },
+          {
+            title: "✨ The Try-On (11-14s)",
+            description: "Film the screen as Vesti AI generates the model wearing your product.",
+            onScreenText: "Generate the model wearing your product 😩"
+          },
+          {
+            title: "🎯 The Result (15-19s)",
+            description: "Film a clear shot of the final AI-generated image, highlighting the quality.",
+            onScreenText: "Use for your website 😎"
+          }
+        ]
+      },
+      3: {
+        title: "Video 3: Social Setting",
+        duration: "7 seconds",
+        color: "from-green-500 to-emerald-600",
+        sections: [
+          {
+            title: "🎬 Hook (0-7s)",
+            description: "Start a selfie-style video with a friend or partner in a social setting (e.g., a bar, restaurant, or out on the town).",
+            onScreenText: "is it rude that I told her to download an app where u can virtually try on all ur clothes so she could start having 10/10 fits everytime we go out 😂",
+            dialogue: "No spoken words, just a popular trending audio track."
+          }
+        ]
+      },
+      4: {
+        title: "Video 4: Discovery Moment",
+        duration: "14 seconds",
+        color: "from-yellow-500 to-orange-600",
+        sections: [
+          {
+            title: "😱 Hook (0-3s)",
+            description: "Start with a close-up of your face, looking shocked or surprised.",
+            onScreenText: "WHY DID NO ONE TELL ME THIS?!?!",
+            dialogue: "No spoken words, just background music."
+          },
+          {
+            title: "💻 The Problem/Solution (4-6s)",
+            description: "Film a screen recording of yourself on an online clothing store. Use a split screen to show a product photo with the original model and then with your face on the model.",
+            onScreenText: "Zara model and Me"
+          },
+          {
+            title: "💡 The Benefit (7-7s)",
+            description: "Cut back to your face.",
+            onScreenText: "You can try on the clothes before buying..."
+          },
+          {
+            title: "✨ The Try-On (8-10s)",
+            description: "Show the Vesti AI try-on effect on the website in action again."
+          },
+          {
+            title: "😊 Reaction (11-14s)",
+            description: "End the video with a positive, happy reaction."
+          }
+        ]
+      },
+      5: {
+        title: "Video 5: Closet Organization",
+        duration: "13 seconds",
+        color: "from-purple-500 to-pink-600",
+        sections: [
+          {
+            title: "😫 Hook (0-3s)",
+            description: "Start with a close-up of your face, looking frustrated or overwhelmed.",
+            onScreenText: "Closet full. Nothing to wear. EVERYDAY.",
+            dialogue: "No spoken words, just background music."
+          },
+          {
+            title: "👗 The Problem (4-6s)",
+            description: "Film your closet, showing it's full of clothes but nothing seems to work together.",
+            onScreenText: "So many clothes... but nothing to wear 😭"
+          },
+          {
+            title: "💡 The Solution (7-9s)",
+            description: "Show yourself using the Vesti AI app to try on different outfit combinations.",
+            onScreenText: "Vesti AI to the rescue! ✨"
+          },
+          {
+            title: "✨ The Result (10-13s)",
+            description: "Show the final outfit that Vesti AI helped you put together.",
+            onScreenText: "Perfect outfit found! 🎉"
+          }
+        ]
+      },
+      6: {
+        title: "Video 6: Home Try-On",
+        duration: "10 seconds",
+        color: "from-indigo-500 to-purple-600",
+        sections: [
+          {
+            title: "🏠 Hook (0-2s)",
+            description: "Start with a shot of you at home, looking comfortable.",
+            onScreenText: "Pov: You found a website to virtually try on clothes...",
+            dialogue: "No spoken words, just background music."
+          },
+          {
+            title: "💻 The Discovery (3-5s)",
+            description: "Show a screen recording of you discovering the Vesti AI website.",
+            onScreenText: "Vesti AI - Virtual Try-On"
+          },
+          {
+            title: "✨ The Try-On (6-8s)",
+            description: "Show the virtual try-on process in action.",
+            onScreenText: "Watch the magic happen! ✨"
+          },
+          {
+            title: "🎉 The Result (9-10s)",
+            description: "Show the final result with a happy reaction.",
+            onScreenText: "Perfect fit! 🎉"
+          }
+        ]
+      },
+      7: {
+        title: "Video 7: Wishlist Try-On",
+        duration: "36 seconds",
+        color: "from-teal-500 to-cyan-600",
+        sections: [
+          {
+            title: "🛍️ Hook (0-5s)",
+            description: "Start with a shot of you looking at your online shopping wishlist.",
+            onScreenText: "Shopping online just got easier with VESTI AI...",
+            dialogue: "I have so many clothes in my wishlist but I never know if they'll look good on me."
+          },
+          {
+            title: "💡 The Solution (6-10s)",
+            description: "Show yourself using Vesti AI to try on items from your wishlist.",
+            onScreenText: "Try on your wishlist items virtually! ✨"
+          },
+          {
+            title: "👗 First Try-On (11-20s)",
+            description: "Show the first item being tried on virtually.",
+            dialogue: "Look at this dress! I thought it would look terrible on me but it's actually perfect."
+          },
+          {
+            title: "👗 Second Try-On (21-30s)",
+            description: "Show another item being tried on.",
+            dialogue: "And this sweater? I was so unsure about the color but now I can see it works!"
+          },
+          {
+            title: "💾 Save & Buy (31-36s)",
+            description: "Show the saved outfits and purchase process.",
+            dialogue: "Now I can save all my favorite looks and buy them with confidence!"
+          }
+        ]
+      },
+      8: {
+        title: "Video 8: Before & After",
+        duration: "15 seconds",
+        color: "from-rose-500 to-pink-600",
+        sections: [
+          {
+            title: "😔 Before (0-5s)",
+            description: "Show yourself looking frustrated with ill-fitting clothes.",
+            onScreenText: "Before: Clothes that don't fit 😔",
+            dialogue: "I always end up with clothes that look great on the model but terrible on me."
+          },
+          {
+            title: "✨ The Transformation (6-10s)",
+            description: "Show the Vesti AI transformation process.",
+            onScreenText: "Vesti AI transformation in progress... ✨"
+          },
+          {
+            title: "😍 After (11-15s)",
+            description: "Show the final result with you looking confident and happy.",
+            onScreenText: "After: Perfect fit! 😍",
+            dialogue: "The difference is INSANE! Now I can see exactly how clothes will look on me before buying."
+          }
+        ]
+      },
+      9: {
+        title: "Video 9: Quick Demo",
+        duration: "8 seconds",
+        color: "from-amber-500 to-yellow-600",
+        sections: [
+          {
+            title: "⚡ Quick Start (0-2s)",
+            description: "Start with a fast-paced intro showing the Vesti AI app.",
+            onScreenText: "Watch this magic happen in seconds!",
+            dialogue: "No spoken words, just upbeat background music."
+          },
+          {
+            title: "🎯 The Process (3-5s)",
+            description: "Show the quick try-on process in fast motion.",
+            onScreenText: "Upload → Try-On → Perfect! ✨"
+          },
+          {
+            title: "🎉 The Result (6-8s)",
+            description: "Show the final result with excitement.",
+            onScreenText: "That's it! Perfect fit in seconds! 🎉"
+          }
+        ]
+      }
+    };
+    
+    return scripts[scriptNumber as keyof typeof scripts] || null;
   };
 
-  const generateVESTIResponse = (userInput: string) => {
-    const input = userInput.toLowerCase();
-    
-    // VESTI Product & Business Knowledge
-    if (input.includes('vesti') || input.includes('product') || input.includes('what is') || input.includes('how does')) {
-      return `VESTI is an AI-powered virtual try-on platform that helps customers see how clothes look on them before buying. Our technology uses advanced computer vision to create realistic virtual fittings, reducing returns and improving customer confidence. We work with fashion brands to integrate this technology into their e-commerce platforms. What specific aspect of VESTI would you like to know more about?`;
-    }
-    
-    // Content Creation - Hooks
-    if (input.includes('hook') || input.includes('viral') || input.includes('attention')) {
-      return `Here are some VESTI-specific hook ideas:\n\n💡 "I spent $500 on clothes that didn't fit until I found VESTI! 💸"\n💡 "Watch this outfit transform with VESTI! ✨"\n💡 "This AI just saved me from another return nightmare! 🤖"\n💡 "The future of online shopping is here - and it's mind-blowing! 🚀"\n\nKey elements: emotional pain points, specific dollar amounts, transformation promises, and tech excitement. Want me to generate more for a specific product category?`;
-    }
-    
-    // Content Creation - Captions
-    if (input.includes('caption') || input.includes('description') || input.includes('text')) {
-      return `Here's a VESTI caption template:\n\n"Just discovered the future of online shopping! 🛍️✨ Virtual try-on has never been easier with VESTI's AI-powered technology. No more guessing if something will fit - see it on yourself instantly! Perfect for anyone who's tired of returns and wants to shop with confidence. #VirtualTryOn #AIFashion #VESTI #FutureOfShopping"\n\nWant me to customize this for a specific product or platform?`;
-    }
-    
-    // Content Creation - Shot Lists
-    if (input.includes('shot') || input.includes('video') || input.includes('filming')) {
-      return `Here's a VESTI video shot list:\n\n📹 Opening Hook (0-3s): Person frustrated with ill-fitting clothes\n📹 Problem Setup (3-8s): Show pile of returns or wrong sizes\n📹 VESTI Introduction (8-12s): "But what if you could try before you buy?"\n📹 Demo (12-20s): Show VESTI virtual try-on in action\n📹 Results (20-25s): Happy customer with perfect fit\n📹 CTA (25-30s): "Try VESTI today!"\n\nNeed this adapted for a specific product category?`;
-    }
-    
-    // Brand Voice & Guidelines
-    if (input.includes('brand') || input.includes('voice') || input.includes('tone')) {
-      return `VESTI's brand voice:\n\n🎯 Confident but not arrogant - We're proud of our tech but humble about solving real problems\n🎯 Tech-savvy but accessible - Advanced AI explained simply\n🎯 Fashion-forward but inclusive - For everyone, not just fashionistas\n🎯 Problem-solver focused - We fix real shopping pain points\n\nAvoid: "100% accurate," "perfect fit," "guaranteed viral," medical claims about body image\n\nNeed help applying this to specific content?`;
-    }
-    
-    // Target Audience
-    if (input.includes('audience') || input.includes('target') || input.includes('demographic')) {
-      return `VESTI's target audiences:\n\n👥 Primary: Online shoppers (18-45) who've experienced sizing issues\n👥 Secondary: Fashion brands looking to reduce returns\n👥 Tertiary: Tech-savvy consumers interested in AI innovation\n\nPain points we solve:\n• Uncertainty about fit when shopping online\n• High return rates and wasted money\n• Time spent on returns and exchanges\n• Lack of confidence in online purchases\n\nWant content tailored to a specific audience segment?`;
-    }
-    
-    // Platform-Specific Content
-    if (input.includes('tiktok') || input.includes('instagram') || input.includes('youtube')) {
-      const platform = input.includes('tiktok') ? 'TikTok' : input.includes('instagram') ? 'Instagram' : 'YouTube';
-      return `${platform} content strategy for VESTI:\n\n📱 ${platform} Best Practices:\n• Keep it short and engaging (${platform === 'TikTok' ? '15-60s' : platform === 'Instagram' ? '30s-1min' : '2-5min'})\n• Start with a strong hook\n• Show the transformation clearly\n• Use trending sounds/music\n• Include clear CTA\n\nContent Ideas:\n• Before/after try-on comparisons\n• "Day in the life" with VESTI\n• Customer testimonials\n• Behind-the-scenes tech demos\n\nNeed specific ${platform} content ideas?`;
-    }
-    
-    // Competitor Analysis
-    if (input.includes('competitor') || input.includes('vs') || input.includes('difference')) {
-      return `VESTI's competitive advantages:\n\n🏆 AI-Powered Accuracy: More precise than basic AR filters\n🏆 E-commerce Integration: Seamless shopping experience\n🏆 Return Reduction: Proven to reduce returns by 30-50%\n🏆 Brand Partnerships: Works with major fashion brands\n🏆 User-Friendly: No app download required\n\nKey Differentiators:\n• Realistic body mapping technology\n• Integration with existing e-commerce platforms\n• Focus on reducing returns, not just visualization\n• Brand-agnostic solution\n\nWant to create content highlighting these advantages?`;
-    }
-    
-    // Technical Questions
-    if (input.includes('how') && (input.includes('work') || input.includes('technology') || input.includes('ai'))) {
-      return `How VESTI works:\n\n🤖 AI Technology:\n• Advanced computer vision algorithms\n• Real-time body mapping and measurement\n• Machine learning for accurate fit prediction\n• Integration with e-commerce platforms\n\nUser Experience:\n1. Customer uploads photo or uses live camera\n2. AI analyzes body measurements and proportions\n3. Virtual try-on renders clothing realistically\n4. Customer sees exactly how items will fit\n5. Confident purchase decision\n\nBenefits:\n• Reduces returns by 30-50%\n• Increases conversion rates\n• Improves customer satisfaction\n• Saves money for both customers and brands\n\nNeed technical details for content creation?`;
-    }
-    
-    // General Help
-    if (input.includes('help') || input.includes('assist') || input.includes('support')) {
-      return `I'm your VESTI AI assistant! I can help you with:\n\n📝 Content Creation: Hooks, captions, shot lists, scripts\n🎨 Design: Canva templates, brand assets, color guides\n📊 Strategy: Platform-specific content, audience targeting\n🏢 Business: Product knowledge, competitive advantages\n💡 Ideas: Viral content concepts, trend adaptation\n\nJust ask me anything about VESTI, content creation, or marketing strategy. What would you like to work on today?`;
-    }
-    
-    // Default response for unrecognized queries
-    return `Thanks for your message! I'm here to help you with all things VESTI - from content creation and brand strategy to product knowledge and marketing ideas. Could you be more specific about what you'd like to work on? I can help with hooks, captions, video scripts, brand guidelines, or any VESTI-related content!`;
-  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -223,26 +467,27 @@ export default function DashboardPage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
 
         {/* Header */}
-        <div className="relative z-10 pt-20">
-          <div className="flex items-center justify-between px-8 py-10">
-            <div className="flex items-center gap-6">
+        <div className="relative z-10 pt-16 sm:pt-20">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-8 py-6 sm:py-10 gap-4 sm:gap-0">
+            <div className="flex items-center gap-3 sm:gap-6 w-full sm:w-auto">
               <Link
                 to="/"
-                className="inline-flex items-center gap-3 px-5 py-3 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20"
+                className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-3 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all duration-300 border border-white/20 text-sm sm:text-base"
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span className="font-medium">Back to Site</span>
+                <span className="font-medium hidden sm:inline">Back to Site</span>
+                <span className="font-medium sm:hidden">Back</span>
               </Link>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                  <Users className="h-5 w-5 text-white" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
-                <span className="text-white font-semibold text-lg">Marketing Intern Dashboard</span>
+                <span className="text-white font-semibold text-base sm:text-lg">Marketing Intern Dashboard</span>
               </div>
             </div>
             <button
               onClick={handleSignOut}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-red-600/20 text-red-300 rounded-xl hover:bg-red-600/30 transition-all duration-300 border border-red-500/30"
+              className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-3 bg-red-600/20 text-red-300 rounded-xl hover:bg-red-600/30 transition-all duration-300 border border-red-500/30 text-sm sm:text-base w-full sm:w-auto justify-center"
             >
               <LogOut className="h-4 w-4" />
               <span className="font-medium">Sign Out</span>
@@ -251,19 +496,19 @@ export default function DashboardPage() {
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-8 pb-16 mt-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-16 mt-4 sm:mt-8">
           {/* Welcome Section */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-12">
-            <div className="flex items-center justify-between">
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-8 border border-white/10 mb-6 sm:mb-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
               <div>
-                <h1 className="text-2xl font-semibold text-white mb-2">
+                <h1 className="text-xl sm:text-2xl font-semibold text-white mb-2">
                   Welcome back, Marketing Intern! 🎉
                 </h1>
                 <p className="text-gray-400 text-sm">
                   Ready to create some viral content today?
                 </p>
               </div>
-              <div className="text-right">
+              <div className="text-left sm:text-right w-full sm:w-auto">
                 <p className="text-gray-500 text-xs">Last login</p>
                 <p className="text-white text-sm font-medium">Today at 9:30 AM</p>
               </div>
@@ -271,51 +516,56 @@ export default function DashboardPage() {
           </div>
 
                                 {/* Chat Toggle Button */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-6 sm:mb-8">
               <button
                 onClick={() => setIsChatOpen(!isChatOpen)}
-                className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md text-white rounded-xl hover:bg-white/20 transition-all duration-200 font-medium border border-white/20"
+                className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-md text-white rounded-xl hover:from-purple-600/30 hover:to-blue-600/30 transition-all duration-200 font-medium border border-white/20 shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base"
               >
                 <MessageSquare className="w-4 h-4" />
-                {isChatOpen ? 'Close Chat' : 'Open VESTI AI Assistant'}
+                <span className="hidden sm:inline">{isChatOpen ? 'Close Chat' : 'Open VESTI AI Assistant'}</span>
+                <span className="sm:hidden">{isChatOpen ? 'Close' : 'Open AI'}</span>
               </button>
             </div>
 
                       {/* VESTI AI Chat Interface */}
             {isChatOpen && (
-           <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden mb-8">
+           <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden mb-8 shadow-2xl h-[500px] sm:h-[600px] md:h-[700px] flex flex-col">
              
              {/* Chat Header */}
-             <div className="p-4 border-b border-white/10">
-               <div className="flex items-center gap-3">
-                 <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                 <h2 className="text-lg font-medium text-white">VESTI AI Assistant</h2>
+             <div className="p-3 sm:p-4 border-b border-white/20 bg-gradient-to-r from-purple-600/20 to-blue-600/20 flex-shrink-0">
+               <div className="flex items-center gap-2 sm:gap-3">
+                 <div className="w-2 h-2 sm:w-3 sm:h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                 <h2 className="text-base sm:text-lg font-semibold text-white">Alex - Marketing Assistant</h2>
+                 <div className="ml-auto text-xs text-gray-300 hidden sm:block">Powered by Vesti AI Assistant</div>
                </div>
              </div>
 
                          {/* Chat Messages */}
-             <div className="p-4 space-y-4 max-h-80 overflow-y-auto">
+             <div 
+               ref={chatMessagesRef}
+               className="flex-1 p-3 sm:p-4 space-y-3 sm:space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent pb-4 sm:pb-6"
+             >
                {messages.map((message) => (
-                 <div key={message.id} className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : ''}`}>
+                 <div key={message.id} className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : ''} animate-fadeInUp`}>
                    {message.type === 'ai' && (
-                     <div className="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
-                       <span className="text-white text-xs font-medium">AI</span>
+                     <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                       <span className="text-white text-xs font-bold">AI</span>
                      </div>
                    )}
                    <div className={`${message.type === 'user' ? 'order-1' : 'flex-1'}`}>
-                     <div className={`rounded-xl p-3 ${
+                     <div className={`rounded-xl p-3 sm:p-4 ${
                        message.type === 'user' 
-                         ? 'bg-purple-600 text-white' 
-                         : 'bg-white/5 text-gray-200'
+                         ? 'bg-purple-600 text-white max-w-[280px] sm:max-w-xs' 
+                         : 'bg-white/10 text-gray-100 max-w-[320px] sm:max-w-2xl border border-white/20'
                      }`}>
-                       <p className="text-sm">
-                         {message.content}
-                       </p>
+                       <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
+                         {message.type === 'ai' ? renderMarkdown(message.content) : message.content}
+                       </div>
                      </div>
                    </div>
                    {message.type === 'user' && (
-                     <div className="w-7 h-7 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                       <span className="text-white text-xs font-medium">U</span>
+                     <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                       <span className="text-white text-xs font-bold">U</span>
                      </div>
                    )}
                  </div>
@@ -323,31 +573,58 @@ export default function DashboardPage() {
              </div>
 
                          {/* Input */}
-             <div className="p-4 border-t border-white/10">
-               <div className="flex gap-2">
+             <div className="flex-shrink-0 p-4 sm:p-6 border-t border-white/20 bg-gradient-to-r from-white/5 to-white/10">
+               <div className="flex gap-2 sm:gap-3 mb-3 sm:mb-4">
                  <input
                    type="text"
                    value={inputValue}
                    onChange={(e) => setInputValue(e.target.value)}
                    onKeyPress={handleKeyPress}
                    placeholder={displayText}
-                   className="flex-1 px-3 py-2 bg-white/5 rounded-lg border border-white/10 text-white placeholder-gray-400 text-sm focus:outline-none focus:border-white/20 transition-all duration-200"
+                   className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white/10 rounded-xl border border-white/20 text-white placeholder-gray-300 text-sm sm:text-base focus:outline-none focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/20 transition-all duration-200"
                  />
                  <button
-                   onClick={handleSend}
-                   className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-200"
+                   onClick={() => handleSend()}
+                   className="px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-purple-500/25 hover:scale-105"
                    title="Send message"
                  >
-                   <Send className="w-4 h-4" />
+                   <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                  </button>
+               </div>
+               
+                               {/* Platform-Specific Quick Actions */}
+                <div className="text-center mb-3 sm:mb-4">
+                  <h3 className="text-white text-base sm:text-lg font-semibold mb-1 sm:mb-2">Choose Your Platform</h3>
+                  <p className="text-gray-300 text-xs sm:text-sm">I can help you create amazing content for any of these platforms</p>
+                </div>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+                  {[
+                    { name: 'TikTok', prompt: 'I want to create content with TikTok. What can you help me with?' },
+                    { name: 'Instagram', prompt: 'I want to create content with Instagram. What can you help me with?' },
+                    { name: 'Reddit', prompt: 'I want to create content with Reddit. What can you help me with?' },
+                    { name: 'YouTube', prompt: 'I want to create content with YouTube. What can you help me with?' },
+                    { name: 'Twitter', prompt: 'I want to create content with Twitter. What can you help me with?' },
+                    { name: 'Pinterest', prompt: 'I want to create content with Pinterest. What can you help me with?' },
+                    { name: 'LinkedIn', prompt: 'I want to create content with LinkedIn. What can you help me with?' }
+                  ].map((platform) => (
+                    <button
+                      key={platform.name}
+                      onClick={() => {
+                        handleSend(platform.prompt);
+                      }}
+                      className="px-3 sm:px-4 py-2 sm:py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-xs sm:text-sm font-medium transition-all duration-200 hover:border-white/40 hover:scale-105 hover:shadow-lg min-w-[70px] sm:min-w-[80px] text-center"
+                    >
+                      {platform.name}
+                    </button>
+                  ))}
                </div>
              </div>
           </div>
           )}
 
                       {/* Navigation Tabs */}
-            <div className="relative mb-8 overflow-hidden">
-              <div className="flex space-x-2 animate-scroll-tabs">
+            <div className="relative mb-6 sm:mb-8 overflow-hidden">
+              <div className="flex space-x-1 sm:space-x-2 animate-scroll-tabs">
                 {/* First set of tabs */}
                 {[
                   { id: 'content', label: 'Content Creation', icon: FileText },
@@ -360,14 +637,14 @@ export default function DashboardPage() {
                   <button
                     key={`first-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                    className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm ${
                       activeTab === tab.id
                         ? 'bg-white/20 text-white'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <tab.icon className="h-4 w-4" />
-                    <span className="text-sm font-medium">{tab.label}</span>
+                    <tab.icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="text-xs sm:text-sm font-medium">{tab.label}</span>
                   </button>
                 ))}
                 
@@ -383,21 +660,21 @@ export default function DashboardPage() {
                   <button
                     key={`second-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                    className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm ${
                       activeTab === tab.id
                         ? 'bg-white/20 text-white'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <tab.icon className="h-4 w-4" />
-                    <span className="text-sm font-medium">{tab.label}</span>
+                    <tab.icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="text-xs sm:text-sm font-medium">{tab.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Tab Content */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 shadow-2xl min-h-[60vh]">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 border border-white/20 shadow-2xl min-h-[50vh] sm:min-h-[60vh]">
             {activeTab === 'content' && (
               <div className="space-y-6">
                 <div className="text-center">
@@ -470,9 +747,182 @@ export default function DashboardPage() {
                     Learn how to write compelling scripts that convert.
                   </p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <p className="text-gray-300">Script tutorials coming soon...</p>
+                {/* Script Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* Video 1 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-purple-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 1 ? null : 1)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
                 </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Online Shopping Try-On</h4>
+                        <p className="text-xs text-gray-400">42s • High Converting</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"Does anyone else go online shopping and cannot tell if it's the clothes that are cute..."</p>
+                  </div>
+
+                  {/* Video 2 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-blue-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 2 ? null : 2)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">AI Model Generation</h4>
+                        <p className="text-xs text-gray-400">20s • Quick & Easy</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"POV: your budget said no to the expensive photoshoot..."</p>
+                  </div>
+
+                  {/* Video 3 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-green-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 3 ? null : 3)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Social Setting</h4>
+                        <p className="text-xs text-gray-400">7s • Trending Audio</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"is it rude that I told her to download an app..."</p>
+                  </div>
+
+                  {/* Video 4 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-yellow-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 4 ? null : 4)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Discovery Moment</h4>
+                        <p className="text-xs text-gray-400">14s • Shock & Awe</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"WHY DID NO ONE TELL ME THIS?!?!"</p>
+                  </div>
+
+                  {/* Video 5 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-purple-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 5 ? null : 5)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Closet Organization</h4>
+                        <p className="text-xs text-gray-400">13s • Problem-Solution</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"Closet full. Nothing to wear. EVERYDAY."</p>
+                  </div>
+
+                  {/* Video 6 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-indigo-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 6 ? null : 6)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Home Try-On</h4>
+                        <p className="text-xs text-gray-400">10s • App Demo</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"Pov: You found a website to virtually try on clothes..."</p>
+                  </div>
+
+                  {/* Video 7 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-teal-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 7 ? null : 7)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Wishlist Try-On</h4>
+                        <p className="text-xs text-gray-400">36s • Shopping Experience</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"Shopping online just got easier with VESTI AI..."</p>
+                  </div>
+
+                  {/* Video 8 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-rose-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 8 ? null : 8)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-rose-500 to-pink-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Before & After</h4>
+                        <p className="text-xs text-gray-400">15s • Transformation</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"The difference is INSANE!"</p>
+                  </div>
+
+                  {/* Video 9 */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-4 border border-white/20 hover:shadow-amber-500/20 transition-all duration-300 cursor-pointer" onClick={() => setSelectedScript(selectedScript === 9 ? null : 9)}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-yellow-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white text-sm">Quick Demo</h4>
+                        <p className="text-xs text-gray-400">8s • Fast Demo</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-xs">"Watch this magic happen in seconds!"</p>
+                  </div>
+                </div>
+
+                {/* Detailed Script (Hidden by default) */}
+                {selectedScript && (
+                  <div className="mt-8">
+                    <h3 className="text-xl font-bold text-white text-center mb-6">Detailed Script Breakdown</h3>
+                    {(() => {
+                      const script = getScriptDetails(selectedScript);
+                      if (!script) return <div className="bg-white/5 rounded-xl p-6 border border-white/10"><p className="text-gray-300 text-center">Script not found.</p></div>;
+                      
+                      return (
+                        <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-6 border border-white/20">
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className={`w-10 h-10 bg-gradient-to-r ${script.color} rounded-lg flex items-center justify-center`}>
+                              <Play className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-white">{script.title}</h4>
+                              <p className="text-sm text-gray-400">Duration: {script.duration}</p>
+                            </div>
+                          </div>
+                          
+                          <div className="space-y-4">
+                            {script.sections.map((section, index) => (
+                              <div key={index} className="bg-white/10 rounded-xl p-4">
+                                <h5 className="font-medium text-white mb-2">{section.title}</h5>
+                                <p className="text-gray-300 text-sm mb-2">{section.description}</p>
+                                <div className="bg-purple-600/20 rounded-lg p-3">
+                                  {section.onScreenText && (
+                                    <>
+                                      <p className="text-white text-sm font-medium">On-screen text:</p>
+                                      <p className="text-white text-sm italic">"{section.onScreenText}"</p>
+                                    </>
+                                  )}
+                                  {'dialogue' in section && section.dialogue && (
+                                    <>
+                                      <p className="text-white text-sm font-medium mt-2">What to say:</p>
+                                      <p className="text-white text-sm italic">"{section.dialogue}"</p>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
               </div>
             )}
 
