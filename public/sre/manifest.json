@@ -1,0 +1,4 @@
+{
+  "before": ["before/00.png"],
+  "after": ["after/00.png", "after/01.png", "after/02.png", "after/03.png"]
+}

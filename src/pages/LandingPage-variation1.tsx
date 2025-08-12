@@ -1,4 +1,4 @@
-import { Hero } from '../components/Hero';
+import { HeroSequence } from '../components/HeroSequence';
 import { Stats } from '../components/Stats';
 import { Features } from '../components/Features';
 import { Brands } from '../components/Brands';
@@ -9,10 +9,9 @@ import { Helmet } from 'react-helmet-async';
 import { CTASection } from '../components/CTASection';
 import { InteractiveDemo } from '../components/InteractiveDemo';
 import { VideoSection } from '../components/VideoSection';
-import VestiScrollJourney from '../components/VestiScrollJourney';
 import { useEffect, useState } from 'react';
 
-export function LandingPage() {
+export function LandingPageVariation1() {
   const [isVideoVisible, setIsVideoVisible] = useState(true);
 
   // Handle hash scrolling when coming from other pages
@@ -110,13 +109,10 @@ export function LandingPage() {
         </script>
       </Helmet>
 
-      <main>
+      <main className="overflow-hidden">
         <section id="hero" className="relative">
-          <Hero onShowVideo={() => setIsVideoVisible(true)} />
+          <HeroSequence onShowVideo={() => setIsVideoVisible(true)} />
         </section>
-        
-        {/* Scroll-driven hero journey */}
-        <VestiScrollJourney />
         
         <VideoSection isVisible={isVideoVisible} onClose={() => setIsVideoVisible(false)} />
         
@@ -143,4 +139,4 @@ export function LandingPage() {
       </main>
     </>
   );
-} 
+}
