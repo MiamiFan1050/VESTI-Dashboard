@@ -26,6 +26,56 @@ const categories = [
 
 export const blogPosts: BlogPostType[] = [
   {
+    title: "2024's Biggest E-commerce Trend: AI-Powered Virtual Try-On Technology",
+    description: "As online shopping continues to dominate retail, virtual try-on technology has emerged as the #1 solution for reducing returns and increasing customer satisfaction. Discover why 78% of consumers now expect virtual fitting rooms and how VESTI is leading this revolution.",
+    date: "August 13, 2024",
+    readTime: "8 min",
+    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "2024-ecommerce-trend-virtual-try-on",
+    category: "Industry News",
+    author: "Sarah Johnson, E-commerce Trends Analyst"
+  },
+  {
+    title: "How TikTok Shop is Revolutionizing Fashion E-commerce with Virtual Try-On",
+    description: "TikTok Shop's explosive growth is changing how brands approach online fashion retail. Learn how virtual try-on technology is becoming essential for TikTok's social commerce success and why VESTI's AI solutions are perfect for this new shopping paradigm.",
+    date: "August 12, 2024",
+    readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "tiktok-shop-virtual-try-on-revolution",
+    category: "E-commerce",
+    author: "Michael Chen, Social Commerce Expert"
+  },
+  {
+    title: "The Metaverse Fashion Week: How Virtual Try-On is Shaping Digital Fashion",
+    description: "With major brands like Nike, Gucci, and Balenciaga embracing digital fashion, virtual try-on technology is becoming the bridge between physical and digital clothing. Explore how VESTI's technology is enabling the future of fashion in the metaverse.",
+    date: "August 11, 2024",
+    readTime: "9 min",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "metaverse-fashion-week-virtual-try-on",
+    category: "AI Technology",
+    author: "Dr. Alex Rivera, Digital Fashion Researcher"
+  },
+  {
+    title: "Sustainability in Fashion: How Virtual Try-On Reduces Carbon Footprint by 40%",
+    description: "The fashion industry is responsible for 10% of global carbon emissions. Discover how virtual try-on technology is helping reduce this impact by minimizing returns, reducing shipping, and enabling more conscious shopping decisions.",
+    date: "August 10, 2024",
+    readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1583744946564-b52d01e7f922?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "sustainability-fashion-virtual-try-on-carbon-footprint",
+    category: "Sustainability",
+    author: "Emma Green, Environmental Fashion Analyst"
+  },
+  {
+    title: "AI Fashion Styling: How Machine Learning is Personalizing Your Wardrobe",
+    description: "Beyond virtual try-on, AI is revolutionizing personal styling. Learn how VESTI's advanced algorithms can suggest outfits, predict trends, and create personalized fashion recommendations based on your body type and style preferences.",
+    date: "August 9, 2024",
+    readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "ai-fashion-styling-machine-learning-wardrobe",
+    category: "AI Technology",
+    author: "Lisa Wang, AI Fashion Specialist"
+  },
+  {
     title: "Virtual Try-On Revolution: Say Goodbye to Clothing Returns Forever",
     description: "Discover how VESTI's AI-powered virtual fitting room technology is transforming online shopping by eliminating size uncertainty and reducing returns by up to 80%. Learn how our advanced body mapping creates the most accurate digital clothing visualization available today.",
     date: "April 15, 2024",

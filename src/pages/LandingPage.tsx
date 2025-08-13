@@ -31,16 +31,16 @@ export function LandingPage() {
     }
   }, []);
 
-  // SEO description optimized for virtual try-on
-  const seoDescription = "Transform your online shopping experience with VESTI's revolutionary virtual try-on technology. Our AI-powered virtual fitting room lets you try clothes virtually before buying, ensuring perfect fit and zero returns. Experience the future of fashion with our advanced virtual dressing room.";
+  // SEO description optimized for virtual try-on (≤160 characters)
+  const seoDescription = "Try on clothes online with VESTI's AI-powered virtual fitting room. See how outfits fit before buying and shop with confidence. Reduce returns with our virtual try-on technology.";
   
   // SEO keywords focusing on virtual try-on
-  const seoKeywords = "virtual try on, virtual fitting room, virtual dressing room, AI fashion technology, digital clothing try on, online fitting room, virtual clothing fitting, AR clothing try on, virtual fashion try on, e-commerce virtual try on, virtual try on solution, fashion technology, digital fashion, virtual fashion fitting";
+  const seoKeywords = "AI virtual try on, virtual fitting room, virtual dressing room, AI fashion technology, digital clothing try on, online fitting room, virtual clothing fitting, AR clothing try on, virtual fashion try on, e-commerce virtual try on, virtual try on solution, fashion technology, digital fashion, virtual fashion fitting";
 
   return (
     <>
       <Helmet>
-        <title>VESTI - Revolutionary Virtual Try-On Technology | Try Clothes Online</title>
+        <title>VESTI - AI Virtual Try-On Technology | Virtual Fitting Room for Online Shopping</title>
         <meta name="description" content={seoDescription} />
         <meta name="keywords" content={seoKeywords} />
         

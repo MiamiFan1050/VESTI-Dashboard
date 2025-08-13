@@ -13,13 +13,13 @@ function Intro() {
         <span>Premium Experience</span>
       </div>
       <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
-        Try Clothes On
+        AI Virtual Try-On
         <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
           {' '}for Confident Shopping
         </span>
       </h1>
       <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-6 max-w-lg">
-        Our premium Chrome extension uses AI to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
+        Our premium Chrome extension uses AI virtual try-on technology to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
       </p>
     </>
   );
