@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { LandingPage } from './pages/LandingPage';
+import { LandingPageVariation1 } from './pages/LandingPage-variation1';
 import CareersPage from './pages/CareersPage';
 import InternshipsPage from './pages/InternshipsPage';
 import FullTimePage from './pages/FullTimePage';
@@ -25,6 +26,7 @@ export function App() {
         <Header />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/variation1" element={<LandingPageVariation1 />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/careers" element={<CareersPage />} />

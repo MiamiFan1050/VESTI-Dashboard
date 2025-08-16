@@ -13,3 +13,4 @@ echo 1. Drag the 'dist' folder to Netlify
 echo 2. Or connect your GitHub repo for auto-deploy
 echo.
 pause
+
