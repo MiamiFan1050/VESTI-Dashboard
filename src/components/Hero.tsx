@@ -19,7 +19,27 @@ function Intro() {
         </span>
       </h1>
       <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-6 max-w-lg">
-        Our premium Chrome extension uses AI to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
+        Our premium Chrome extension uses AI virtual try-on technology to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
+      </p>
+    </>
+  );
+}
+
+function DesktopIntro() {
+  return (
+    <>
+      <div className="mb-4 inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-700 text-sm font-medium border border-purple-100/20">
+        <Infinity className="h-4 w-4 mr-2" />
+        <span>Premium Experience</span>
+      </div>
+      <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900">
+        Try Clothes On
+        <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          {' '}for Confident Shopping
+        </span>
+      </h2>
+      <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-6 max-w-lg">
+        Our premium Chrome extension uses AI virtual try-on technology to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
       </p>
     </>
   );
@@ -173,7 +193,7 @@ export function Hero({ onShowVideo }: HeroProps) {
         {/* Desktop layout: Text left (Intro + Details), Slideshow right */}
         <div className="hidden md:grid xs:grid-cols-2 gap-6 lg:gap-12 items-center">
           <div className="animate-fade-in-up">
-            <Intro />
+            <DesktopIntro />
             <Details onShowVideo={onShowVideo} />
           </div>
           <div className="relative animate-fade-in">

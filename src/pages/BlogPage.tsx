@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BlogPost } from '../components/Blog/BlogPost';
 import { Helmet } from 'react-helmet-async';
+import { SEOManager, SEOConfigs } from '../components/SEO/SEOManager';
 
 export interface BlogPostType {
   title: string;
@@ -26,11 +27,71 @@ const categories = [
 
 export const blogPosts: BlogPostType[] = [
   {
+    title: "10 Best Virtual Try-On Apps That Actually Work in 2024",
+    description: "Discover the top virtual try-on apps for fashion shopping. Compare features, accuracy, and user experience of leading virtual clothing fitting technology including Vesti AI.",
+    date: "April 20, 2024",
+    readTime: "9 min",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "best-virtual-try-on-apps-2024",
+    category: "Virtual Try-On",
+    author: "Emma Rodriguez, Fashion Tech Analyst"
+  },
+  {
+    title: "AI Fashion Shopping: How Artificial Intelligence is Revolutionizing Online Retail",
+    description: "Explore how AI fashion shopping technology transforms online retail with virtual try-on, personalized recommendations, and smart sizing. The future of fashion e-commerce.",
+    date: "April 19, 2024",
+    readTime: "8 min",
+    image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "ai-fashion-shopping-revolution-online-retail",
+    category: "AI Technology",
+    author: "Dr. Michael Chen, AI Fashion Researcher"
+  },
+  {
+    title: "Best Chrome Extensions for Online Shopping: 15 Must-Have Tools in 2024",
+    description: "Transform your online shopping with these essential Chrome extensions. From virtual try-on to price comparison and cashback, discover tools that save money and time.",
+    date: "April 18, 2024", 
+    readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "best-chrome-extensions-online-shopping-2024",
+    category: "E-commerce",
+    author: "Jessica Park, E-commerce Specialist"
+  },
+  {
+    title: "How Fashion Influencers Are Using AI Virtual Try-On to Create Viral Content",
+    description: "Discover how top fashion influencers are leveraging AI virtual try-on technology like Vesti to create engaging content, build audience trust, and drive actual sales for their brand partnerships.",
+    date: "April 17, 2024",
+    readTime: "8 min",
+    image: "https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "fashion-influencers-ai-virtual-try-on-viral-content",
+    category: "Fashion",
+    author: "Sarah Mitchell, Social Media Strategist"
+  },
+  {
+    title: "7 Chrome Extensions That Will Transform Your Online Shopping Game in 2024",
+    description: "Discover the best Chrome extensions for online shopping, including Vesti's AI virtual try-on, to save money, time, and avoid fashion fails. Complete guide to smart shopping tools.",
+    date: "April 17, 2024",
+    readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "chrome-extensions-transform-online-shopping-2024",
+    category: "E-commerce",
+    author: "Alex Thompson, Tech Writer"
+  },
+  {
+    title: "How Virtual Try-On Technology is Changing the Way Gen Z Shops Online",
+    description: "Explore how Vesti's AI virtual try-on Chrome extension is transforming online shopping for Gen Z with instant previews, perfect fits, and sustainable shopping habits.",
+    date: "April 16, 2024",
+    readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1200&h=800",
+    slug: "virtual-try-on-changing-gen-z-shopping-online",
+    category: "Virtual Try-On",
+    author: "Emma Chen, Fashion Tech Analyst"
+  },
+  {
     title: "Virtual Try-On Revolution: Say Goodbye to Clothing Returns Forever",
     description: "Discover how VESTI's AI-powered virtual fitting room technology is transforming online shopping by eliminating size uncertainty and reducing returns by up to 80%. Learn how our advanced body mapping creates the most accurate digital clothing visualization available today.",
     date: "April 15, 2024",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&q=80&w=1200&h=800",
+    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "virtual-try-on-revolution-eliminate-returns",
     category: "Virtual Try-On",
     author: "Emma Roberts, Fashion Tech Analyst"
@@ -40,7 +101,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Tired of the uncertainty when shopping online? Learn how virtual fitting room technology creates a shopping experience where you can visualize exactly how clothes will look and fit on your body before you buy, giving you complete confidence in every purchase.",
     date: "April 13, 2024",
     readTime: "7 min",
-    image: "https://images.unsplash.com/photo-1583744946564-b52d01e7f922?auto=format&fit=crop&q=80&w=1200&h=800",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "shop-with-confidence-virtual-fitting-rooms",
     category: "E-commerce",
     author: "Marcus Chen, UX Research Lead"
@@ -50,7 +111,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Everything you need to know about virtual try-on technology and how it's revolutionizing online shopping. From the science behind accurate body mapping to the environmental impact of reduced returns, discover why this technology is essential for modern consumers.",
     date: "April 12, 2024",
     readTime: "9 min",
-    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=1200&h=800",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "ultimate-guide-virtual-try-on-technology-2024",
     category: "AI Technology",
     author: "Dr. Sophia Williams, AI Research Director"
@@ -60,7 +121,7 @@ export const blogPosts: BlogPostType[] = [
     description: "AI is transforming e-commerce by turning intelligence into a utility. With $16 billion projected in political ad spending and the deprecation of third-party cookies, brands must focus on building first-party databases and leveraging AI-driven solutions for personalized customer experiences.",
     date: "April 10, 2024",
     readTime: "8 min",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200&h=800",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "ai-revolutionizing-ecommerce-forbes",
     category: "Industry News",
     source: "Forbes Business Development Council",
@@ -71,7 +132,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Discover how artificial intelligence is transforming the way we shop online, with virtual try-on technology leading the charge in reducing returns and improving customer satisfaction.",
     date: "April 4, 2024",
     readTime: "5 min",
-    image: "/blog/ai-shopping.jpg",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "ai-revolutionizing-online-shopping",
     category: "AI Technology"
   },
@@ -80,7 +141,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Explore how virtual fitting rooms are changing the game for online fashion retailers, making shopping more convenient and sustainable than ever before.",
     date: "April 3, 2024",
     readTime: "4 min",
-    image: "/blog/virtual-tryon.jpg",
+    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "virtual-tryon-future-fashion",
     category: "Virtual Try-On"
   },
@@ -89,7 +150,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Learn how AI-powered virtual try-on solutions are helping reduce return rates and minimize the environmental impact of online fashion shopping.",
     date: "April 2, 2024",
     readTime: "6 min",
-    image: "/blog/sustainable-fashion.jpg",
+    image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "reducing-fashion-waste-virtual-tryon",
     category: "Sustainability"
   },
@@ -98,7 +159,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Understanding consumer behavior and how virtual try-on technology addresses key psychological barriers in online shopping.",
     date: "April 1, 2024",
     readTime: "7 min",
-    image: "/blog/psychology-shopping.jpg",
+    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "psychology-virtual-shopping",
     category: "E-commerce"
   },
@@ -107,7 +168,7 @@ export const blogPosts: BlogPostType[] = [
     description: "How VESTI's AI technology learns your style preferences to provide personalized fashion recommendations.",
     date: "March 31, 2024",
     readTime: "5 min",
-    image: "/blog/ai-fashion.jpg",
+    image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "ai-fashion-recommendations",
     category: "AI Technology"
   },
@@ -116,7 +177,7 @@ export const blogPosts: BlogPostType[] = [
     description: "Exploring how virtual try-on technology is creating seamless experiences between online and offline shopping.",
     date: "March 30, 2024",
     readTime: "6 min",
-    image: "/blog/future-retail.jpg",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1200&h=800",
     slug: "future-fashion-retail",
     category: "Fashion"
   }
@@ -141,48 +202,38 @@ export function BlogPage() {
 
   return (
     <>
-      <Helmet>
-        <title>VESTI Blog - Virtual Try-On Technology & AI Fashion Innovation</title>
-        <meta name="description" content={seoDescription} />
-        <meta name="keywords" content={seoKeywords} />
-        <meta property="og:title" content="VESTI Blog - Virtual Try-On Technology & AI Fashion Innovation" />
-        <meta property="og:description" content={seoDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://getvesti.com/images/blog-header.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="VESTI Blog - Virtual Try-On Technology & AI Fashion Innovation" />
-        <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content="https://getvesti.com/images/blog-header.jpg" />
-        <link rel="canonical" href="https://getvesti.com/blog" />
-        
-        {/* Schema.org markup for better search results */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            "name": "VESTI Blog",
-            "description": seoDescription,
-            "url": "https://getvesti.com/blog",
-            "publisher": {
-              "@type": "Organization",
-              "name": "VESTI",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://getvesti.com/images/logo.png"
-              }
-            },
-            "blogPost": blogPosts.map(post => ({
-              "@type": "BlogPosting",
-              "headline": post.title,
-              "description": post.description,
-              "datePublished": post.date,
-              "author": post.author || "VESTI Team",
-              "image": post.image,
-              "url": `https://getvesti.com/blog/${post.slug}`
-            }))
-          })}
-        </script>
-      </Helmet>
+      <SEOManager
+        title={SEOConfigs.blog.title}
+        description={SEOConfigs.blog.description}
+        keywords={SEOConfigs.blog.keywords}
+        url={SEOConfigs.blog.url}
+        image="https://getvesti.com/images/blog-header.jpg"
+        type="website"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "VESTI Blog",
+          "description": SEOConfigs.blog.description,
+          "url": "https://getvesti.com/blog",
+          "publisher": {
+            "@type": "Organization",
+            "name": "VESTI",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://getvesti.com/images/logo.png"
+            }
+          },
+          "blogPost": blogPosts.map(post => ({
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.description,
+            "datePublished": post.date,
+            "author": post.author || "VESTI Team",
+            "image": post.image,
+            "url": `https://getvesti.com/blog/${post.slug}`
+          }))
+        }}
+      />
 
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
         {/* Header Spacing */}

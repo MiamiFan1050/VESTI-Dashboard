@@ -1,4 +1,4 @@
-import { ShoppingBag, Twitter, Instagram, Linkedin, LogIn } from 'lucide-react';
+import { Twitter, Instagram, Linkedin, LogIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
@@ -14,13 +14,20 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-12 lg:gap-16">
           {/* Brand Section */}
           <div>
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-xl">
-                <ShoppingBag className="h-8 w-8 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Vesti
-              </span>
+            <div className="flex items-center mb-6">
+              <Link to="/" className="group block">
+                <div className="relative">
+                  {/* Subtle glow effect behind logo */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Logo with enhanced styling */}
+                  <img 
+                    src="/images/vesti-logo.png" 
+                    alt="Vesti Logo"
+                    className="relative h-14 w-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"
+                  />
+                </div>
+              </Link>
             </div>
             <p className="text-gray-400 leading-relaxed">
               Transform your online shopping experience with virtual try-ons powered by advanced AI technology

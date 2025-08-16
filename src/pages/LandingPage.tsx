@@ -6,6 +6,7 @@ import { HowItWorks } from '../components/HowItWorks';
 import { Testimonials } from '../components/Testimonials';
 import { Newsletter } from '../components/Newsletter';
 import { Helmet } from 'react-helmet-async';
+import { SEOManager, SEOConfigs } from '../components/SEO/SEOManager';
 import { CTASection } from '../components/CTASection';
 import { InteractiveDemo } from '../components/InteractiveDemo';
 import { VideoSection } from '../components/VideoSection';
@@ -39,76 +40,15 @@ export function LandingPage() {
 
   return (
     <>
-      <Helmet>
-        <title>VESTI - Revolutionary Virtual Try-On Technology | Try Clothes Online</title>
-        <meta name="description" content={seoDescription} />
-        <meta name="keywords" content={seoKeywords} />
-        
-        {/* Schema.org structured data for virtual try-on service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "VESTI Virtual Try-On",
-            "applicationCategory": "Virtual Fitting Room",
-            "description": seoDescription,
-            "operatingSystem": "Web-based",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "ratingCount": "1250",
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "featureList": [
-              "AI-powered virtual try-on",
-              "Realistic virtual fitting room",
-              "Size recommendation",
-              "360-degree view",
-              "Real-time visualization"
-            ]
-          })}
-        </script>
+      <SEOManager
+        title="Vesti AI - Virtual Try-On Chrome Extension"
+        description="Transform online shopping with Vesti's AI virtual try-on Chrome extension. See how clothes fit your body before buying. Free unlimited try-ons!"
+        keywords="virtual try on apps, AI fashion shopping, virtual clothing try on, Chrome extension, virtual fitting room"
+        url="https://getvesti.com"
+        image="https://getvesti.com/images/vesti-hero.jpg"
+        type="website"
+      />
 
-        {/* FAQ structured data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is virtual try-on technology?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Virtual try-on technology uses AI and AR to let you see how clothes will look on you before buying. It creates a realistic virtual fitting room experience, helping ensure perfect fit and reduce returns."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How accurate is VESTI's virtual fitting room?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "VESTI's AI-powered virtual try-on technology provides highly accurate fit predictions by analyzing your measurements and comparing them with detailed product specifications."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I try clothes virtually before buying?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes! VESTI's virtual dressing room lets you try clothes virtually before purchasing, giving you a realistic preview of how items will look and fit on you."
-                }
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
 
       <main>
         <section id="hero" className="relative">
