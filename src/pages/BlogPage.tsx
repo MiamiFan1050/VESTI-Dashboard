@@ -85,7 +85,8 @@ export const blogPosts: BlogPostType[] = [
     slug: "virtual-try-on-changing-gen-z-shopping-online",
     category: "Virtual Try-On",
     author: "Emma Chen, Fashion Tech Analyst"
-=======
+  },
+  {
     title: "2024's Biggest E-commerce Trend: AI-Powered Virtual Try-On Technology",
     description: "As online shopping continues to dominate retail, virtual try-on technology has emerged as the #1 solution for reducing returns and increasing customer satisfaction. Discover why 78% of consumers now expect virtual fitting rooms and how VESTI is leading this revolution.",
     date: "August 13, 2024",
