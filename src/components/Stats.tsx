@@ -145,31 +145,7 @@ export function Stats() {
           </div>
         </div>
         
-        {/* Enhanced Testimonial Quote with Custom Background */}
-        <div className="max-w-4xl mx-auto relative mb-12 md:mb-16">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl md:rounded-3xl transform rotate-1"></div>
-          <div className="relative bg-white rounded-2xl md:rounded-3xl p-8 md:p-12 shadow-lg border border-purple-100">
-            <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 mx-auto flex items-center justify-center shadow-lg mb-5 md:mb-6 overflow-hidden ring-2 ring-white">
-              <img
-                src="/images/Model_01_after.jpeg"
-                alt="Happy Vesti shopper"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <p className="text-slate-700 text-base md:text-xl italic my-5 md:my-6 leading-relaxed text-center">
-              Since I started using Vesti, I've completely eliminated returns. I shop with so much more confidence knowing exactly how everything will fit and look on my body before I buy.
-            </p>
-            <div className="flex items-center justify-center mt-4 md:mt-6">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white shadow-md">
-                <span className="text-lg md:text-xl font-medium">ME</span>
-              </div>
-              <div className="ml-3 md:ml-4 text-left">
-                <p className="text-slate-900 font-medium">Maria E.</p>
-                <p className="text-slate-500 text-xs md:text-sm">Premium Vesti User</p>
-              </div>
-            </div>
-          </div>
-        </div>
+
         
         {/* Enhanced CTA Button with Animation */}
         <div className="text-center">

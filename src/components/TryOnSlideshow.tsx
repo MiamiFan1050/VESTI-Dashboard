@@ -191,7 +191,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
                 <img
                   key={`model-${index}`}
                   src={image}
-                  alt={`Model photo ${index + 1}`}
+                  alt={`Virtual try-on model photo ${index + 1} - AI fashion technology`}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
@@ -216,7 +216,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
                 <img
                   key={`clothing-${index}`}
                   src={image}
-                  alt={`Clothing item ${index + 1}`}
+                  alt={`Virtual try-on clothing item ${index + 1} - online fitting room`}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
@@ -241,7 +241,7 @@ export const TryOnSlideshow: React.FC<TryOnSlideshowProps> = ({
                 <img
                   key={`result-${index}`}
                   src={image}
-                  alt={`Result ${index + 1}`}
+                  alt={`Virtual try-on result ${index + 1} - AI-powered virtual fitting room`}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}

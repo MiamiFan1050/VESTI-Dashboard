@@ -68,14 +68,14 @@ export default function VestiScrollJourney() {
                     // Show Alex before
                     <img
                       src="/images/alex-before.webp"
-                      alt="Alex before"
+                      alt="Virtual try-on before - AI fashion technology demonstration"
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     // Show Alex results
                     <img
                       src={LOOKS[activeIndex].after}
-                      alt={LOOKS[activeIndex].title}
+                      alt={`Virtual try-on result - ${LOOKS[activeIndex].title} - AI-powered virtual fitting room`}
                       className="w-full h-full object-cover"
                     />
                   )}

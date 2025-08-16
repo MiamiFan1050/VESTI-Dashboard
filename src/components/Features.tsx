@@ -83,7 +83,7 @@ export function Features() {
           </div>
           
           <h2 className="text-4xl font-bold text-slate-900 mb-6">
-            Everything You Need for <span className="text-purple-700">Confident Shopping</span>
+            Everything You Need for <span className="text-purple-700">Virtual Try-On Shopping</span>
           </h2>
           
           <p className="text-slate-600 text-lg mb-5 max-w-3xl mx-auto">

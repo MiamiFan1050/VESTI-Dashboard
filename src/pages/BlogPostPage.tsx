@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { blogPosts } from './BlogPage';
+import { blogPostContents } from '../content/blogPosts';
 import { Helmet } from 'react-helmet-async';
 
 export function BlogPostPage() {
   const { slug } = useParams();
   const post = blogPosts.find(post => post.slug === slug);
+  const postContent = blogPostContents.find(content => content.slug === slug);
 
   if (!post) {
     return (
@@ -31,7 +33,10 @@ export function BlogPostPage() {
   };
 
   // SEO description
-  const seoDescription = `${post.description} Learn about ${post.category.toLowerCase()} and virtual try-on technology at VESTI, your premier destination for AI-powered fashion solutions.`;
+  const seoDescription = postContent?.metaDescription || `${post.description} Learn about ${post.category.toLowerCase()} and virtual try-on technology at VESTI, your premier destination for AI-powered fashion solutions.`;
+  
+  // SEO keywords
+  const seoKeywords = postContent?.keywords || getKeywords(post.category);
 
   // Ultimate Guide to Virtual Try-On Technology
   const ultimateGuideContent = post.slug === 'ultimate-guide-virtual-try-on-technology-2024' ? (
@@ -1778,7 +1783,7 @@ export function BlogPostPage() {
       <Helmet>
         <title>{post.title} | VESTI - Virtual Try-On Technology</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content={getKeywords(post.category)} />
+        <meta name="keywords" content={seoKeywords} />
         <meta property="og:title" content={`${post.title} | VESTI`} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:image" content={post.image} />
@@ -1832,11 +1837,21 @@ export function BlogPostPage() {
           </div>
 
           {/* Article Content */}
+<<<<<<< HEAD
                   <div className="prose prose-lg max-w-none">
           {bestVirtualTryOnAppsContent || aiFashionShoppingContent || bestChromeExtensionsContent || genZShoppingContent || chromeExtensionsContent || influencerContent || virtualTryOnRevolutionContent || shopWithConfidenceContent || ultimateGuideContent || forbesContent || (
             <p className="text-gray-700">{post.description}</p>
           )}
         </div>
+=======
+          <div className="prose prose-lg max-w-none">
+            {postContent ? (
+              <div dangerouslySetInnerHTML={{ __html: postContent.content }} />
+            ) : virtualTryOnRevolutionContent || shopWithConfidenceContent || ultimateGuideContent || forbesContent || (
+              <p className="text-gray-700">{post.description}</p>
+            )}
+          </div>
+>>>>>>> 57fe998157d80fc8d8bded159c4c54d2d31095ce
         </article>
       </div>
     </>

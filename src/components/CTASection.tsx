@@ -29,7 +29,7 @@ export function CTASection() {
             </h2>
             
             <p className="text-purple-200 text-lg mb-8 leading-relaxed max-w-2xl">
-              Join thousands of satisfied shoppers who have revolutionized the way they buy clothes online. Our premium Chrome extension gives you all the tools you need to shop with complete confidence and eliminate returns.
+              Join thousands of satisfied shoppers who have revolutionized the way they buy clothes online. Our premium Chrome extension gives you all the tools you need to shop with complete confidence and eliminate returns. <a href="/blog" className="text-purple-300 hover:text-white underline transition-colors">Learn more about virtual try-on technology</a> in our blog.
             </p>
             
             {/* Benefit List */}
