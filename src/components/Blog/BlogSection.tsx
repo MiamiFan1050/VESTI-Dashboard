@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BlogPost } from './BlogPost';
 
 const blogPosts = [
@@ -8,7 +8,9 @@ const blogPosts = [
     date: "April 4, 2024",
     readTime: "5 min",
     image: "/blog/ai-shopping.jpg",
-    slug: "ai-revolutionizing-online-shopping"
+    slug: "ai-revolutionizing-online-shopping",
+    category: "AI Technology",
+    author: "VESTI Team"
   },
   {
     title: "Virtual Try-On Technology: The Future of Fashion E-commerce",
@@ -16,7 +18,9 @@ const blogPosts = [
     date: "April 3, 2024",
     readTime: "4 min",
     image: "/blog/virtual-tryon.jpg",
-    slug: "virtual-tryon-future-fashion"
+    slug: "virtual-tryon-future-fashion",
+    category: "Virtual Try-On",
+    author: "VESTI Team"
   },
   {
     title: "Reducing Fashion Waste: How Virtual Try-Ons Help the Environment",
@@ -24,7 +28,9 @@ const blogPosts = [
     date: "April 2, 2024",
     readTime: "6 min",
     image: "/blog/sustainable-fashion.jpg",
-    slug: "reducing-fashion-waste-virtual-tryon"
+    slug: "reducing-fashion-waste-virtual-tryon",
+    category: "Sustainability",
+    author: "VESTI Team"
   }
 ];
 
