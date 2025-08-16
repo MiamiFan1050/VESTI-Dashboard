@@ -41,6 +41,7 @@ export const renderMarkdown = (text: string): JSX.Element[] => {
     } else if (part.type === 'bold') {
       return <strong key={index} className="font-semibold text-white">{part.content}</strong>;
     }
-    return <span key={index}>{part}</span>;
+    // This shouldn't happen, but TypeScript needs it
+    return <span key={index}></span>;
   });
 };

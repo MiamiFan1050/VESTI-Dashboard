@@ -112,7 +112,7 @@ export const generateVESTIResponse = async (userInput: string): Promise<string> 
   } catch (error) {
     console.error('Error calling Gemini API:', error);
     console.error('API Key present:', !!import.meta.env.VITE_GEMINI_API_KEY);
-    console.error('Error details:', error.message);
+    console.error('Error details:', error instanceof Error ? error.message : 'Unknown error');
     
     // Fallback to the original rule-based system if API fails
     return generateFallbackResponse(userInput);

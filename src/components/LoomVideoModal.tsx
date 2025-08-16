@@ -34,8 +34,6 @@ export function LoomVideoModal({ isOpen, onClose }: LoomVideoModalProps) {
             <iframe 
               src="https://www.loom.com/embed/e9eaa347c34b4cb7b2f88b866f6bdcc6?sid=9a1292fe-0834-4206-a304-229d0e747f4e&hideEmbedTopBar=true&hide_share=true&hide_title=true&hide_owner=true&hide_speed=true&t=0s&muted=1&autoplay=1" 
               frameBorder="0" 
-              webkitallowfullscreen 
-              mozallowfullscreen 
               allowFullScreen 
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
             />
