@@ -57,6 +57,12 @@ export function Footer() {
                   Careers
                 </Link>
               </li>
+              <li>
+                <Link to="/onboarding" className="text-gray-400 hover:text-white transition-colors flex items-center">
+                  <span className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 w-1.5 h-1.5 rounded-full mr-2"></span>
+                  Getting Started
+                </Link>
+              </li>
             </ul>
           </div>
 
