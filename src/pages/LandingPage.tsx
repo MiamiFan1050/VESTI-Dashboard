@@ -40,7 +40,6 @@ export function LandingPage() {
 
   return (
     <>
-<<<<<<< HEAD
       <SEOManager
         title="Vesti AI - Virtual Try-On Chrome Extension"
         description="Transform online shopping with Vesti's AI virtual try-on Chrome extension. See how clothes fit your body before buying. Free unlimited try-ons!"
@@ -49,43 +48,6 @@ export function LandingPage() {
         image="https://getvesti.com/images/vesti-hero.jpg"
         type="website"
       />
-=======
-      <Helmet>
-        <title>VESTI - AI Virtual Try-On Technology | Virtual Fitting Room for Online Shopping</title>
-        <meta name="description" content={seoDescription} />
-        <meta name="keywords" content={seoKeywords} />
-        
-        {/* Schema.org structured data for virtual try-on service */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "VESTI Virtual Try-On",
-            "applicationCategory": "Virtual Fitting Room",
-            "description": seoDescription,
-            "operatingSystem": "Web-based",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "ratingCount": "1250",
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "featureList": [
-              "AI-powered virtual try-on",
-              "Realistic virtual fitting room",
-              "Size recommendation",
-              "360-degree view",
-              "Real-time visualization"
-            ]
-          })}
-        </script>
->>>>>>> 57fe998157d80fc8d8bded159c4c54d2d31095ce
 
 
       <main>

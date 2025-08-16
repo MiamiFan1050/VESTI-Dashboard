@@ -27,7 +27,6 @@ const categories = [
 
 export const blogPosts: BlogPostType[] = [
   {
-<<<<<<< HEAD
     title: "10 Best Virtual Try-On Apps That Actually Work in 2024",
     description: "Discover the top virtual try-on apps for fashion shopping. Compare features, accuracy, and user experience of leading virtual clothing fitting technology including Vesti AI.",
     date: "April 20, 2024",
@@ -135,7 +134,6 @@ export const blogPosts: BlogPostType[] = [
     slug: "ai-fashion-styling-machine-learning-wardrobe",
     category: "AI Technology",
     author: "Lisa Wang, AI Fashion Specialist"
->>>>>>> 57fe998157d80fc8d8bded159c4c54d2d31095ce
   },
   {
     title: "Virtual Try-On Revolution: Say Goodbye to Clothing Returns Forever",

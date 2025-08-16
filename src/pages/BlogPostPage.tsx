@@ -1837,21 +1837,11 @@ export function BlogPostPage() {
           </div>
 
           {/* Article Content */}
-<<<<<<< HEAD
-                  <div className="prose prose-lg max-w-none">
-          {bestVirtualTryOnAppsContent || aiFashionShoppingContent || bestChromeExtensionsContent || genZShoppingContent || chromeExtensionsContent || influencerContent || virtualTryOnRevolutionContent || shopWithConfidenceContent || ultimateGuideContent || forbesContent || (
-            <p className="text-gray-700">{post.description}</p>
-          )}
-        </div>
-=======
           <div className="prose prose-lg max-w-none">
-            {postContent ? (
-              <div dangerouslySetInnerHTML={{ __html: postContent.content }} />
-            ) : virtualTryOnRevolutionContent || shopWithConfidenceContent || ultimateGuideContent || forbesContent || (
+            {bestVirtualTryOnAppsContent || aiFashionShoppingContent || bestChromeExtensionsContent || genZShoppingContent || chromeExtensionsContent || influencerContent || virtualTryOnRevolutionContent || shopWithConfidenceContent || ultimateGuideContent || forbesContent || (
               <p className="text-gray-700">{post.description}</p>
             )}
           </div>
->>>>>>> 57fe998157d80fc8d8bded159c4c54d2d31095ce
         </article>
       </div>
     </>

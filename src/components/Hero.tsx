@@ -20,7 +20,6 @@ function Intro() {
       </h1>
       <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-6 max-w-lg">
         Our premium Chrome extension uses AI virtual try-on technology to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
-<<<<<<< HEAD
       </p>
     </>
   );
@@ -41,8 +40,6 @@ function DesktopIntro() {
       </h2>
       <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-6 max-w-lg">
         Our premium Chrome extension uses AI virtual try-on technology to show you exactly how clothes will look on your body before you buy, eliminating uncertainty and reducing returns
-=======
->>>>>>> 57fe998157d80fc8d8bded159c4c54d2d31095ce
       </p>
     </>
   );
