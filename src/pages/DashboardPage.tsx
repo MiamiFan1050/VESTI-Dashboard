@@ -623,8 +623,18 @@ export default function DashboardPage() {
           )}
 
                       {/* Navigation Tabs */}
-            <div className="relative mb-6 sm:mb-8 overflow-hidden">
-              <div className="flex space-x-1 sm:space-x-2 animate-scroll-tabs">
+            <div className="relative mb-8 sm:mb-10 overflow-hidden">
+              {/* Attention-Grabbing Header */}
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full border border-purple-500/20">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  <h3 className="text-lg font-semibold text-white">Dashboard Tools</h3>
+                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                </div>
+                <p className="text-gray-400 text-sm mt-2">Explore all available resources and tools</p>
+              </div>
+              
+              <div className="flex space-x-2 sm:space-x-3 animate-scroll-tabs">
                 {/* First set of tabs */}
                 {[
                   { id: 'content', label: 'Content Creation', icon: FileText },
@@ -633,18 +643,36 @@ export default function DashboardPage() {
                   { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
                   { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
                   { id: 'brand-assets', label: 'Brand Assets', icon: Award },
+                  { id: 'successful-videos', label: 'Successful Videos', icon: Play },
+                  { id: 'content-schedule', label: 'Content Schedule', icon: Calendar },
                 ].map((tab) => (
                   <button
                     key={`first-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm ${
+                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm ${
                       activeTab === tab.id
-                        ? 'bg-white/20 text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                        ? 'bg-white/20 text-white border-white/30 shadow-lg shadow-white/10 scale-105'
+                        : 'text-gray-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20 hover:shadow-md hover:shadow-white/5 hover:scale-105'
                     }`}
                   >
-                    <tab.icon className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="text-xs sm:text-sm font-medium">{tab.label}</span>
+                    {/* Subtle inner glow on hover */}
+                    <div className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
+                      activeTab === tab.id 
+                        ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-100' 
+                        : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100'
+                    }`}></div>
+                    
+                    <div className={`relative z-10 transition-all duration-300 ${
+                      activeTab === tab.id ? 'scale-110' : 'group-hover:scale-105'
+                    }`}>
+                      <tab.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </div>
+                    <span className="relative z-10 text-sm sm:text-base font-medium">{tab.label}</span>
+                    
+                    {/* Active indicator with glow */}
+                    {activeTab === tab.id && (
+                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg shadow-white/50"></div>
+                    )}
                   </button>
                 ))}
                 
@@ -656,18 +684,36 @@ export default function DashboardPage() {
                   { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
                   { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
                   { id: 'brand-assets', label: 'Brand Assets', icon: Award },
+                  { id: 'successful-videos', label: 'Successful Videos', icon: Play },
+                  { id: 'content-schedule', label: 'Content Schedule', icon: Calendar },
                 ].map((tab) => (
                   <button
                     key={`second-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm ${
+                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm ${
                       activeTab === tab.id
-                        ? 'bg-white/20 text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                        ? 'bg-white/20 text-white border-white/30 shadow-lg shadow-white/10 scale-105'
+                        : 'text-gray-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20 hover:shadow-md hover:shadow-white/5 hover:scale-105'
                     }`}
                   >
-                    <tab.icon className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="text-xs sm:text-sm font-medium">{tab.label}</span>
+                    {/* Subtle inner glow on hover */}
+                    <div className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
+                      activeTab === tab.id 
+                        ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-100' 
+                        : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100'
+                    }`}></div>
+                    
+                    <div className={`relative z-10 transition-all duration-300 ${
+                      activeTab === tab.id ? 'scale-110' : 'group-hover:scale-105'
+                    }`}>
+                      <tab.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </div>
+                    <span className="relative z-10 text-sm sm:text-base font-medium">{tab.label}</span>
+                    
+                    {/* Active indicator with glow */}
+                    {activeTab === tab.id && (
+                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg shadow-white/50"></div>
+                    )}
                   </button>
                 ))}
               </div>
