@@ -649,7 +649,7 @@ export default function DashboardPage() {
                   <button
                     key={`first-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm ${
+                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm overflow-visible ${
                       activeTab === tab.id
                         ? 'bg-white/20 text-white border-white/30 shadow-lg shadow-white/10 scale-105'
                         : 'text-gray-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20 hover:shadow-md hover:shadow-white/5 hover:scale-105'
@@ -668,11 +668,6 @@ export default function DashboardPage() {
                       <tab.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <span className="relative z-10 text-sm sm:text-base font-medium">{tab.label}</span>
-                    
-                    {/* Active indicator with glow */}
-                    {activeTab === tab.id && (
-                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg shadow-white/50"></div>
-                    )}
                   </button>
                 ))}
                 
@@ -690,7 +685,7 @@ export default function DashboardPage() {
                   <button
                     key={`second-${tab.id}`}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm ${
+                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm overflow-visible ${
                       activeTab === tab.id
                         ? 'bg-white/20 text-white border-white/30 shadow-lg shadow-white/10 scale-105'
                         : 'text-gray-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20 hover:shadow-md hover:shadow-white/5 hover:scale-105'
@@ -709,11 +704,6 @@ export default function DashboardPage() {
                       <tab.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <span className="relative z-10 text-sm sm:text-base font-medium">{tab.label}</span>
-                    
-                    {/* Active indicator with glow */}
-                    {activeTab === tab.id && (
-                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg shadow-white/50"></div>
-                    )}
                   </button>
                 ))}
               </div>
