@@ -1554,16 +1554,16 @@ export default function DashboardPage() {
 
                 {/* Additional Trending Links */}
                 <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-white mb-4">Trending Hashtags & Audio</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">Trending Content & Trends</h3>
                   <p className="text-gray-300 mb-4 text-sm">
-                    These trending links are also valuable for research. Study the content, audio, and hashtags that are currently performing well.
+                    These trending links showcase content that's currently performing well. Study the execution, storytelling, and creative approaches that are resonating with audiences right now.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    <a href="https://www.tiktok.com/t/ZP8k3GcUW/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-sm text-center font-medium">Trending Link 1</a>
-                    <a href="https://www.tiktok.com/t/ZP8k3C95X/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 px-4 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-200 text-sm text-center font-medium">Trending Link 2</a>
-                    <a href="https://www.tiktok.com/t/ZP8k3nQWM/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 px-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 text-sm text-center font-medium">Trending Link 3</a>
-                    <a href="https://www.tiktok.com/t/ZP8k37tRw/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 rounded-lg hover:from-orange-700 hover:to-red-700 transition-all duration-200 text-sm text-center font-medium">Trending Link 4</a>
-                    <a href="https://www.tiktok.com/t/ZP8k3qEvt/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 text-sm text-center font-medium">Trending Link 5</a>
+                    <a href="https://www.tiktok.com/t/ZP8k3GcUW/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-sm text-center font-medium">Trending Content 1</a>
+                    <a href="https://www.tiktok.com/t/ZP8k3C95X/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 px-4 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-200 text-sm text-center font-medium">Trending Content 2</a>
+                    <a href="https://www.tiktok.com/t/ZP8k3nQWM/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 px-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 text-sm text-center font-medium">Trending Content 3</a>
+                    <a href="https://www.tiktok.com/t/ZP8k37tRw/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 rounded-lg hover:from-orange-700 hover:to-red-700 transition-all duration-200 text-sm text-center font-medium">Trending Content 4</a>
+                    <a href="https://www.tiktok.com/t/ZP8k3qEvt/" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 text-sm text-center font-medium">Trending Content 5</a>
                   </div>
                 </div>
               </div>
