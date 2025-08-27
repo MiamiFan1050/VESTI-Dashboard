@@ -1384,6 +1384,343 @@ export default function DashboardPage() {
                 <ScriptGenerator />
               </div>
             )}
+
+            {activeTab === 'successful-videos' && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-white mb-4">Successful Video Examples</h2>
+                  <p className="text-gray-300 mb-6">
+                    Study these successful TikTok videos from competitors to understand what works and what we're looking for.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* @fashnai Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@fashnai</h3>
+                        <p className="text-sm text-gray-400">Fashion & Style Content</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@fashnai/video/7472445375283039510?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white py-2 px-3 rounded-lg hover:from-pink-700 hover:to-purple-700 transition-all duration-200 text-sm text-center">Video 1</a>
+                      <a href="https://www.tiktok.com/@fashnai/video/7470452439401991446?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white py-2 px-3 rounded-lg hover:from-pink-700 hover:to-purple-700 transition-all duration-200 text-sm text-center">Video 2</a>
+                    </div>
+                  </div>
+
+                  {/* @0yindasola Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@0yindasola</h3>
+                        <p className="text-sm text-gray-400">Fashion & Lifestyle</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@0yindasola/video/7512962861853904150?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-blue-600 to-cyan-700 text-white py-2 px-3 rounded-lg hover:from-blue-700 hover:to-cyan-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                    </div>
+                  </div>
+
+                  {/* @luxeveraaa Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@luxeveraaa</h3>
+                        <p className="text-sm text-gray-400">Luxury Fashion</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@luxeveraaa/video/7527524661819755806?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-purple-600 to-pink-700 text-white py-2 px-3 rounded-lg hover:from-purple-700 hover:to-pink-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                    </div>
+                  </div>
+
+                  {/* @lucyatdressy Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@lucyatdressy</h3>
+                        <p className="text-sm text-gray-400">Dress Styling</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@lucyatdressy/video/7535321295219723527?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white py-2 px-3 rounded-lg hover:from-green-700 hover:to-emerald-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                    </div>
+                  </div>
+
+                  {/* @styledbysalmaa Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@styledbysalmaa</h3>
+                        <p className="text-sm text-gray-400">Personal Styling</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@styledbysalmaa/video/7535982580185763127?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-orange-600 to-red-700 text-white py-2 px-3 rounded-lg hover:from-orange-700 hover:to-red-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                    </div>
+                  </div>
+
+                  {/* @fitswithjake7 Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@fitswithjake7</h3>
+                        <p className="text-sm text-gray-400">Men's Fashion</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@fitswithjake7/video/7531511264971869471?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-indigo-600 to-blue-700 text-white py-2 px-3 rounded-lg hover:from-indigo-700 hover:to-blue-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                      <a href="https://www.tiktok.com/@fitswithjake7/video/7530442404093037854?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-indigo-600 to-blue-700 text-white py-2 px-3 rounded-lg hover:from-indigo-700 hover:to-blue-800 transition-all duration-200 text-sm text-center">Video 2</a>
+                    </div>
+                  </div>
+
+                  {/* @kayadevonte Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-green-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@kayadevonte</h3>
+                        <p className="text-sm text-gray-400">Fashion & Beauty</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@kayadevonte/video/7508727643915717910?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-teal-600 to-green-700 text-white py-2 px-3 rounded-lg hover:from-teal-700 hover:to-green-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                    </div>
+                  </div>
+
+                  {/* @joyyshi Videos */}
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">@joyyshi</h3>
+                        <p className="text-sm text-gray-400">Fashion & Lifestyle</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a href="https://www.tiktok.com/@joyyshi/video/7442166072364518674?is_from_webapp=1&sender_device=pc&web_id=7505848652914198047" target="_blank" rel="noopener noreferrer" className="block w-full bg-gradient-to-r from-yellow-600 to-orange-700 text-white py-2 px-3 rounded-lg hover:from-yellow-700 hover:to-orange-800 transition-all duration-200 text-sm text-center">Video 1</a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Video Analysis Guide */}
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">What to Look For</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-white">Content Elements</h4>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>• Strong opening hook (0-3 seconds)</li>
+                        <li>• Clear problem statement</li>
+                        <li>• Solution demonstration</li>
+                        <li>• Before/after transformation</li>
+                        <li>• Strong call-to-action</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-white">Engagement Factors</h4>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>• High view counts</li>
+                        <li>• Strong comment engagement</li>
+                        <li>• Shareable content</li>
+                        <li>• Trending audio/music</li>
+                        <li>• Relatable scenarios</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'content-schedule' && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-white mb-4">Content Schedule & Job Description</h2>
+                  <p className="text-gray-300 mb-6">
+                    Your roadmap to success as a VESTI Marketing Intern. Follow this structured approach to build sustainable content creation habits.
+                  </p>
+                </div>
+
+                {/* Job Description */}
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">Marketing Intern Role Overview</h3>
+                  <div className="space-y-4 text-gray-300">
+                    <p><strong className="text-white">About Vesti:</strong> Vesti is an innovative virtual try-on Chrome extension that allows users to upload an image of themselves (or celebrities) and instantly see how clothing items from across the web would look on them. We're reimagining online shopping through AI-powered styling and personalization—and we're growing fast.</p>
+                    
+                    <p><strong className="text-white">About the Role:</strong> We're looking for a creative, driven, and digitally-savvy Marketing Intern to help shape the voice of Vesti and bring our brand to life through compelling content. You'll play a key role in our growth by developing and distributing social-first content that drives user engagement, brand awareness, and excitement across digital platforms.</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                      <div>
+                        <h4 className="font-medium text-white mb-2">Key Responsibilities:</h4>
+                        <ul className="text-sm space-y-1">
+                          <li>• Content Creation: Develop engaging short-form content for TikTok, Instagram Reels, X, and other platforms</li>
+                          <li>• Social Media Strategy: Execute strategy to drive traffic and user installs</li>
+                          <li>• Visual Assets: Collaborate with design team or AI tools to generate visual assets</li>
+                          <li>• Influencer Outreach: Support influencer outreach and UGC campaigns</li>
+                          <li>• Copywriting: Write copy for social posts, blog entries, email campaigns</li>
+                          <li>• Analytics: Analyze content performance and recommend optimizations</li>
+                          <li>• Trend Monitoring: Keep content relevant and fresh</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-white mb-2">Requirements:</h4>
+                        <ul className="text-sm space-y-1">
+                          <li>• Passion for fashion, tech, and digital media</li>
+                          <li>• Strong grasp of TikTok and Instagram trends</li>
+                          <li>• Video editing skills (CapCut, Adobe Premiere preferred)</li>
+                          <li>• Experience with Canva, Figma, or Adobe Creative Suite</li>
+                          <li>• Excellent writing and storytelling skills</li>
+                          <li>• Proactive attitude and creativity</li>
+                          <li>• Current student or recent grad in Marketing, Communications, Media, or related field</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Schedule */}
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">Content Creation Schedule</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* Week 1 */}
+                    <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg p-4 border border-blue-500/20">
+                      <h4 className="font-medium text-white mb-3 text-center">Week 1: Foundation</h4>
+                      <div className="space-y-3">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-400">1</div>
+                          <div className="text-xs text-gray-400">Video per day</div>
+                        </div>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Learn the process</li>
+                          <li>• Build confidence</li>
+                          <li>• Establish quality standards</li>
+                          <li>• Learn what works</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Weeks 2-4 */}
+                    <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg p-4 border border-purple-500/20">
+                      <h4 className="font-medium text-white mb-3 text-center">Weeks 2-4: Growth</h4>
+                      <div className="space-y-3">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-purple-400">2</div>
+                          <div className="text-xs text-gray-400">Videos per day</div>
+                        </div>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Morning post (9-10 AM)</li>
+                          <li>• Evening post (6-8 PM)</li>
+                          <li>• Focus on quality content</li>
+                          <li>• Build engagement systems</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Week 5+ */}
+                    <div className="bg-gradient-to-br from-pink-500/10 to-red-500/10 rounded-lg p-4 border border-pink-500/20">
+                      <h4 className="font-medium text-white mb-3 text-center">Week 5+: Scale</h4>
+                      <div className="space-y-3">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-pink-400">2-3</div>
+                          <div className="text-xs text-gray-400">Videos per day</div>
+                        </div>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Content batching</li>
+                          <li>• Advanced optimization</li>
+                          <li>• Performance analysis</li>
+                          <li>• Strategy refinement</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Daily Workflow */}
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">Daily Workflow</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg p-4 border border-blue-500/20">
+                        <h4 className="font-medium text-white mb-2">Morning (9-10 AM)</h4>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Check trending topics</li>
+                          <li>• Create first video</li>
+                          <li>• Post and monitor engagement</li>
+                          <li>• Plan evening content</li>
+                        </ul>
+                      </div>
+                      <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg p-4 border border-purple-500/20">
+                        <h4 className="font-medium text-white mb-2">Afternoon (2-4 PM)</h4>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Engage with comments</li>
+                          <li>• Research new trends</li>
+                          <li>• Plan tomorrow's content</li>
+                          <li>• Analyze performance</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="bg-gradient-to-r from-pink-500/10 to-red-500/10 rounded-lg p-4 border border-pink-500/20">
+                        <h4 className="font-medium text-white mb-2">Evening (6-8 PM)</h4>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Create second video</li>
+                          <li>• Post and engage</li>
+                          <li>• Respond to DMs</li>
+                          <li>• Document learnings</li>
+                        </ul>
+                      </div>
+                      <div className="bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-lg p-4 border border-green-500/20">
+                        <h4 className="font-medium text-white mb-2">Weekly Review</h4>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          <li>• Performance analysis</li>
+                          <li>• Content calendar planning</li>
+                          <li>• Strategy adjustments</li>
+                          <li>• Skill development focus</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Why Ramp Up Gradually */}
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">Why Ramp Up Gradually?</h3>
+                  <div className="space-y-4 text-gray-300">
+                    <p><strong className="text-white">Quality Over Quantity:</strong> It's better to create 1 amazing video (100k views) than 3 mediocre videos (5k each). Focus on learning what works before scaling up.</p>
+                    
+                    <p><strong className="text-white">Sustainable Habits:</strong> Building a consistent routine takes time. Starting with 1 video per day helps establish the habit without overwhelming yourself.</p>
+                    
+                    <p><strong className="text-white">Skill Development:</strong> Each video is an opportunity to improve your editing, storytelling, and trend-spotting abilities. Quality practice leads to better results.</p>
+                    
+                    <p><strong className="text-white">Audience Building:</strong> Consistent, high-quality content builds trust with your audience. They'll come to expect and engage with your content regularly.</p>
+                    
+                    <p><strong className="text-white">Burnout Prevention:</strong> Content creation can be mentally demanding. A gradual approach prevents burnout and keeps you motivated long-term.</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
