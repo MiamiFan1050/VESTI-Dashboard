@@ -634,8 +634,7 @@ export default function DashboardPage() {
                 <p className="text-gray-400 text-sm mt-2">Explore all available resources and tools</p>
               </div>
               
-              <div className="flex space-x-2 sm:space-x-3 animate-scroll-tabs">
-                {/* First set of tabs */}
+              <div className="flex space-x-1 sm:space-x-1.5 overflow-x-auto pb-2 scrollbar-hide justify-center">
                 {[
                   { id: 'content', label: 'Content Creation', icon: FileText },
                   { id: 'canva', label: 'Canva Templates', icon: Image },
@@ -647,16 +646,16 @@ export default function DashboardPage() {
                   { id: 'content-schedule', label: 'Content Schedule', icon: Calendar },
                 ].map((tab) => (
                   <button
-                    key={`first-${tab.id}`}
+                    key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm overflow-visible ${
+                    className={`group relative flex flex-col items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-1.5 sm:py-2 rounded-lg transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs font-medium border backdrop-blur-sm overflow-visible min-w-[70px] sm:min-w-[75px] ${
                       activeTab === tab.id
                         ? 'bg-white/20 text-white border-white/30 shadow-lg shadow-white/10 scale-105'
                         : 'text-gray-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20 hover:shadow-md hover:shadow-white/5 hover:scale-105'
                     }`}
                   >
                     {/* Subtle inner glow on hover */}
-                    <div className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
+                    <div className={`absolute inset-0 rounded-lg transition-opacity duration-300 ${
                       activeTab === tab.id 
                         ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-100' 
                         : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100'
@@ -665,45 +664,9 @@ export default function DashboardPage() {
                     <div className={`relative z-10 transition-all duration-300 ${
                       activeTab === tab.id ? 'scale-110' : 'group-hover:scale-105'
                     }`}>
-                      <tab.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <tab.icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     </div>
-                    <span className="relative z-10 text-sm sm:text-base font-medium">{tab.label}</span>
-                  </button>
-                ))}
-                
-                {/* Duplicate set for seamless loop */}
-                {[
-                  { id: 'content', label: 'Content Creation', icon: FileText },
-                  { id: 'canva', label: 'Canva Templates', icon: Image },
-                  { id: 'veo-tutorials', label: 'Veo Tutorials', icon: Video },
-                  { id: 'script-generator', label: 'Script Generator', icon: Sparkles },
-                  { id: 'script-tutorials', label: 'Script Tutorials', icon: Play },
-                  { id: 'brand-assets', label: 'Brand Assets', icon: Award },
-                  { id: 'successful-videos', label: 'Successful Videos', icon: Play },
-                  { id: 'content-schedule', label: 'Content Schedule', icon: Calendar },
-                ].map((tab) => (
-                  <button
-                    key={`second-${tab.id}`}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm sm:text-base font-medium border backdrop-blur-sm overflow-visible ${
-                      activeTab === tab.id
-                        ? 'bg-white/20 text-white border-white/30 shadow-lg shadow-white/10 scale-105'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20 hover:shadow-md hover:shadow-white/5 hover:scale-105'
-                    }`}
-                  >
-                    {/* Subtle inner glow on hover */}
-                    <div className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
-                      activeTab === tab.id 
-                        ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-100' 
-                        : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100'
-                    }`}></div>
-                    
-                    <div className={`relative z-10 transition-all duration-300 ${
-                      activeTab === tab.id ? 'scale-110' : 'group-hover:scale-105'
-                    }`}>
-                      <tab.icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                    </div>
-                    <span className="relative z-10 text-sm sm:text-base font-medium">{tab.label}</span>
+                    <span className="relative z-10 text-xs font-medium text-center leading-tight">{tab.label}</span>
                   </button>
                 ))}
               </div>
@@ -1137,105 +1100,145 @@ export default function DashboardPage() {
               </div>
             )}
 
-            {activeTab === 'brand-assets' && (
+                        {activeTab === 'brand-assets' && (
               <div className="space-y-6">
                 <div className="text-center">
                   <h2 className="text-2xl font-bold text-white mb-4">Brand Assets</h2>
                   <p className="text-gray-300 mb-6">
-                    Access logos, colors, fonts, and brand guidelines for VESTI.
+                    Access logos, colors, and brand guidelines for VESTI.
                   </p>
                 </div>
                 
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                   {/* Logo Assets */}
-                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                     <div className="flex items-center gap-4 mb-4">
-                       <div className="w-12 h-12 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
-                         <Award className="w-6 h-6 text-white" />
-                       </div>
-                       <div>
-                         <h3 className="font-semibold text-white">Logo Files</h3>
-                         <p className="text-sm text-gray-400">PNG, SVG, JPG formats</p>
-                       </div>
-                     </div>
-                     <div className="space-y-2">
-                       <button className="w-full bg-gradient-to-r from-violet-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 text-sm">
-                         Download Primary Logo
-                       </button>
-                       <button className="w-full bg-white/10 text-white py-2 px-4 rounded-lg hover:bg-white/20 transition-all duration-200 text-sm">
-                         Download Secondary Logo
-                       </button>
-                     </div>
-                   </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  {/* Logo Assets */}
+                  <div className="bg-white/5 rounded-xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 group justify-self-center">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <Award className="w-7 h-7 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white text-lg">Logo Files</h3>
+                        <p className="text-sm text-gray-400">Primary & Secondary logos</p>
+                      </div>
+                    </div>
+                    
+                    {/* Primary Logo - Vesti */}
+                    <div className="mb-6 p-5 bg-white/5 rounded-lg border border-white/10">
+                      <div className="text-center mb-4">
+                        <img 
+                          src="/images/vesti-logo.png" 
+                          alt="VESTI Primary Logo" 
+                          className="h-16 mx-auto mb-3"
+                        />
+                        <p className="text-sm text-gray-400">Primary Logo</p>
+                      </div>
+                      <a 
+                        href="/images/vesti-logo.png" 
+                        download="vesti-logo.png"
+                        className="block w-full bg-gradient-to-r from-violet-600 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 text-sm text-center font-medium"
+                      >
+                        Download PNG
+                      </a>
+                    </div>
+                    
+                    {/* Secondary Logo - V */}
+                    <div className="p-5 bg-white/5 rounded-lg border border-white/10">
+                      <div className="text-center mb-4">
+                        <img 
+                          src="/images/Vesti-logo-old-v.png" 
+                          alt="VESTI Secondary Logo" 
+                          className="h-16 mx-auto mb-3"
+                        />
+                        <p className="text-sm text-gray-400">Secondary Logo</p>
+                      </div>
+                      <a 
+                        href="/images/Vesti-logo-old-v.png" 
+                        download="Vesti-logo-old-v.png"
+                        className="block w-full bg-gradient-to-r from-violet-600 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 text-sm text-center font-medium"
+                      >
+                        Download PNG
+                      </a>
+                    </div>
+                  </div>
 
-                   {/* Color Palette */}
-                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                     <div className="flex items-center gap-4 mb-4">
-                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-                         <div className="w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-500 rounded"></div>
-                       </div>
-                       <div>
-                         <h3 className="font-semibold text-white">Color Palette</h3>
-                         <p className="text-sm text-gray-400">Brand colors & hex codes</p>
-                       </div>
-                     </div>
-                     <div className="grid grid-cols-4 gap-2 mb-4">
-                       <div className="w-full h-8 bg-purple-600 rounded"></div>
-                       <div className="w-full h-8 bg-pink-600 rounded"></div>
-                       <div className="w-full h-8 bg-blue-600 rounded"></div>
-                       <div className="w-full h-8 bg-emerald-600 rounded"></div>
-                     </div>
-                     <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-sm">
-                       Download Color Guide
-                     </button>
-                   </div>
+                  {/* Color Palette */}
+                  <div className="bg-white/5 rounded-xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 group justify-self-center">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                        <div className="w-7 h-7 bg-gradient-to-r from-purple-400 to-pink-500 rounded"></div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white text-lg">Brand Colors</h3>
+                        <p className="text-sm text-gray-400">Hex codes & visual examples</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {/* Primary: Purple */}
+                      <div className="flex items-center gap-4 p-4 bg-white/5 rounded-lg">
+                        <div className="w-10 h-10 bg-[#8B5CF6] rounded border border-white/20"></div>
+                        <div className="flex-1">
+                          <div className="text-white font-medium text-sm">Primary</div>
+                          <div className="text-gray-400 text-xs">#8B5CF6</div>
+                        </div>
+                      </div>
+                      
+                      {/* Secondary: Pink */}
+                      <div className="flex items-center gap-4 p-4 bg-white/5 rounded-lg">
+                        <div className="w-10 h-10 bg-[#EC4899] rounded border border-white/20"></div>
+                        <div className="flex-1">
+                          <div className="text-white font-medium text-sm">Secondary</div>
+                          <div className="text-gray-400 text-xs">#EC4899</div>
+                        </div>
+                      </div>
+                      
+                      {/* Accent: Blue */}
+                      <div className="flex items-center gap-4 p-4 bg-white/5 rounded-lg">
+                        <div className="w-10 h-10 bg-[#3B82F6] rounded border border-white/20"></div>
+                        <div className="flex-1">
+                          <div className="text-white font-medium text-sm">Accent</div>
+                          <div className="text-gray-400 text-xs">#3B82F6</div>
+                        </div>
+                      </div>
+                      
+                      {/* Success: Emerald */}
+                      <div className="flex items-center gap-4 p-4 bg-white/5 rounded-lg">
+                        <div className="w-10 h-10 bg-[#10B981] rounded border border-white/20"></div>
+                        <div className="flex-1">
+                          <div className="text-white font-medium text-sm">Success</div>
+                          <div className="text-gray-400 text-xs">#10B981</div>
+                        </div>
+                      </div>
+                    </div>
+                    
 
-                   {/* Typography */}
-                   <div className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 group">
-                     <div className="flex items-center gap-4 mb-4">
-                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                         <FileText className="w-6 h-6 text-white" />
-                       </div>
-                       <div>
-                         <h3 className="font-semibold text-white">Typography</h3>
-                         <p className="text-sm text-gray-400">Fonts & text styles</p>
-                       </div>
-                     </div>
-                     <div className="space-y-2 mb-4">
-                       <div className="text-white font-bold text-lg">VESTI</div>
-                       <div className="text-gray-300 font-medium">Primary Font</div>
-                       <div className="text-gray-400 text-sm">Secondary Font</div>
-                     </div>
-                     <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-sm">
-                       Download Fonts
-                     </button>
-                   </div>
-                 </div>
+                  </div>
+                </div>
 
-                 {/* Brand Guidelines */}
-                 <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                   <h3 className="text-lg font-semibold text-white mb-4">Brand Guidelines</h3>
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                     <div className="space-y-3">
-                       <h4 className="font-medium text-white">Logo Usage</h4>
-                       <ul className="text-gray-300 text-sm space-y-1">
-                         <li>• Minimum size: 24px height</li>
-                         <li>• Clear space: 1x logo height</li>
-                         <li>• Don't stretch or distort</li>
-                         <li>• Use on light backgrounds only</li>
-                       </ul>
-                     </div>
-                     <div className="space-y-3">
-                       <h4 className="font-medium text-white">Color Usage</h4>
-                       <ul className="text-gray-300 text-sm space-y-1">
-                         <li>• Primary: Purple (#8B5CF6)</li>
-                         <li>• Secondary: Pink (#EC4899)</li>
-                         <li>• Accent: Blue (#3B82F6)</li>
-                         <li>• Success: Emerald (#10B981)</li>
-                       </ul>
-                     </div>
-                   </div>
-                 </div>
+                {/* Brand Guidelines */}
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-4">Brand Guidelines</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-white">Logo Usage</h4>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>• Minimum size: 24px height</li>
+                        <li>• Clear space: 1x logo height</li>
+                        <li>• Don't stretch or distort</li>
+                        <li>• Use on light backgrounds only</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-3">
+                      <h4 className="font-medium text-white">Color Usage</h4>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        <li>• Primary: Purple (#8B5CF6)</li>
+                        <li>• Secondary: Pink (#EC4899)</li>
+                        <li>• Accent: Blue (#3B82F6)</li>
+                        <li>• Success: Emerald (#10B981)</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
