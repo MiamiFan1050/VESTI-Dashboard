@@ -19,6 +19,7 @@ const MarketingInternPage = lazy(() => import('./pages/MarketingInternPage'));
 const ManagementInternPage = lazy(() => import('./pages/ManagementInternPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'));
 const OnboardingPage = lazy(() => import('./pages/OnboardingPage').then(module => ({ default: module.OnboardingPage })));
 const GetFeatured = lazy(() => import('./components/GetFeatured').then(module => ({ default: module.GetFeatured })));
 const FAQ = lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
@@ -56,6 +57,7 @@ function AppContent() {
           <Route path="/careers/interns/management" element={<ManagementInternPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
           <Route path="/get-featured" element={<GetFeatured />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/onboarding" element={<OnboardingPage />} />

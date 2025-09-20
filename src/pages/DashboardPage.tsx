@@ -35,8 +35,12 @@ import {
 import { Link } from 'react-router-dom';
 import { BeforeAfterTemplate } from '../components/BeforeAfterTemplate';
 import { ScriptGenerator } from '../components/careers/ScriptGenerator';
+import { WeeklyProductivityPackage } from '../components/WeeklyProductivityPackage';
+import { AdminDashboard } from '../components/AdminDashboard';
+import { SocialMediaSetup } from '../components/SocialMediaSetup';
 import { generateVESTIResponse } from '../utils/geminiApi';
 import { renderMarkdown } from '../utils/markdownRenderer';
+import { userProfileService } from '../utils/userProfileService';
 export default function DashboardPage() {
   const baseText = "Ask me anything about ";
   const topics = [
@@ -67,6 +71,8 @@ export default function DashboardPage() {
       content: "Hi! I'm your VESTI AI Assistant. I can help with content creation, brand strategy, and everything VESTI-related. What would you like to work on?"
     }
   ]);
+  const [showSocialSetup, setShowSocialSetup] = useState(false);
+  const [userProfile, setUserProfile] = useState(userProfileService.getCurrentProfile());
 
   const chatMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -81,6 +87,13 @@ export default function DashboardPage() {
       }, 100);
     }
   }, [messages]);
+
+  // Check if user needs to complete social media setup
+  useEffect(() => {
+    if (userProfile && !userProfile.setupCompleted) {
+      setShowSocialSetup(true);
+    }
+  }, [userProfile]);
 
   // Typewriter effect
   React.useEffect(() => {
@@ -442,8 +455,14 @@ export default function DashboardPage() {
 
   const handleSignOut = () => {
     if (window.confirm('Are you sure you want to sign out?')) {
+      userProfileService.clearProfile();
       window.location.href = '/signin';
     }
+  };
+
+  const handleSocialSetupComplete = () => {
+    setShowSocialSetup(false);
+    setUserProfile(userProfileService.getCurrentProfile());
   };
 
   return (
@@ -467,8 +486,10 @@ export default function DashboardPage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
 
         {/* Header */}
-        <div className="relative z-10 pt-16 sm:pt-20">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-8 py-6 sm:py-10 gap-4 sm:gap-0">
+        <div className="relative z-10 pt-24 sm:pt-28">
+          <div className="bg-white/5 backdrop-blur-lg border-b border-white/10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
             <div className="flex items-center gap-3 sm:gap-6 w-full sm:w-auto">
               <Link
                 to="/"
@@ -482,7 +503,15 @@ export default function DashboardPage() {
                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
                   <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
-                <span className="text-white font-semibold text-base sm:text-lg">Marketing Intern Dashboard</span>
+                <span className="text-white font-semibold text-base sm:text-lg">
+                  {userProfile ? `Welcome, ${userProfile.name}!` : 'Marketing Intern Dashboard'}
+                </span>
+                {userProfile && (
+                  <div className="flex items-center gap-1 text-xs sm:text-sm text-purple-300">
+                    <Hash className="h-3 w-3" />
+                    <span>@{userProfile.discordUsername}</span>
+                  </div>
+                )}
               </div>
             </div>
             <button
@@ -492,11 +521,13 @@ export default function DashboardPage() {
               <LogOut className="h-4 w-4" />
               <span className="font-medium">Sign Out</span>
             </button>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-16 mt-4 sm:mt-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-16 mt-12 sm:mt-16">
           {/* Welcome Section */}
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-8 border border-white/10 mb-6 sm:mb-12">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
@@ -514,6 +545,13 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
+
+          {/* Social Media Setup */}
+          {showSocialSetup && (
+            <div className="mb-6 sm:mb-8">
+              <SocialMediaSetup onComplete={handleSocialSetupComplete} />
+            </div>
+          )}
 
                                 {/* Chat Toggle Button */}
             <div className="flex justify-center mb-6 sm:mb-8">
@@ -644,6 +682,7 @@ export default function DashboardPage() {
                   { id: 'brand-assets', label: 'Brand Assets', icon: Award },
                   { id: 'successful-videos', label: 'Successful Videos', icon: Play },
                   { id: 'content-schedule', label: 'Content Schedule', icon: Calendar },
+                  { id: 'weekly-package', label: 'Weekly Package', icon: TrendingUp },
                 ].map((tab) => (
                   <button
                     key={tab.id}
@@ -1737,6 +1776,18 @@ export default function DashboardPage() {
                     <p><strong className="text-white">Burnout Prevention:</strong> Content creation can be mentally demanding. A gradual approach prevents burnout and keeps you motivated long-term.</p>
                   </div>
                 </div>
+              </div>
+            )}
+
+            {activeTab === 'weekly-package' && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold text-white mb-4">Weekly Productivity Package</h2>
+                  <p className="text-gray-300 mb-6">
+                    Submit your weekly marketing performance and analytics to track progress and get feedback.
+                  </p>
+                </div>
+                <WeeklyProductivityPackage />
               </div>
             )}
           </div>
