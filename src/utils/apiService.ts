@@ -1,33 +1,48 @@
 // API Service for handling submissions in a live environment
 // This simulates a real backend API that would be used in production
 
-export interface SubmissionData {
-  id: string;
-  timestamp: number;
-  data: {
-    name: string;
-    discordUsername: string;
-    socialAccounts: Array<{
-      platform: string;
-      username: string;
-      followers?: number;
-      engagement?: number;
-    }>;
-    videosPosted: number;
-    totalViews: number;
-    mostSuccessfulVideo: {
-      title: string;
-      platform: string;
-      views: number;
-      likes: number;
-      comments: number;
-      shares: number;
-    };
-    weeklyInteractions: number;
-    additionalNotes: string;
-    weekOf: string;
-  };
-}
+        export interface SubmissionData {
+          id: string;
+          timestamp: number;
+          data: {
+            name: string;
+            discordUsername: string;
+            socialAccounts: Array<{
+              platform: string;
+              username: string;
+              followers?: number;
+              engagement?: number;
+            }>;
+            videosPosted: number;
+            totalViews: number;
+            mostSuccessfulVideo: {
+              title: string;
+              platform: string;
+              views: number;
+              likes: number;
+              comments: number;
+              shares: number;
+            };
+            weeklyInteractions: number;
+            additionalNotes: string;
+            weekOf: string;
+          };
+        }
+
+        // Interface for intern profiles with social media accounts
+        export interface InternProfile {
+          name: string;
+          discordUsername: string;
+          socialAccounts: Array<{
+            platform: string;
+            username: string;
+            followers?: number;
+            engagement?: number;
+          }>;
+          totalSubmissions: number;
+          lastSubmissionDate?: string;
+          setupCompleted: boolean;
+        }
 
 // In-memory storage for demo purposes
 // In production, this would be replaced with actual API calls to your backend
@@ -208,39 +223,45 @@ export const apiService = {
     }
   },
 
-  // Get all social media accounts from all interns
-  async getAllSocialAccounts() {
+  // Get all intern profiles with their social media accounts
+  async getInternProfiles(): Promise<InternProfile[]> {
     try {
-      const allSubmissions = await this.getAllSubmissions();
+      const profiles: InternProfile[] = [];
       
-      // Group by intern name to get unique interns with their social accounts
-      const internSocialAccounts: { [key: string]: any } = {};
+      // Get user profiles from localStorage
+      const profileKeys = Object.keys(localStorage).filter(key => key.startsWith('vesti_user_profile'));
       
-      allSubmissions.forEach(submission => {
-        const internName = submission.data.name;
-        if (!internSocialAccounts[internName]) {
-          internSocialAccounts[internName] = {
-            name: internName,
-            discordUsername: submission.data.discordUsername,
-            socialAccounts: submission.data.socialAccounts,
-            lastSubmission: submission.timestamp,
-            totalSubmissions: 0
-          };
-        }
-        internSocialAccounts[internName].totalSubmissions++;
-        
-        // Update last submission if this one is more recent
-        if (submission.timestamp > internSocialAccounts[internName].lastSubmission) {
-          internSocialAccounts[internName].lastSubmission = submission.timestamp;
-          internSocialAccounts[internName].socialAccounts = submission.data.socialAccounts;
+      profileKeys.forEach(key => {
+        try {
+          const profileData = JSON.parse(localStorage.getItem(key) || '{}');
+          if (profileData.name && profileData.discordUsername) {
+            // Count submissions for this intern
+            const internSubmissions = submissionsStorage.filter(s => 
+              s.data.discordUsername === profileData.discordUsername
+            );
+            
+            profiles.push({
+              name: profileData.name,
+              discordUsername: profileData.discordUsername,
+              socialAccounts: profileData.socialAccounts || [],
+              totalSubmissions: internSubmissions.length,
+              lastSubmissionDate: internSubmissions.length > 0 
+                ? new Date(Math.max(...internSubmissions.map(s => s.timestamp))).toISOString().split('T')[0]
+                : undefined,
+              setupCompleted: profileData.setupCompleted || false
+            });
+          }
+        } catch (error) {
+          console.error('Error parsing profile:', error);
         }
       });
 
-      return Object.values(internSocialAccounts).sort((a: any, b: any) => 
-        b.lastSubmission - a.lastSubmission
-      );
+      // Sort by Discord username
+      profiles.sort((a, b) => a.discordUsername.localeCompare(b.discordUsername));
+      
+      return profiles;
     } catch (error) {
-      console.error('Error fetching social accounts:', error);
+      console.error('Error fetching intern profiles:', error);
       return [];
     }
   }

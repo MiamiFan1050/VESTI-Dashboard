@@ -486,10 +486,8 @@ export default function DashboardPage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
 
         {/* Header */}
-        <div className="relative z-10 pt-24 sm:pt-28">
-          <div className="bg-white/5 backdrop-blur-lg border-b border-white/10">
-            <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+        <div className="relative z-10 pt-16 sm:pt-20">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-8 py-6 sm:py-10 gap-4 sm:gap-0">
             <div className="flex items-center gap-3 sm:gap-6 w-full sm:w-auto">
               <Link
                 to="/"
@@ -521,13 +519,11 @@ export default function DashboardPage() {
               <LogOut className="h-4 w-4" />
               <span className="font-medium">Sign Out</span>
             </button>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-16 mt-12 sm:mt-16">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pb-16 mt-4 sm:mt-8">
           {/* Welcome Section */}
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-8 border border-white/10 mb-6 sm:mb-12">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">

@@ -32,12 +32,11 @@ export default function AdminDashboardPage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
 
         {/* Header */}
-        <div className="relative z-10 pt-24 sm:pt-28">
-          <div className="bg-white/5 backdrop-blur-lg border-b border-white/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-              
-              {/* Top Navigation */}
-              <div className="flex items-center justify-between">
+        <div className="relative z-10 pt-16 sm:pt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            {/* Top Navigation */}
+            <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-4">
                 <Link 
                   to="/signin"
@@ -61,14 +60,13 @@ export default function AdminDashboardPage() {
                 <LogOut className="h-4 w-4" />
                 <span>Sign Out</span>
               </button>
-              </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto">
+              <AdminDashboard />
             </div>
           </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 mt-12 sm:mt-16">
-          <AdminDashboard />
         </div>
       </div>
     </>

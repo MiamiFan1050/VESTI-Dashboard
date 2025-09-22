@@ -20,15 +20,9 @@ import {
   Target,
   Award,
   Instagram,
-  Hash,
-  Globe,
-  Twitter,
-  Youtube,
-  Facebook,
-  Linkedin,
-  Pinterest
+  Hash
 } from 'lucide-react';
-import { apiService, SubmissionData } from '../utils/apiService';
+import { apiService, SubmissionData, InternProfile } from '../utils/apiService';
 
 export function AdminDashboard() {
   const [submissions, setSubmissions] = useState<SubmissionData[]>([]);
@@ -41,8 +35,8 @@ export function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [uniqueInterns, setUniqueInterns] = useState<string[]>([]);
   const [availableWeeks, setAvailableWeeks] = useState<string[]>([]);
-  const [socialAccounts, setSocialAccounts] = useState<any[]>([]);
-  const [activeTab, setActiveTab] = useState<'submissions' | 'social-accounts'>('submissions');
+  const [internProfiles, setInternProfiles] = useState<InternProfile[]>([]);
+  const [activeTab, setActiveTab] = useState<'submissions' | 'profiles'>('submissions');
 
   useEffect(() => {
     loadSubmissions();
@@ -55,17 +49,17 @@ export function AdminDashboard() {
   const loadSubmissions = async () => {
     setIsLoading(true);
     try {
-      const [allSubmissions, analyticsData, internsList, socialAccountsData] = await Promise.all([
+      const [allSubmissions, analyticsData, internsList, profiles] = await Promise.all([
         apiService.getAllSubmissions(),
         apiService.getAnalyticsSummary(),
         apiService.getUniqueInterns(),
-        apiService.getAllSocialAccounts()
+        apiService.getInternProfiles()
       ]);
       
       setSubmissions(allSubmissions);
       setAnalytics(analyticsData);
       setUniqueInterns(internsList);
-      setSocialAccounts(socialAccountsData);
+      setInternProfiles(profiles);
       
       // Get available weeks
       const weeks = [...new Set(allSubmissions.map(s => s.data.weekOf))].sort().reverse();
@@ -122,30 +116,6 @@ export function AdminDashboard() {
     }
   };
 
-  const getPlatformIcon = (platform: string) => {
-    const platformLower = platform.toLowerCase();
-    switch (platformLower) {
-      case 'instagram':
-        return <Instagram className="h-4 w-4" />;
-      case 'tiktok':
-        return <Video className="h-4 w-4" />;
-      case 'youtube':
-        return <Youtube className="h-4 w-4" />;
-      case 'twitter':
-        return <Twitter className="h-4 w-4" />;
-      case 'facebook':
-        return <Facebook className="h-4 w-4" />;
-      case 'linkedin':
-        return <Linkedin className="h-4 w-4" />;
-      case 'pinterest':
-        return <Pinterest className="h-4 w-4" />;
-      case 'discord':
-        return <Hash className="h-4 w-4" />;
-      default:
-        return <Globe className="h-4 w-4" />;
-    }
-  };
-
   return (
     <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl">
       <div className="flex items-center gap-3 mb-8">
@@ -159,33 +129,39 @@ export function AdminDashboard() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex gap-2 mb-8">
-        <button
-          onClick={() => setActiveTab('submissions')}
-          className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-            activeTab === 'submissions'
-              ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-              : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
-          }`}
-        >
-          <FileText className="h-4 w-4 inline mr-2" />
-          Weekly Submissions
-        </button>
-        <button
-          onClick={() => setActiveTab('social-accounts')}
-          className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-            activeTab === 'social-accounts'
-              ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-              : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
-          }`}
-        >
-          <Users className="h-4 w-4 inline mr-2" />
-          Social Media Accounts
-        </button>
+      <div className="mb-8">
+        <div className="flex space-x-1 bg-white/5 rounded-xl p-1">
+          <button
+            onClick={() => setActiveTab('submissions')}
+            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+              activeTab === 'submissions'
+                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                : 'text-gray-400 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <FileText className="h-4 w-4" />
+              Weekly Submissions
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab('profiles')}
+            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+              activeTab === 'profiles'
+                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                : 'text-gray-400 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Users className="h-4 w-4" />
+              Intern Profiles & Social Media
+            </div>
+          </button>
+        </div>
       </div>
 
-      {/* Analytics Overview - Only show for submissions tab */}
-      {activeTab === 'submissions' && analytics && (
+      {/* Analytics Overview */}
+      {analytics && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-xl p-6 border border-blue-500/20 hover:border-blue-500/30 transition-all duration-200">
             <div className="flex items-center gap-3 mb-3">
@@ -233,9 +209,11 @@ export function AdminDashboard() {
         </div>
       )}
 
-      {/* Filters and Search - Only show for submissions tab */}
+      {/* Submissions Tab Content */}
       {activeTab === 'submissions' && (
-        <div className="space-y-4 mb-6">
+        <>
+          {/* Filters and Search */}
+          <div className="space-y-4 mb-6">
         {/* Search Bar */}
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
@@ -325,22 +303,20 @@ export function AdminDashboard() {
         </div>
       </div>
 
-        {/* Results Counter */}
-        {!isLoading && filteredSubmissions.length > 0 && (
-          <div className="mb-4">
-            <p className="text-sm text-gray-400">
-              Showing {filteredSubmissions.length} of {submissions.length} submissions
-              {(selectedIntern || selectedWeek || searchTerm) && (
-                <span className="text-purple-400"> (filtered)</span>
-              )}
-            </p>
-          </div>
-        )}
+      {/* Results Counter */}
+      {!isLoading && filteredSubmissions.length > 0 && (
+        <div className="mb-4">
+          <p className="text-sm text-gray-400">
+            Showing {filteredSubmissions.length} of {submissions.length} submissions
+            {(selectedIntern || selectedWeek || searchTerm) && (
+              <span className="text-purple-400"> (filtered)</span>
+            )}
+          </p>
+        </div>
       )}
 
-      {/* Submissions List - Only show for submissions tab */}
-      {activeTab === 'submissions' && (
-        <div className="space-y-4">
+      {/* Submissions List */}
+      <div className="space-y-4">
         {isLoading ? (
           <div className="text-center py-12">
             <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -447,80 +423,114 @@ export function AdminDashboard() {
             </div>
           ))
         )}
-        </div>
+          </div>
+        </>
       )}
 
-      {/* Social Media Accounts Tab */}
-      {activeTab === 'social-accounts' && (
+      {/* Profiles Tab Content */}
+      {activeTab === 'profiles' && (
         <div className="space-y-6">
-          {isLoading ? (
-            <div className="text-center py-12">
-              <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-gray-400">Loading social media accounts...</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-bold text-white mb-2">Intern Profiles & Social Media</h3>
+              <p className="text-gray-300">View all registered interns and their social media accounts</p>
             </div>
-          ) : socialAccounts.length === 0 ? (
+            <div className="text-right">
+              <p className="text-sm text-gray-400">Total Registered Interns</p>
+              <p className="text-2xl font-bold text-purple-400">{internProfiles.length}</p>
+            </div>
+          </div>
+
+          {isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="flex items-center gap-3">
+                <RefreshCw className="h-5 w-5 text-purple-400 animate-spin" />
+                <span className="text-gray-300">Loading intern profiles...</span>
+              </div>
+            </div>
+          ) : internProfiles.length === 0 ? (
             <div className="text-center py-12 bg-white/5 rounded-xl border border-white/10">
               <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-400 mb-2">No social media accounts found</p>
-              <p className="text-gray-500 text-sm">Interns need to submit weekly reports to populate their social accounts</p>
+              <p className="text-gray-400 mb-2">No intern profiles found</p>
+              <p className="text-gray-500 text-sm">Interns need to complete their profile setup first</p>
             </div>
           ) : (
-            <div className="space-y-4">
-              <div className="mb-6">
-                <p className="text-sm text-gray-400">
-                  Showing social media accounts for {socialAccounts.length} interns
-                </p>
-              </div>
-              
-              {socialAccounts.map((intern, index) => (
-                <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-200">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
-                        <User className="h-5 w-5 text-purple-300" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-white">{intern.name}</h4>
-                        <div className="flex items-center gap-2">
-                          <Hash className="h-4 w-4 text-purple-400" />
-                          <span className="text-sm text-purple-300">@{intern.discordUsername}</span>
-                        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {internProfiles.map((profile, index) => (
+                <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-200">
+                  {/* Intern Header */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
+                      <User className="h-5 w-5 text-purple-400" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-white font-semibold">{profile.name}</h4>
+                      <div className="flex items-center gap-1">
+                        <Hash className="h-3 w-3 text-purple-400" />
+                        <span className="text-sm text-purple-300">@{profile.discordUsername}</span>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm text-gray-400">{intern.totalSubmissions} submissions</p>
-                      <p className="text-xs text-gray-500">
-                        Last: {new Date(intern.lastSubmission).toLocaleDateString()}
-                      </p>
+                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      profile.setupCompleted 
+                        ? 'bg-green-500/20 text-green-300 border border-green-500/30' 
+                        : 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30'
+                    }`}>
+                      {profile.setupCompleted ? 'Complete' : 'Incomplete'}
                     </div>
                   </div>
 
-                  {intern.socialAccounts && intern.socialAccounts.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                      {intern.socialAccounts.map((account: any, accountIndex: number) => (
-                        <div key={accountIndex} className="bg-white/5 rounded-lg p-3 border border-white/10">
-                          <div className="flex items-center gap-2 mb-2">
-                            {getPlatformIcon(account.platform)}
-                            <span className="text-sm font-medium text-white">{account.platform}</span>
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <p className="text-xs text-gray-400">Submissions</p>
+                      <p className="text-lg font-bold text-white">{profile.totalSubmissions}</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <p className="text-xs text-gray-400">Social Accounts</p>
+                      <p className="text-lg font-bold text-white">{profile.socialAccounts.length}</p>
+                    </div>
+                  </div>
+
+                  {/* Social Media Accounts */}
+                  {profile.socialAccounts.length > 0 ? (
+                    <div className="space-y-3">
+                      <h5 className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                        <Instagram className="h-4 w-4" />
+                        Social Media Accounts
+                      </h5>
+                      <div className="space-y-2">
+                        {profile.socialAccounts.map((account, accountIndex) => (
+                          <div key={accountIndex} className="bg-white/5 rounded-lg p-3 border border-white/10">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-sm font-medium text-white">{account.platform}</span>
+                              {account.followers && (
+                                <span className="text-xs text-gray-400">{account.followers.toLocaleString()} followers</span>
+                              )}
+                            </div>
+                            <p className="text-sm text-gray-300">@{account.username}</p>
+                            {account.engagement && (
+                              <div className="mt-1">
+                                <span className="text-xs text-purple-400">{account.engagement}% engagement</span>
+                              </div>
+                            )}
                           </div>
-                          <p className="text-sm text-gray-300 truncate">@{account.username}</p>
-                          {account.followers && (
-                            <p className="text-xs text-gray-400">
-                              {account.followers.toLocaleString()} followers
-                            </p>
-                          )}
-                          {account.engagement && (
-                            <p className="text-xs text-gray-400">
-                              {account.engagement}% engagement
-                            </p>
-                          )}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   ) : (
                     <div className="text-center py-4 bg-white/5 rounded-lg border border-white/10">
-                      <Globe className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                      <p className="text-gray-400 text-sm">No social media accounts added yet</p>
+                      <Instagram className="h-6 w-6 text-gray-400 mx-auto mb-2" />
+                      <p className="text-xs text-gray-400">No social accounts added</p>
+                    </div>
+                  )}
+
+                  {/* Last Submission */}
+                  {profile.lastSubmissionDate && (
+                    <div className="mt-4 pt-4 border-t border-white/10">
+                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <Clock className="h-3 w-3" />
+                        <span>Last submission: {new Date(profile.lastSubmissionDate).toLocaleDateString()}</span>
+                      </div>
                     </div>
                   )}
                 </div>
